@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { APIService } from "./API.services";
 import { Auth } from "aws-amplify";
 
@@ -9,22 +9,18 @@ import { Auth } from "aws-amplify";
 })
 export class AppComponent {
   title = "test-angular";
-  constructor(private apiService: APIService) {
+  loggedIn = false;
+  constructor(private apiService: APIService) {}
+
+  ngOnInit() {
     this.init();
   }
   async init() {
-    await this.signIn();
-    this.test();
+    let user = await Auth.signIn("test-case@showsourcing.com", "password1234");
+    if (user.username) {
+      this.loggedIn = true;
+    }
   }
 
-  async signIn() {
-    const user = await Auth.signIn(
-      "test-case@showsourcing.com",
-      "password1234"
-    );
-    console.log(user);
-  }
-  async test() {
-    console.log(await this.apiService.ListProducts());
-  }
+
 }

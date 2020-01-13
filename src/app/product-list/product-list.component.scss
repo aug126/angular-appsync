@@ -1,0 +1,105 @@
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.Rectangle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 16px;
+  height: 80px;
+  box-shadow: 0 2px 4px 0 rgba(93, 109, 139, 0.2);
+  background-color: #ffffff;
+}
+
+.My-Products {
+  width: 127px;
+  height: 31px;
+  font-family: SourceSansPro;
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.Background {
+  width: 296px;
+  margin: 12px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  transition: all ease 0.3s;
+  &:hover {
+    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+    .Product-Name {
+      color: #50c2ff;
+    }
+  }
+}
+
+.Product-Name {
+  width: 184px;
+  height: 24px;
+  font-family: SourceSansPro;
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  margin-bottom: 4px;
+  transition: all ease 0.3s;
+}
+.Supplier-Name {
+  width: 184px;
+  height: 18px;
+  font-family: SourceSansPro;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  margin-bottom: 8px;
+  display: block;
+}
+.Description {
+  font-family: SourceSansPro;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px;
+}
+
+.product-single {
+  display: flex;
+  padding: 8px 12px 12px 8px;
+  cursor: pointer;
+}
+
+.product-img {
+  height: 80px;
+  width: 80px;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  margin-right: 12px;
+}
+
+.product-detail {
+  width: 182px; // 296 -8 -12 - 80 -12
+}

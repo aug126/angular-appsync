@@ -1,0 +1,21 @@
+<div class="content" role="main">
+  <div class="Rectangle">
+    <h1 class="My-Products">
+      My Products
+    </h1>
+  </div>
+
+  <div class="product-list">
+    <div *ngFor="let product of products" class="Background product-single">
+      <div
+        class="product-img"
+        [style.backgroundImage]="'url(' + product.imageUrl + ')'"
+      ></div>
+      <div class="product-detail">
+        <h3 class="Product-Name">{{ product.name }}</h3>
+        <span class="Supplier-Name">{{ product.supplierName }}</span>
+        <p class="Description">{{ product.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
