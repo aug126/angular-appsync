@@ -1,0 +1,16 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 48px);
+  @media screen and (max-width: 640px) {
+    align-items: flex-start;
+  }
+}
+.login-form {
+  margin: 24px;
+  width: 376px;
+  .title {
+    margin-bottom: 48px;
+  }
+}

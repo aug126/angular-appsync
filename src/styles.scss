@@ -79,6 +79,7 @@ form {
     border: solid 1px #a3afc6;
     margin-bottom: 24px;
     transition: border-color ease 0.3s;
+    outline: none;
     &.active {
       border: solid 2px #45adff;
       // margin-top: -2px;

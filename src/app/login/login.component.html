@@ -1,0 +1,36 @@
+<div class="login-page">
+  <div class="login-form">
+    <form action="">
+      <h3 class="title">Please Log-in</h3>
+      <label [class.active]="activeField == 'username'" for="username"
+        >Email</label
+      >
+      <input
+        [(ngModel)]="form.username"
+        [class.active]="activeField == 'username'"
+        (focus)="setActive('username')"
+        (blur)="setInactive()"
+        id="username"
+        name="username"
+        type="email"
+      />
+      <label [class.active]="activeField == 'password'" for="password"
+        >password</label
+      >
+      <input
+        [(ngModel)]="form.password"
+        [class.active]="activeField == 'password'"
+        (focus)="setActive('password')"
+        (blur)="setInactive()"
+        id="password"
+        name="password"
+        type="password"
+      />
+      <div>
+        <button (click)="formAction($event)" type="text">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

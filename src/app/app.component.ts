@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { APIService } from "./API.services";
-import { Auth } from "aws-amplify";
+import { AuthService } from "./auth/auth.service";
 
 @Component({
   selector: "app-root",
@@ -10,17 +9,9 @@ import { Auth } from "aws-amplify";
 export class AppComponent {
   title = "test-angular";
   loggedIn = false;
-  constructor(private apiService: APIService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.init();
+    this.authService.checkUser("");
   }
-  async init() {
-    let user = await Auth.signIn("test-case@showsourcing.com", "password1234");
-    if (user.username) {
-      this.loggedIn = true;
-    }
-  }
-
-
 }
