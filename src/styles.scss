@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/variables";
+@import "./assets/scss/loader.scss";
 
 * {
   box-sizing: border-box;
@@ -24,15 +26,29 @@ p {
 
 // Button
 button {
+  outline: none;
   border-radius: 4px;
-  background-color: #45adff;
+  background-color: $blue;
+  &:hover {
+    background-color: darken($blue, 10);
+  }
   border: none;
   padding: 7px 11px;
   width: 100px;
   color: #ffffff;
   font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
   margin-right: 12px;
+  margin-bottom: 12px;
+  transition: background-color ease 0.2s;
+  position: relative;
+  &.danger {
+    background-color: $red;
+    &:hover {
+      background-color: darken($red, 10);
+    }
+  }
 }
 
 /* MODALS */
@@ -51,10 +67,18 @@ button {
     padding: 24px;
     width: 424px;
     border-radius: 4px;
-    @media screen and (max-width: 640px) {
-      height: 100vh;
-      position: fixed;
+  }
+}
+@media screen and (max-width: 640px) {
+  .modal {
+    display: block;
+    & > .modal-content {
+      width: 100%;
+      min-height: 100vh;
     }
+  }
+  .mobile-hidden {
+    display: none;
   }
 }
 
@@ -84,6 +108,7 @@ form {
     border: solid 1px #a3afc6;
     margin-bottom: 24px;
     transition: border-color ease 0.3s;
+    font-size: 14px;
     outline: none;
     &.active {
       border: solid 2px #45adff;

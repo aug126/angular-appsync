@@ -11,16 +11,16 @@ export class NewProductComponent implements OnInit {
   ngOnInit() {}
 
   @Output() closeEvent = new EventEmitter();
-  activeField = "";
   @Input() formTitle = "";
   @Input() formBtn = "";
-
+  activeField = "";
   form = {
     name: "",
     supplierName: "",
     imageUrl: "",
     description: ""
   };
+  actionLoading = false;
 
   setActive(field) {
     this.activeField = field;
@@ -32,6 +32,8 @@ export class NewProductComponent implements OnInit {
   // Create a new product
   async formAction($event) {
     $event.preventDefault();
+    if (this.actionLoading === true) return;
+    this.actionLoading = true;
     // prevent empty string for optional values.
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
@@ -39,7 +41,8 @@ export class NewProductComponent implements OnInit {
       await this.apiService.CreateProduct(this.form);
       this.close();
     } catch (err) {
-      alert(err.errors[0].message);
+      this.actionLoading = false;
+      setTimeout(() => alert(err.errors[0].message), 1);
     }
   }
 

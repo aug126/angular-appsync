@@ -1,30 +1,36 @@
 <div class="content" role="main">
-  <div class="Rectangle">
-    <h1 class="My-Products">
-      My Products
-    </h1>
-    <button (click)="newProduct()" class="new-product-btn">New Product</button>
-  </div>
-
-  <div class="product-list">
-    <div
-      (click)="updateProduct(product)"
-      *ngFor="let product of products"
-      class="Background product-single"
-    >
+  <div
+    [class.mobile-hidden]="showNewProduct || updatingProduct"
+    class="displayed-content"
+  >
+    <div class="Rectangle">
+      <h1 class="My-Products">
+        My Products
+      </h1>
+      <button (click)="newProduct()" class="new-product-btn">
+        New Product
+      </button>
+    </div>
+    <div class="product-list">
       <div
-        class="product-img"
-        [style.backgroundImage]="
-          'url(' +
-          (product.imageUrl ||
-            'https://informaticapubblica.com/wp-content/uploads/2016/12/default.jpg') +
-          ')'
-        "
-      ></div>
-      <div class="product-detail">
-        <h3 class="Product-Name">{{ product.name }}</h3>
-        <span class="Supplier-Name">{{ product.supplierName }}</span>
-        <p class="Description">{{ product.description }}</p>
+        (click)="updateProduct(product)"
+        *ngFor="let product of products"
+        class="Background product-single"
+      >
+        <div
+          class="product-img"
+          [style.backgroundImage]="
+            'url(' +
+            (product.imageUrl ||
+              'https://informaticapubblica.com/wp-content/uploads/2016/12/default.jpg') +
+            ')'
+          "
+        ></div>
+        <div class="product-detail">
+          <h3 class="Product-Name">{{ product.name }}</h3>
+          <span class="Supplier-Name">{{ product.supplierName }}</span>
+          <p class="Description">{{ product.description }}</p>
+        </div>
       </div>
     </div>
   </div>

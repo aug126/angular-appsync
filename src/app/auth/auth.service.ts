@@ -20,7 +20,7 @@ export class AuthService {
         this.router.navigate([this.redirectUrl]);
       }
     } catch (err) {
-      alert(err.message);
+      throw err;
     }
     return false;
   }

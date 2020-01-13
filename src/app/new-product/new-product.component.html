@@ -54,10 +54,25 @@
         ></textarea>
         <div>
           <button (click)="formAction($event)" type="text">
-            {{ formBtn }}
+            <div *ngIf="actionLoading" class="loader">
+              <div></div>
+              <div></div>
+            </div>
+            <span>{{ formBtn }}</span>
           </button>
           <button (click)="close()" type="text">
             Cancel
+          </button>
+          <button
+            *ngIf="form.id"
+            (click)="deleteProduct(form.id)"
+            class="danger"
+          >
+            <div *ngIf="deleteLoading" class="loader">
+              <div></div>
+              <div></div>
+            </div>
+            <span>Delete</span>
           </button>
         </div>
       </form>

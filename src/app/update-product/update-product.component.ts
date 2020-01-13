@@ -20,6 +20,8 @@ export class UpdateProductComponent implements OnInit {
     imageUrl: "",
     description: ""
   };
+  actionLoading = false;
+  deleteLoading = false;
 
   setActive(field) {
     this.activeField = field;
@@ -29,14 +31,30 @@ export class UpdateProductComponent implements OnInit {
   }
 
   // Update the product.
-  async formAction() {
+  async formAction($event) {
+    $event.preventDefault();
+    if (this.actionLoading === true) return;
+    this.actionLoading = true;
+    // prevent empty string for optional parameters
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
       await this.apiService.UpdateProduct(this.form);
       this.close();
     } catch (err) {
-      alert(err.errors[0].message);
+      this.actionLoading = false;
+      setTimeout(() => alert(err.errors[0].message), 1);
+    }
+  }
+
+  async deleteProduct(id) {
+    if (this.deleteLoading === true) return;
+    this.deleteLoading = true;
+    try {
+      await this.apiService.DeleteProduct({ id });
+      this.close();
+    } catch (err) {
+      this.deleteLoading = false;
     }
   }
 
