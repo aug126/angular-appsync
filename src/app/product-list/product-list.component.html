@@ -7,7 +7,11 @@
   </div>
 
   <div class="product-list">
-    <div *ngFor="let product of products" class="Background product-single">
+    <div
+      (click)="updateProduct(product)"
+      *ngFor="let product of products"
+      class="Background product-single"
+    >
       <div
         class="product-img"
         [style.backgroundImage]="
@@ -25,7 +29,16 @@
     </div>
   </div>
   <app-new-product
-    (closeEvent)="closeModal()"
+    (closeEvent)="closeModalNewProduct()"
     *ngIf="showNewProduct"
+    formTitle="Create Product"
+    formBtn="Create"
   ></app-new-product>
+  <app-update-product
+    (closeEvent)="closeModalUpdateProduct()"
+    *ngIf="updatingProduct"
+    formTitle="Update Product"
+    formBtn="Update"
+    [form]="updatingProduct"
+  ></app-update-product>
 </div>

@@ -2,7 +2,7 @@
   <div (click)="close($event)" class="test modal">
     <div class="modal-content">
       <form action="">
-        <h3 class="title">Create Product</h3>
+        <h3 class="title">{{ formTitle }}</h3>
         <label [class.active]="activeField == 'name'" for="name">Name</label>
         <input
           [(ngModel)]="form.name"
@@ -53,7 +53,9 @@
           [(ngModel)]="form.description"
         ></textarea>
         <div>
-          <button (click)="createNewProduct($event)" type="text">Create</button>
+          <button (click)="formAction($event)" type="text">
+            {{ formBtn }}
+          </button>
         </div>
       </form>
     </div>

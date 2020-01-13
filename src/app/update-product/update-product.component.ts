@@ -1,21 +1,20 @@
-import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
+import { Component, OnInit, Output, Input, EventEmitter } from "@angular/core";
 import { APIService } from "../API.services";
 
 @Component({
-  selector: "app-new-product",
-  templateUrl: "./new-product.component.html",
-  styleUrls: ["./new-product.component.scss"]
+  selector: "app-update-product",
+  templateUrl: "../new-product/new-product.component.html", // template from another component
+  styleUrls: ["../new-product/new-product.component.scss"] // template from another component
 })
-export class NewProductComponent implements OnInit {
+export class UpdateProductComponent implements OnInit {
   constructor(private apiService: APIService) {}
   ngOnInit() {}
-
   @Output() closeEvent = new EventEmitter();
   activeField = "";
   @Input() formTitle = "";
   @Input() formBtn = "";
-
-  form = {
+  @Input() form = {
+    id: "",
     name: "",
     supplierName: "",
     imageUrl: "",
@@ -29,14 +28,12 @@ export class NewProductComponent implements OnInit {
     this.activeField = "";
   }
 
-  // Create a new product
-  async formAction($event) {
-    $event.preventDefault();
-    // prevent empty string for optional values.
+  // Update the product.
+  async formAction() {
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
-      await this.apiService.CreateProduct(this.form);
+      await this.apiService.UpdateProduct(this.form);
       this.close(null);
     } catch (err) {
       alert(err.errors[0].message);

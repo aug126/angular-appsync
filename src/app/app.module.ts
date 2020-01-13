@@ -11,9 +11,10 @@ import { ProductListComponent } from "./product-list/product-list.component";
 
 import { FormsModule } from "@angular/forms";
 import { NewProductComponent } from "./new-product/new-product.component";
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 @NgModule({
-  declarations: [AppComponent, ProductListComponent, NewProductComponent],
+  declarations: [AppComponent, ProductListComponent, NewProductComponent, UpdateProductComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot([{ path: "", component: ProductListComponent }]),

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { APIService } from "../API.services";
-import { NewProductComponent } from "../new-product/new-product.component";
 
 @Component({
   selector: "app-product-list",
@@ -10,6 +9,7 @@ import { NewProductComponent } from "../new-product/new-product.component";
 export class ProductListComponent implements OnInit {
   products = [];
   showNewProduct = false;
+  updatingProduct = null;
   constructor(private apiService: APIService) {}
   ngOnInit() {
     this.getDatas();
@@ -22,7 +22,16 @@ export class ProductListComponent implements OnInit {
   newProduct() {
     this.showNewProduct = true;
   }
-  closeModal() {
+  closeModalNewProduct() {
     this.showNewProduct = false;
+  }
+
+  updateProduct(product) {
+    let productCopy = { ...product };
+    delete productCopy.__typename;
+    this.updatingProduct = productCopy;
+  }
+  closeModalUpdateProduct() {
+    this.updatingProduct = null;
   }
 }
