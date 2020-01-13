@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0 16px;
+  padding: 0 24px;
   height: 80px;
   box-shadow: 0 2px 4px 0 rgba(93, 109, 139, 0.2);
   background-color: #ffffff;
@@ -102,4 +102,8 @@
 
 .product-detail {
   width: 182px; // 296 -8 -12 - 80 -12
+}
+
+.new-product-btn {
+  margin-left: auto;
 }

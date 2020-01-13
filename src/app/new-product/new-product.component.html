@@ -1,0 +1,61 @@
+<div class="new-product-component">
+  <div (click)="close($event)" class="test modal">
+    <div class="modal-content">
+      <form action="">
+        <h3 class="title">Create Product</h3>
+        <label [class.active]="activeField == 'name'" for="name">Name</label>
+        <input
+          [(ngModel)]="form.name"
+          [class.active]="activeField == 'name'"
+          (focus)="setActive('name')"
+          (blur)="setInactive()"
+          id="name"
+          name="name"
+          type="text"
+        />
+        <label
+          [class.active]="activeField == 'supplier-name'"
+          for="supplier-name"
+          >Supplier Name</label
+        >
+        <input
+          [(ngModel)]="form.supplierName"
+          [class.active]="activeField == 'supplier-name'"
+          (focus)="setActive('supplier-name')"
+          (blur)="setInactive()"
+          id="supplier-name"
+          name="supplier-name"
+          type="text"
+        />
+        <label [class.active]="activeField == 'img-url'" for="img-url"
+          >Image Url</label
+        >
+        <input
+          [(ngModel)]="form.imageUrl"
+          [class.active]="activeField == 'img-url'"
+          (focus)="setActive('img-url')"
+          (blur)="setInactive()"
+          id="img-url"
+          name="img-url"
+          type="text"
+        />
+        <label [class.active]="activeField == 'description'" for="description"
+          >Description</label
+        >
+        <textarea
+          [class.active]="activeField == 'description'"
+          (focus)="setActive('description')"
+          (blur)="setInactive()"
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+          [(ngModel)]="form.description"
+        ></textarea>
+        <div>
+          <button (click)="createNewProduct($event)" type="text">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -9,12 +9,16 @@ import { AmplifyAngularModule, AmplifyService } from "aws-amplify-angular";
 import { APIService } from "./API.services";
 import { ProductListComponent } from "./product-list/product-list.component";
 
+import { FormsModule } from "@angular/forms";
+import { NewProductComponent } from "./new-product/new-product.component";
+
 @NgModule({
-  declarations: [AppComponent, ProductListComponent],
+  declarations: [AppComponent, ProductListComponent, NewProductComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot([{ path: "", component: ProductListComponent }]),
-    AmplifyAngularModule
+    AmplifyAngularModule,
+    FormsModule
   ],
   providers: [AmplifyService, APIService],
   bootstrap: [AppComponent]

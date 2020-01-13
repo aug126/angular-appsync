@@ -2,6 +2,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: SourceSansPro;
 }
 
 body,
@@ -19,4 +20,76 @@ p {
   font-family: "SourceSansPro";
   src: url("./assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf")
     format("truetype");
+}
+
+// Button
+button {
+  border-radius: 4px;
+  background-color: #45adff;
+  border: none;
+  padding: 7px 11px;
+  width: 100px;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* MODALS */
+.modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .modal-content {
+    background: #ffffff;
+    padding: 24px;
+    width: 424px;
+    border-radius: 4px;
+  }
+}
+
+/* FORMS */
+form {
+  display: flex;
+  flex-direction: column;
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #000000;
+  }
+  label {
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    transition: color ease 0.3s;
+    &.active {
+      color: #45adff;
+    }
+  }
+  input,
+  textarea {
+    border-radius: 4px;
+    border: solid 1px #a3afc6;
+    margin-bottom: 24px;
+    transition: border-color ease 0.3s;
+    &.active {
+      border: solid 2px #45adff;
+      // margin-top: -2px;
+    }
+  }
+  input {
+    height: 30px;
+    padding: 0 8px;
+  }
+  textarea {
+    height: 80px;
+    padding: 6px 8px;
+  }
 }

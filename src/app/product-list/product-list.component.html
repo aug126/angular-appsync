@@ -3,13 +3,19 @@
     <h1 class="My-Products">
       My Products
     </h1>
+    <button (click)="newProduct()" class="new-product-btn">New Product</button>
   </div>
 
   <div class="product-list">
     <div *ngFor="let product of products" class="Background product-single">
       <div
         class="product-img"
-        [style.backgroundImage]="'url(' + product.imageUrl + ')'"
+        [style.backgroundImage]="
+          'url(' +
+          (product.imageUrl ||
+            'https://informaticapubblica.com/wp-content/uploads/2016/12/default.jpg') +
+          ')'
+        "
       ></div>
       <div class="product-detail">
         <h3 class="Product-Name">{{ product.name }}</h3>
@@ -18,4 +24,8 @@
       </div>
     </div>
   </div>
+  <app-new-product
+    (closeEvent)="closeModal()"
+    *ngIf="showNewProduct"
+  ></app-new-product>
 </div>
