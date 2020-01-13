@@ -1,5 +1,5 @@
 <div class="new-product-component">
-  <div (click)="close($event)" class="test modal">
+  <div class="modal">
     <div class="modal-content">
       <form action="">
         <h3 class="title">{{ formTitle }}</h3>
@@ -55,6 +55,9 @@
         <div>
           <button (click)="formAction($event)" type="text">
             {{ formBtn }}
+          </button>
+          <button (click)="close()" type="text">
+            Cancel
           </button>
         </div>
       </form>

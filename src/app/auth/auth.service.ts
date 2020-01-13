@@ -42,6 +42,7 @@ export class AuthService {
     try {
       await Auth.signOut();
       this.isLoggedIn = false;
+      this.router.navigate(["login"]);
     } catch (err) {}
   }
 }

@@ -37,16 +37,13 @@ export class NewProductComponent implements OnInit {
     this.form.description = this.form.description || null;
     try {
       await this.apiService.CreateProduct(this.form);
-      this.close(null);
+      this.close();
     } catch (err) {
       alert(err.errors[0].message);
     }
   }
 
-  close($event) {
-    // Check the element clicked (button create or background overlay.)
-    if (!$event || $event.target.classList.contains("modal")) {
-      this.closeEvent.emit();
-    }
+  close() {
+    this.closeEvent.emit();
   }
 }

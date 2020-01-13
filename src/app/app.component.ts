@@ -14,4 +14,7 @@ export class AppComponent {
   ngOnInit() {
     this.authService.checkUser("");
   }
+  logout() {
+    this.authService.logout();
+  }
 }
