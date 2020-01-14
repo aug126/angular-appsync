@@ -33,6 +33,20 @@
         </div>
       </div>
     </div>
+    <div class="loader-container">
+      <div *ngIf="infiniteScroll.loading === true" class="loader">
+        <div></div>
+        <div></div>
+      </div>
+      <button
+        *ngIf="
+          infiniteScroll.loading === false && infiniteScroll.maxDone === false
+        "
+        (click)="getDatas()"
+      >
+        Load More
+      </button>
+    </div>
   </div>
   <app-new-product
     (closeEvent)="closeModalNewProduct()"

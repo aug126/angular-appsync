@@ -7,7 +7,7 @@
     </div>
   </button>
 */
-$color: #ffffff;
+@import "./variables";
 
 button .loader {
   position: absolute;
@@ -21,7 +21,7 @@ button .loader {
 }
 button .loader div {
   position: absolute;
-  border: 4px solid $color;
+  border: 4px solid $loader-color-btn;
   opacity: 1;
   border-radius: 50%;
   animation: btn-loader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -47,5 +47,31 @@ button .loader + span {
     width: 72px;
     height: 72px;
     opacity: 0;
+  }
+}
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  .loader {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    div {
+      position: absolute;
+      border: 4px solid $loader-color;
+      opacity: 1;
+      border-radius: 50%;
+      animation: btn-loader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    div:nth-child(2) {
+      animation-delay: -0.5s;
+    }
+    & + span {
+      color: transparent;
+    }
   }
 }

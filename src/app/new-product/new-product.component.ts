@@ -8,7 +8,9 @@ import { APIService } from "../API.services";
 })
 export class NewProductComponent implements OnInit {
   constructor(private apiService: APIService) {}
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => (this.showingClass = true), 10);
+  }
 
   @Output() closeEvent = new EventEmitter();
   @Input() formTitle = "";
@@ -21,6 +23,7 @@ export class NewProductComponent implements OnInit {
     description: ""
   };
   actionLoading = false;
+  showingClass = false;
 
   setActive(field) {
     this.activeField = field;
@@ -47,6 +50,7 @@ export class NewProductComponent implements OnInit {
   }
 
   close() {
-    this.closeEvent.emit();
+    this.showingClass = false;
+    setTimeout(() => this.closeEvent.emit(), 350);
   }
 }

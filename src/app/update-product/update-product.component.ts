@@ -8,7 +8,9 @@ import { APIService } from "../API.services";
 })
 export class UpdateProductComponent implements OnInit {
   constructor(private apiService: APIService) {}
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => (this.showingClass = true), 10);
+  }
   @Output() closeEvent = new EventEmitter();
   activeField = "";
   @Input() formTitle = "";
@@ -23,6 +25,7 @@ export class UpdateProductComponent implements OnInit {
   actionLoading = false;
   deleteLoading = false;
   deleteConfirm = false;
+  showingClass = false;
 
   setActive(field) {
     this.activeField = field;
@@ -64,6 +67,7 @@ export class UpdateProductComponent implements OnInit {
   }
 
   close() {
-    this.closeEvent.emit();
+    this.showingClass = false;
+    setTimeout(() => this.closeEvent.emit(), 350);
   }
 }

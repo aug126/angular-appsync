@@ -11,14 +11,54 @@ export class ProductListComponent implements OnInit {
   products = [];
   showNewProduct = false;
   updatingProduct = null;
+  infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: "" };
   ngOnInit() {
+    this.initLimit();
     this.getDatas();
     this.addSubscriptions();
+    this.setInfiniteScroll();
+  }
+
+  initLimit() {
+    switch (true) {
+      case screen.width > 1900:
+        this.infiniteScroll.limit = 40;
+        break;
+      case screen.width > 1200:
+        this.infiniteScroll.limit = 25;
+        break;
+      case screen.width > 640:
+        this.infiniteScroll.limit = 15;
+        break;
+      default:
+        this.infiniteScroll.limit = 15;
+    }
   }
 
   async getDatas() {
-    let datas = await this.apiService.ListProducts(null, 50);
-    this.products = datas.items;
+    if (this.infiniteScroll.maxDone === true) return;
+    if (this.infiniteScroll.loading === true) return;
+    this.infiniteScroll.loading = true;
+    let datas = await this.apiService.ListProducts(
+      null,
+      this.infiniteScroll.limit,
+      this.infiniteScroll.nextToken
+    );
+    if (datas.nextToken === null) this.infiniteScroll.maxDone = true; // Strop le infinite scroll.
+    this.infiniteScroll.nextToken = datas.nextToken;
+    this.products.push(...datas.items);
+    this.infiniteScroll.loading = false;
+  }
+
+  setInfiniteScroll() {
+    window.onscroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 300
+      ) {
+        this.getDatas();
+      }
+    };
   }
 
   addSubscriptions() {
