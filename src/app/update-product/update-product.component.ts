@@ -22,6 +22,7 @@ export class UpdateProductComponent implements OnInit {
   };
   actionLoading = false;
   deleteLoading = false;
+  deleteConfirm = false;
 
   setActive(field) {
     this.activeField = field;
@@ -48,6 +49,10 @@ export class UpdateProductComponent implements OnInit {
   }
 
   async deleteProduct(id) {
+    if (this.deleteConfirm === false) {
+      this.deleteConfirm = true;
+      return;
+    }
     if (this.deleteLoading === true) return;
     this.deleteLoading = true;
     try {
