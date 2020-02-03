@@ -12,6 +12,10 @@ The objective is to build a responsive app for web and mobile that propose a lis
 
 Run `git clone https://github.com/aug126/angular-appsync.git <my-folder>`
 
+### Install the dependencies.
+
+Run `npm install`
+
 ### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
