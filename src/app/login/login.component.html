@@ -28,7 +28,13 @@
       />
       <div>
         <button (click)="formAction($event)" type="text">
-          Login
+          <div *ngIf="loginLoading" class="loader">
+            <div></div>
+            <div></div>
+          </div>
+          <span>
+            Login
+          </span>
         </button>
       </div>
     </form>

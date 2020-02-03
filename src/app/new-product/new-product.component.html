@@ -1,5 +1,5 @@
 <div class="new-product-component">
-  <div class="modal">
+  <div [class.show]="showingClass" class="modal">
     <div class="modal-content">
       <form action="">
         <h3 class="title">{{ formTitle }}</h3>
@@ -54,10 +54,26 @@
         ></textarea>
         <div>
           <button (click)="formAction($event)" type="text">
-            {{ formBtn }}
+            <div *ngIf="actionLoading" class="loader">
+              <div></div>
+              <div></div>
+            </div>
+            <span>{{ formBtn }}</span>
           </button>
           <button (click)="close()" type="text">
             Cancel
+          </button>
+          <button
+            *ngIf="form.id"
+            (click)="deleteProduct(form.id)"
+            class="danger"
+          >
+            <div *ngIf="deleteLoading" class="loader">
+              <div></div>
+              <div></div>
+            </div>
+            <span *ngIf="!deleteConfirm">Delete</span>
+            <span *ngIf="deleteConfirm">Confirm</span>
           </button>
         </div>
       </form>

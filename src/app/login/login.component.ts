@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     password: ""
   };
   activeField = "";
+  loginLoading = false;
 
   setActive(field) {
     this.activeField = field;
@@ -23,7 +24,13 @@ export class LoginComponent implements OnInit {
     this.activeField = "";
   }
 
-  formAction() {
-    this.authService.login(this.form, "");
+  async formAction() {
+    this.loginLoading = true;
+    try {
+      await this.authService.login(this.form, "");
+    } catch (err) {
+      this.loginLoading = false;
+      setTimeout(() => alert(err.message), 1);
+    }
   }
 }

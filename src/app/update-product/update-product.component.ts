@@ -8,7 +8,9 @@ import { APIService } from "../API.services";
 })
 export class UpdateProductComponent implements OnInit {
   constructor(private apiService: APIService) {}
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => (this.showingClass = true), 10);
+  }
   @Output() closeEvent = new EventEmitter();
   activeField = "";
   @Input() formTitle = "";
@@ -20,6 +22,10 @@ export class UpdateProductComponent implements OnInit {
     imageUrl: "",
     description: ""
   };
+  actionLoading = false;
+  deleteLoading = false;
+  deleteConfirm = false;
+  showingClass = false;
 
   setActive(field) {
     this.activeField = field;
@@ -29,18 +35,39 @@ export class UpdateProductComponent implements OnInit {
   }
 
   // Update the product.
-  async formAction() {
+  async formAction($event) {
+    $event.preventDefault();
+    if (this.actionLoading === true) return;
+    this.actionLoading = true;
+    // prevent empty string for optional parameters
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
       await this.apiService.UpdateProduct(this.form);
       this.close();
     } catch (err) {
-      alert(err.errors[0].message);
+      this.actionLoading = false;
+      setTimeout(() => alert(err.errors[0].message), 1);
+    }
+  }
+
+  async deleteProduct(id) {
+    if (this.deleteConfirm === false) {
+      this.deleteConfirm = true;
+      return;
+    }
+    if (this.deleteLoading === true) return;
+    this.deleteLoading = true;
+    try {
+      await this.apiService.DeleteProduct({ id });
+      this.close();
+    } catch (err) {
+      this.deleteLoading = false;
     }
   }
 
   close() {
-    this.closeEvent.emit();
+    this.showingClass = false;
+    setTimeout(() => this.closeEvent.emit(), 350);
   }
 }
