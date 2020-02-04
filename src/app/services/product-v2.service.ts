@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { Product } from 'app-sync/src/models';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Product } from '../app-sync/src/models';
 
 
 
