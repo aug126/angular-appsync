@@ -1,5 +1,9 @@
+<<<<<<< HEAD:src/app/products/product-list/product-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../API.services';
+=======
+import { Component } from '@angular/core';
+>>>>>>> 78042f1710893f653bb17c05dc6ded957d73f4ed:src/app/product-list/product-list.component.ts
 import { DataStore, Predicates } from '@aws-amplify/datastore';
 import { Product } from '../../app-sync/src/models';
 // import { Product } from '../graphql';
@@ -9,18 +13,12 @@ import { Product } from '../../app-sync/src/models';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit {
-  constructor(private apiService: APIService) {}
+export class ProductListComponent {
+  constructor() {}
   products = [];
   showNewProduct = false;
   updatingProduct = null;
   infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: '' };
-
-  products$ = DataStore.observe(Product, Predicates.ALL);
-
-  ngOnInit() {
-
-  }
 
   async getData() {
     this.products = await DataStore.query(Product, Predicates.ALL);
