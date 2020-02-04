@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { APIService } from '../API.services';
+import { APIService } from '../../API.services';
 
 @Component({
   selector: 'app-update-product',
