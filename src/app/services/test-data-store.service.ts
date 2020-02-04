@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataStore } from '@aws-amplify/datastore';
 import { Category, Product } from '../app-sync/src/models';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
