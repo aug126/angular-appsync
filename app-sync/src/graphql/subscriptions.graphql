@@ -9,8 +9,14 @@ subscription OnCreateProduct {
     category {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       version
     }
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -24,8 +30,14 @@ subscription OnUpdateProduct {
     category {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       version
     }
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -39,8 +51,14 @@ subscription OnDeleteProduct {
     category {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       version
     }
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -48,6 +66,9 @@ subscription OnCreateCategory {
   onCreateCategory {
     id
     name
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -55,6 +76,9 @@ subscription OnUpdateCategory {
   onUpdateCategory {
     id
     name
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -62,6 +86,9 @@ subscription OnDeleteCategory {
   onDeleteCategory {
     id
     name
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }

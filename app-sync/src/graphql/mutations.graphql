@@ -12,8 +12,14 @@ mutation CreateProduct(
     category {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       version
     }
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -30,8 +36,14 @@ mutation UpdateProduct(
     category {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       version
     }
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -48,8 +60,14 @@ mutation DeleteProduct(
     category {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       version
     }
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -60,6 +78,9 @@ mutation CreateCategory(
   createCategory(input: $input, condition: $condition) {
     id
     name
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -70,6 +91,9 @@ mutation UpdateCategory(
   updateCategory(input: $input, condition: $condition) {
     id
     name
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -80,6 +104,9 @@ mutation DeleteCategory(
   deleteCategory(input: $input, condition: $condition) {
     id
     name
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }

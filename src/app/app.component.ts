@@ -1,26 +1,24 @@
-import { Component, OnInit } from "@angular/core";
-import { AuthService } from "./auth/auth.service";
+import { Component } from '@angular/core';
+import { DataStore } from '@aws-amplify/datastore';
 // import { APIService } from "./API.services";
-import { Product, Category } from "../../app-sync-2/src/models";
-import { DataStore, Predicates } from "@aws-amplify/datastore";
-import { ObjectUnsubscribedError } from "rxjs";
-import * as uuid from "uuid";
+import { Product } from '../../app-sync/src/models';
+import { AuthService } from './auth/auth.service';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   constructor(
     // private apiService: APIService,
     private authService: AuthService
   ) {}
-  title = "test-angular";
+  title = 'test-angular';
   isLoggedIn = this.authService.isLoggedIn;
 
   ngOnInit() {
-    this.authService.checkUser("");
+    this.authService.checkUser('');
 
     // setTimeout(() => {
     //   for (let i = 0; i < 50; i++) {
@@ -47,11 +45,11 @@ export class AppComponent {
     // DataStore.observe(Product).subscribe(d => console.log(d));
 
     /** CREATE */
-    const product = new Product({
-      name: "NEW PRODUCT",
-      supplierName: ""
-    });
-    data = await DataStore.save(product);
+    // const product = new Product({
+    //   name: 'NEW PRODUCT',
+    //   supplierName: 'TEST'
+    // });
+    // data = await DataStore.save(product);
     console.log(data);
 
     /** UPDATE */

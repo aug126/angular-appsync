@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../API.services';
-import { DataStore } from '@aws-amplify/datastore';
-import { Product } from '../graphql';
+import { DataStore, Predicates } from '@aws-amplify/datastore';
+import { Product } from 'app-sync/src/models';
+// import { Product } from '../graphql';
 
 @Component({
   selector: 'app-product-list',
@@ -15,16 +16,14 @@ export class ProductListComponent implements OnInit {
   updatingProduct = null;
   infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: '' };
 
-  products$ = DataStore.observe(Product);
+  products$ = DataStore.observe(Product, Predicates.ALL);
 
   ngOnInit() {
     this.initLimit();
     this.getDatas();
     this.addSubscriptions();
     this.setInfiniteScroll();
-    this.products$.subscribe(d => {
-      debugger;
-    });
+    this.products$.subscribe(d => { });
   }
 
   initLimit() {

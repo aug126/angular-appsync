@@ -1,43 +1,43 @@
-import { Component, OnInit, Output, Input, EventEmitter } from "@angular/core";
-import { APIService } from "../API.services";
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { APIService } from '../API.services';
 
 @Component({
-  selector: "app-update-product",
-  templateUrl: "../new-product/new-product.component.html", // template from another component
-  styleUrls: ["../new-product/new-product.component.scss"] // template from another component
+  selector: 'app-update-product',
+  templateUrl: '../new-product/new-product.component.html', // template from another component
+  styleUrls: ['../new-product/new-product.component.scss'] // template from another component
 })
 export class UpdateProductComponent implements OnInit {
   constructor(private apiService: APIService) {}
-  ngOnInit() {
-    setTimeout(() => (this.showingClass = true), 10);
-  }
   @Output() closeEvent = new EventEmitter();
-  activeField = "";
-  @Input() formTitle = "";
-  @Input() formBtn = "";
+  activeField = '';
+  @Input() formTitle = '';
+  @Input() formBtn = '';
   @Input() form = {
-    id: "",
-    name: "",
-    supplierName: "",
-    imageUrl: "",
-    description: ""
+    id: '',
+    name: '',
+    supplierName: '',
+    imageUrl: '',
+    description: ''
   };
   actionLoading = false;
   deleteLoading = false;
   deleteConfirm = false;
   showingClass = false;
+  ngOnInit() {
+    setTimeout(() => (this.showingClass = true), 10);
+  }
 
   setActive(field) {
     this.activeField = field;
   }
   setInactive() {
-    this.activeField = "";
+    this.activeField = '';
   }
 
   // Update the product.
   async formAction($event) {
     $event.preventDefault();
-    if (this.actionLoading === true) return;
+    if (this.actionLoading === true) { return; }
     this.actionLoading = true;
     // prevent empty string for optional parameters
     this.form.imageUrl = this.form.imageUrl || null;
@@ -56,7 +56,7 @@ export class UpdateProductComponent implements OnInit {
       this.deleteConfirm = true;
       return;
     }
-    if (this.deleteLoading === true) return;
+    if (this.deleteLoading === true) { return; }
     this.deleteLoading = true;
     try {
       await this.apiService.DeleteProduct({ id });

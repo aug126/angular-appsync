@@ -1,26 +1,27 @@
-import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
-import { APIService } from "../API.services";
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { APIService } from '../API.services';
 // import { DataStore, Predicates } from "@aws-amplify/datastore";
-import * as uuid from "uuid";
+import * as uuid from 'uuid';
+import { Product } from 'app-sync/src/models';
+import { DataStore } from '@aws-amplify/datastore';
 
 @Component({
-  selector: "app-new-product",
-  templateUrl: "./new-product.component.html",
-  styleUrls: ["./new-product.component.scss"]
+  selector: 'app-new-product',
+  templateUrl: './new-product.component.html',
+  styleUrls: ['./new-product.component.scss']
 })
 export class NewProductComponent implements OnInit {
   constructor(private apiService: APIService) {}
 
   @Output() closeEvent = new EventEmitter();
-  @Input() formTitle = "";
-  @Input() formBtn = "";
-  activeField = "";
+  @Input() formTitle = '';
+  @Input() formBtn = '';
+  activeField = '';
   form = {
-    id: uuid(),
-    name: "",
-    supplierName: "",
-    imageUrl: "",
-    description: ""
+    name: 'FIND ME',
+    supplierName: 'FIND ME SUPPLIER',
+    imageUrl: '',
+    description: ''
   };
   actionLoading = false;
   showingClass = false;
@@ -32,7 +33,7 @@ export class NewProductComponent implements OnInit {
     this.activeField = field;
   }
   setInactive() {
-    this.activeField = "";
+    this.activeField = '';
   }
 
   // Create a new product
@@ -46,8 +47,8 @@ export class NewProductComponent implements OnInit {
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
-      // const product = new Product(this.form);
-      // await DataStore.save(new Product(product));
+      const product = new Product(this.form);
+      await DataStore.save(new Product(product));
       this.close();
     } catch (err) {
       this.actionLoading = false;

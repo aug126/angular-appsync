@@ -11,6 +11,7 @@ export type CreateProductInput = {
   supplierName: string;
   description?: string | null;
   imageUrl?: string | null;
+  _version?: number | null;
   productCategoryId?: string | null;
 };
 
@@ -69,18 +70,21 @@ export type UpdateProductInput = {
   supplierName?: string | null;
   description?: string | null;
   imageUrl?: string | null;
+  _version?: number | null;
   expectedVersion: number;
   productCategoryId?: string | null;
 };
 
 export type DeleteProductInput = {
   id?: string | null;
+  _version?: number | null;
   expectedVersion: number;
 };
 
 export type CreateCategoryInput = {
   id?: string | null;
   name: string;
+  _version?: number | null;
 };
 
 export type ModelCategoryConditionInput = {
@@ -93,11 +97,13 @@ export type ModelCategoryConditionInput = {
 export type UpdateCategoryInput = {
   id: string;
   name?: string | null;
+  _version?: number | null;
   expectedVersion: number;
 };
 
 export type DeleteCategoryInput = {
   id?: string | null;
+  _version?: number | null;
   expectedVersion: number;
 };
 
@@ -147,8 +153,14 @@ export type CreateProductMutation = {
     __typename: "Category";
     id: string;
     name: string;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     version: number;
   } | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -163,8 +175,14 @@ export type UpdateProductMutation = {
     __typename: "Category";
     id: string;
     name: string;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     version: number;
   } | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -179,8 +197,14 @@ export type DeleteProductMutation = {
     __typename: "Category";
     id: string;
     name: string;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     version: number;
   } | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -188,6 +212,9 @@ export type CreateCategoryMutation = {
   __typename: "Category";
   id: string;
   name: string;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -195,6 +222,9 @@ export type UpdateCategoryMutation = {
   __typename: "Category";
   id: string;
   name: string;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -202,7 +232,28 @@ export type DeleteCategoryMutation = {
   __typename: "Category";
   id: string;
   name: string;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
+};
+
+export type SyncProductsQuery = {
+  __typename: "ModelProductConnection";
+  items: Array<{
+    __typename: "Product";
+    id: string;
+    name: string;
+    supplierName: string;
+    description: string | null;
+    imageUrl: string | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    version: number;
+  } | null> | null;
+  nextToken: string | null;
+  startedAt: number | null;
 };
 
 export type GetProductQuery = {
@@ -216,8 +267,14 @@ export type GetProductQuery = {
     __typename: "Category";
     id: string;
     name: string;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     version: number;
   } | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -230,15 +287,37 @@ export type ListProductsQuery = {
     supplierName: string;
     description: string | null;
     imageUrl: string | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     version: number;
   } | null> | null;
   nextToken: string | null;
+  startedAt: number | null;
+};
+
+export type SyncCategoriesQuery = {
+  __typename: "ModelCategoryConnection";
+  items: Array<{
+    __typename: "Category";
+    id: string;
+    name: string;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    version: number;
+  } | null> | null;
+  nextToken: string | null;
+  startedAt: number | null;
 };
 
 export type GetCategoryQuery = {
   __typename: "Category";
   id: string;
   name: string;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -248,9 +327,13 @@ export type ListCategorysQuery = {
     __typename: "Category";
     id: string;
     name: string;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     version: number;
   } | null> | null;
   nextToken: string | null;
+  startedAt: number | null;
 };
 
 export type OnCreateProductSubscription = {
@@ -264,8 +347,14 @@ export type OnCreateProductSubscription = {
     __typename: "Category";
     id: string;
     name: string;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     version: number;
   } | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -280,8 +369,14 @@ export type OnUpdateProductSubscription = {
     __typename: "Category";
     id: string;
     name: string;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     version: number;
   } | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -296,8 +391,14 @@ export type OnDeleteProductSubscription = {
     __typename: "Category";
     id: string;
     name: string;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     version: number;
   } | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -305,6 +406,9 @@ export type OnCreateCategorySubscription = {
   __typename: "Category";
   id: string;
   name: string;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -312,6 +416,9 @@ export type OnUpdateCategorySubscription = {
   __typename: "Category";
   id: string;
   name: string;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -319,6 +426,9 @@ export type OnDeleteCategorySubscription = {
   __typename: "Category";
   id: string;
   name: string;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   version: number;
 };
 
@@ -342,8 +452,14 @@ export class APIService {
             __typename
             id
             name
+            _version
+            _deleted
+            _lastChangedAt
             version
           }
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`;
@@ -374,8 +490,14 @@ export class APIService {
             __typename
             id
             name
+            _version
+            _deleted
+            _lastChangedAt
             version
           }
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`;
@@ -406,8 +528,14 @@ export class APIService {
             __typename
             id
             name
+            _version
+            _deleted
+            _lastChangedAt
             version
           }
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`;
@@ -431,6 +559,9 @@ export class APIService {
           __typename
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`;
@@ -454,6 +585,9 @@ export class APIService {
           __typename
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`;
@@ -477,6 +611,9 @@ export class APIService {
           __typename
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`;
@@ -491,6 +628,49 @@ export class APIService {
     )) as any;
     return <DeleteCategoryMutation>response.data.deleteCategory;
   }
+  async SyncProducts(
+    filter?: ModelProductFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncProductsQuery> {
+    const statement = `query SyncProducts($filter: ModelProductFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncProducts(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            supplierName
+            description
+            imageUrl
+            _version
+            _deleted
+            _lastChangedAt
+            version
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncProductsQuery>response.data.syncProducts;
+  }
   async GetProduct(id: string): Promise<GetProductQuery> {
     const statement = `query GetProduct($id: ID!) {
         getProduct(id: $id) {
@@ -504,8 +684,14 @@ export class APIService {
             __typename
             id
             name
+            _version
+            _deleted
+            _lastChangedAt
             version
           }
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`;
@@ -532,9 +718,13 @@ export class APIService {
             supplierName
             description
             imageUrl
+            _version
+            _deleted
+            _lastChangedAt
             version
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -552,12 +742,55 @@ export class APIService {
     )) as any;
     return <ListProductsQuery>response.data.listProducts;
   }
+  async SyncCategories(
+    filter?: ModelCategoryFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncCategoriesQuery> {
+    const statement = `query SyncCategories($filter: ModelCategoryFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncCategories(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            _version
+            _deleted
+            _lastChangedAt
+            version
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncCategoriesQuery>response.data.syncCategories;
+  }
   async GetCategory(id: string): Promise<GetCategoryQuery> {
     const statement = `query GetCategory($id: ID!) {
         getCategory(id: $id) {
           __typename
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`;
@@ -581,9 +814,13 @@ export class APIService {
             __typename
             id
             name
+            _version
+            _deleted
+            _lastChangedAt
             version
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -617,8 +854,14 @@ export class APIService {
             __typename
             id
             name
+            _version
+            _deleted
+            _lastChangedAt
             version
           }
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`
@@ -641,8 +884,14 @@ export class APIService {
             __typename
             id
             name
+            _version
+            _deleted
+            _lastChangedAt
             version
           }
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`
@@ -665,8 +914,14 @@ export class APIService {
             __typename
             id
             name
+            _version
+            _deleted
+            _lastChangedAt
             version
           }
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`
@@ -682,6 +937,9 @@ export class APIService {
           __typename
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`
@@ -697,6 +955,9 @@ export class APIService {
           __typename
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`
@@ -712,6 +973,9 @@ export class APIService {
           __typename
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           version
         }
       }`

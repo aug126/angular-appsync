@@ -1,4 +1,31 @@
 # this is an auto generated file. This will be overwritten
+query SyncProducts(
+  $filter: ModelProductFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncProducts(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      name
+      supplierName
+      description
+      imageUrl
+      _version
+      _deleted
+      _lastChangedAt
+      version
+    }
+    nextToken
+    startedAt
+  }
+}
 query GetProduct($id: ID!) {
   getProduct(id: $id) {
     id
@@ -9,8 +36,14 @@ query GetProduct($id: ID!) {
     category {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       version
     }
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -26,15 +59,46 @@ query ListProducts(
       supplierName
       description
       imageUrl
+      _version
+      _deleted
+      _lastChangedAt
       version
     }
     nextToken
+    startedAt
+  }
+}
+query SyncCategories(
+  $filter: ModelCategoryFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncCategories(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      name
+      _version
+      _deleted
+      _lastChangedAt
+      version
+    }
+    nextToken
+    startedAt
   }
 }
 query GetCategory($id: ID!) {
   getCategory(id: $id) {
     id
     name
+    _version
+    _deleted
+    _lastChangedAt
     version
   }
 }
@@ -47,8 +111,12 @@ query ListCategorys(
     items {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       version
     }
     nextToken
+    startedAt
   }
 }
