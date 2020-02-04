@@ -1,9 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { APIService } from '../API.services';
-// import { DataStore, Predicates } from "@aws-amplify/datastore";
-import * as uuid from 'uuid';
-import { Product } from 'app-sync/src/models';
-import { DataStore } from '@aws-amplify/datastore';
+import { APIService } from '../../API.services';
 
 @Component({
   selector: 'app-new-product',
@@ -47,8 +43,7 @@ export class NewProductComponent implements OnInit {
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
-      const product = new Product(this.form);
-      await DataStore.save(new Product(product));
+      // TODO Créer le product
       this.close();
     } catch (err) {
       this.actionLoading = false;

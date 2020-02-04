@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { APIService } from '../API.services';
+import { APIService } from '../../API.services';
 import { DataStore, Predicates } from '@aws-amplify/datastore';
-import { Product } from 'app-sync/src/models';
+import { Product } from '../../app-sync/src/models';
 // import { Product } from '../graphql';
 
 @Component({
