@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { TestDataStoreService } from './services/test-data-store.service';
 
@@ -8,18 +8,18 @@ import { TestDataStoreService } from './services/test-data-store.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  implements OnInit {
+
   constructor(
     private authService: AuthService,
     private testSvc: TestDataStoreService
   ) {}
+
   title = 'test-angular';
   isLoggedIn = this.authService.isLoggedIn;
 
   ngOnInit() {
     this.authService.checkUser('');
-
-
-    this.testSvc.getAllProducts();
+    this.testSvc.loadProducts();
   }
 
   logout() {

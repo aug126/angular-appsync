@@ -7,15 +7,17 @@
       <h1 class="My-Products">
         My Products
       </h1>
-      <button (click)="createManyProducts()">Create many</button>
-      <button (click)="newProduct()" class="new-product-btn">
-        New Product
-      </button>
+      <div>
+        <button (click)="createManyProducts()">Create many Products</button>
+        <button (click)="newProduct()" class="new-product-btn">
+          New Product
+        </button>
+      </div>
     </div>
     <div class="product-list">
       <div
         (click)="updateProduct(product)"
-        *ngFor="let product of products"
+        *ngFor="let product of products$ | async"
         class="Background product-single"
       >
         <div

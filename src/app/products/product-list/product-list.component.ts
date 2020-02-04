@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataStore, Predicates } from '@aws-amplify/datastore';
 import { Product } from '../../app-sync/src/models';
+import { TestDataStoreService } from 'src/app/services/test-data-store.service';
 // import { Product } from '../graphql';
 
 @Component({
@@ -9,15 +10,13 @@ import { Product } from '../../app-sync/src/models';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent {
-  constructor() {}
-  products = [];
   showNewProduct = false;
   updatingProduct = null;
   infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: '' };
+  products$ = this.testSrv.productList$;
 
-  async getData() {
-    this.products = await DataStore.query(Product, Predicates.ALL);
-  }
+  constructor(private testSrv: TestDataStoreService) {}
+
 
 
   newProduct() {
@@ -25,9 +24,7 @@ export class ProductListComponent {
   }
 
   createManyProducts() {
-    (new Array(100))
-    .fill(null)
-    .forEach((_, i) => DataStore.save(new Product({ name: `${i} PRODUCT`, supplierName: `product supplier` })));
+    this.testSrv.createManyProducts();
   }
 
   closeModalNewProduct() {
