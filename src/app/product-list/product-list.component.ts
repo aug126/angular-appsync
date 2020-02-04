@@ -1,22 +1,30 @@
-import { Component, OnInit } from "@angular/core";
-import { APIService } from "../API.services";
+import { Component, OnInit } from '@angular/core';
+import { APIService } from '../API.services';
+import { DataStore } from '@aws-amplify/datastore';
+import { Product } from '../graphql';
 
 @Component({
-  selector: "app-product-list",
-  templateUrl: "./product-list.component.html",
-  styleUrls: ["./product-list.component.scss"]
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
   constructor(private apiService: APIService) {}
   products = [];
   showNewProduct = false;
   updatingProduct = null;
-  infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: "" };
+  infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: '' };
+
+  products$ = DataStore.observe(Product);
+
   ngOnInit() {
     this.initLimit();
     this.getDatas();
     this.addSubscriptions();
     this.setInfiniteScroll();
+    this.products$.subscribe(d => {
+      debugger;
+    });
   }
 
   initLimit() {
@@ -36,15 +44,15 @@ export class ProductListComponent implements OnInit {
   }
 
   async getDatas() {
-    if (this.infiniteScroll.maxDone === true) return;
-    if (this.infiniteScroll.loading === true) return;
+    if (this.infiniteScroll.maxDone === true) { return; }
+    if (this.infiniteScroll.loading === true) { return; }
     this.infiniteScroll.loading = true;
-    let datas = await this.apiService.ListProducts(
+    const datas = await this.apiService.ListProducts(
       null,
       this.infiniteScroll.limit,
       this.infiniteScroll.nextToken
     );
-    if (datas.nextToken === null) this.infiniteScroll.maxDone = true; // Strop le infinite scroll.
+    if (datas.nextToken === null) { this.infiniteScroll.maxDone = true; } // Strop le infinite scroll.
     this.infiniteScroll.nextToken = datas.nextToken;
     this.products.push(...datas.items);
     this.infiniteScroll.loading = false;
@@ -64,14 +72,14 @@ export class ProductListComponent implements OnInit {
   addSubscriptions() {
     this.apiService.OnCreateProductListener.subscribe({
       next: data => {
-        let newProduct = data.value.data.onCreateProduct;
+        const newProduct = data.value.data.onCreateProduct;
         this.products.push(newProduct);
       }
     });
     this.apiService.OnUpdateProductListener.subscribe({
       next: data => {
-        let updatedProduct = data.value.data.onUpdateProduct;
-        let updatedIndex = this.products.findIndex(
+        const updatedProduct = data.value.data.onUpdateProduct;
+        const updatedIndex = this.products.findIndex(
           product => product.id === updatedProduct.id
         );
         this.products[updatedIndex] = updatedProduct;
@@ -79,8 +87,8 @@ export class ProductListComponent implements OnInit {
     });
     this.apiService.OnDeleteProductListener.subscribe({
       next: data => {
-        let deletedProduct = data.value.data.onDeleteProduct;
-        let deletedIndex = this.products.findIndex(
+        const deletedProduct = data.value.data.onDeleteProduct;
+        const deletedIndex = this.products.findIndex(
           product => product.id === deletedProduct.id
         );
         this.products.splice(deletedIndex, 1);
@@ -97,7 +105,7 @@ export class ProductListComponent implements OnInit {
   }
 
   updateProduct(product) {
-    let productCopy = { ...product };
+    const productCopy = { ...product };
     delete productCopy.__typename;
     this.updatingProduct = productCopy;
   }

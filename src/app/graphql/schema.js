@@ -8,6 +8,10 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "versioned",
+                    "properties": {}
                 }
             ],
             "fields": {
@@ -45,10 +49,54 @@ export const schema = {
                     "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
+                },
+                "category": {
+                    "name": "category",
+                    "isArray": false,
+                    "type": {
+                        "model": "Category"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "productCategoryId"
+                    }
+                }
+            }
+        },
+        "Category": {
+            "syncable": true,
+            "name": "Category",
+            "pluralName": "Categories",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "versioned",
+                    "properties": {}
+                }
+            ],
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 }
             }
         }
     },
     "enums": {},
-    "version": "e7314f2669291f1a7f3d1a8545870573"
+    "version": "e673743f01bc99242078f738cdeeb3ca"
 };
