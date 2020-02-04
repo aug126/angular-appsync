@@ -1,27 +1,26 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { APIService } from '../API.services';
-import { DataStore, Predicates } from '@aws-amplify/datastore';
-import * as uuid from 'uuid/v4';
-import { Product } from '../graphql/index';
+import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
+import { APIService } from "../API.services";
+// import { DataStore, Predicates } from "@aws-amplify/datastore";
+import * as uuid from "uuid";
 
 @Component({
-  selector: 'app-new-product',
-  templateUrl: './new-product.component.html',
-  styleUrls: ['./new-product.component.scss']
+  selector: "app-new-product",
+  templateUrl: "./new-product.component.html",
+  styleUrls: ["./new-product.component.scss"]
 })
 export class NewProductComponent implements OnInit {
   constructor(private apiService: APIService) {}
 
   @Output() closeEvent = new EventEmitter();
-  @Input() formTitle = '';
-  @Input() formBtn = '';
-  activeField = '';
+  @Input() formTitle = "";
+  @Input() formBtn = "";
+  activeField = "";
   form = {
     id: uuid(),
-    name: '',
-    supplierName: '',
-    imageUrl: '',
-    description: ''
+    name: "",
+    supplierName: "",
+    imageUrl: "",
+    description: ""
   };
   actionLoading = false;
   showingClass = false;
@@ -33,20 +32,22 @@ export class NewProductComponent implements OnInit {
     this.activeField = field;
   }
   setInactive() {
-    this.activeField = '';
+    this.activeField = "";
   }
 
   // Create a new product
   async formAction($event) {
     $event.preventDefault();
-    if (this.actionLoading === true) { return; }
+    if (this.actionLoading === true) {
+      return;
+    }
     this.actionLoading = true;
     // prevent empty string for optional values.
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
-      const product = new Product(this.form);
-      await DataStore.save(new Product(product));
+      // const product = new Product(this.form);
+      // await DataStore.save(new Product(product));
       this.close();
     } catch (err) {
       this.actionLoading = false;
