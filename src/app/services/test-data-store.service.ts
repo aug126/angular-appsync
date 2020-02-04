@@ -18,16 +18,17 @@ export class TestDataStoreService {
   loadProducts() {
     return DataStore.query<Product>(Product)
     .then(r => {
-      debugger;
       this.productList$.next(r);
     });
   }
 
 
   createManyProducts() {
-    (new Array(1000))
+    console.log('');
+    const promises = (new Array(1000))
     .fill(null)
-    .forEach((_, i) => DataStore.save(new Product({ name: `${i} PRODUCT`, supplierName: `product supplier` })));
+    .map((_, i) => DataStore.save(new Product({ name: `${i} PRODUCT`, supplierName: `product supplier` })));
+    Promise.all(promises).then(_ => console.log('finished'));
   }
 
   queryProducts() {
