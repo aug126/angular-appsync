@@ -16,12 +16,6 @@ export class ProductListComponent implements OnInit {
   updatingProduct = null;
   infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: '' };
 
-  products$ = DataStore.observe(Product, Predicates.ALL);
-
-  ngOnInit() {
-
-  }
-
   async getData() {
     this.products = await DataStore.query(Product, Predicates.ALL);
   }
