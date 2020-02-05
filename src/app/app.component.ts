@@ -7,15 +7,16 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  implements OnInit {
+
   constructor(
     private authService: AuthService,
   ) {}
+
   title = 'test-angular';
   isLoggedIn = this.authService.isLoggedIn;
 
   ngOnInit() {
     this.authService.checkUser('');
-
   }
 
   logout() {
