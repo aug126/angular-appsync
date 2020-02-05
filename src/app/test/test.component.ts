@@ -6,6 +6,7 @@ import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 import awsconfig from '../app-sync/src/aws-exports';
 
 import * as queries from '../app-sync/src/graphql/queries';
+import * as mutations from '../app-sync/src/graphql/mutations';
 import { Auth } from 'aws-amplify';
 import { of, from } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
@@ -15,10 +16,10 @@ const client = new AWSAppSyncClient({
   region: awsconfig.aws_appsync_region,
   auth: {
     type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS, // authentication type in awsconfig.aws_appsync_authenticationType,
-    jwtToken: async () => (await Auth.currentSession()).getIdToken().getJwtToken(),
+    jwtToken: async () =>
+      (await Auth.currentSession()).getIdToken().getJwtToken()
   }
 });
-
 
 @Component({
   selector: 'app-test',
@@ -52,12 +53,29 @@ export class TestComponent implements OnInit {
   }
 
   testUpdate(product) {
-    const productCopy = { ...product };
-    delete productCopy.__typename;
-    const variables = { input : { ...productCopy, name: product.name + ' Edit' } };
-    client.mutate({ mutation: gql([queries.updateProduct]), variables }).catch(e => {
+    const variables = { input : { id: product.id, name: product.name + ' Edit' } };
+    client.mutate({
+      mutation: gql([mutation.updateProduct]), variables }).catch(e => {
       debugger;
     });
+  }
 
+  testCreateSimpleProduct() {
+    console.time('testListProductQuery');
+
+    client
+      .mutate({
+        mutation: gql([mutations.createProduct]),
+        variables: {
+          input: {
+            name: 'Test Product Mutation',
+            supplierName: 'supplier'
+          }
+        }
+      })
+      .then(data => {
+        console.timeEnd('testListProductQuery');
+        console.log(data);
+      });
   }
 }
