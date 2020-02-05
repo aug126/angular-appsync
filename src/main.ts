@@ -7,8 +7,6 @@ import { environment } from './environments/environment';
 /** Amplify */
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
-import { DataStore } from '@aws-amplify/datastore';
-DataStore.configure({});
 Amplify.configure(awsconfig);
 /** End Amplify */
 
