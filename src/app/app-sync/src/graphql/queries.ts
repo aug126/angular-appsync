@@ -26,3 +26,17 @@ export const listProducts = `query ListProducts(
   }
 }
 `;
+
+
+export const updateProduct = `
+  mutation UpdateProduct($input: UpdateProductInput!, $condition: ModelProductConditionInput) {
+    updateProduct(input: $input, condition: $condition) {
+      __typename
+      id
+      name
+      supplierName
+      description
+      imageUrl
+    }
+  }
+`;

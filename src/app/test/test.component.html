@@ -1,4 +1,16 @@
 <!-- CEDRIC -->
+<div class="container">
+
+  <!-- Updates-->
+  <p>
+    QueryList of products + QueryOne product, update the one product, is the product in the list updated as well. Click on Product to modify
+  </p>
+
+  <ul>
+    <li *ngFor="let product of products$ | async" (click)="testUpdate(product)">{{ product.name }}</li>
+  </ul>
+
+</div>
 
 <!-- AUGUSTIn -->
 <div class="container">
