@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { APIService } from '../../API.services';
 
 @Component({
   selector: 'app-new-product',
@@ -7,7 +6,7 @@ import { APIService } from '../../API.services';
   styleUrls: ['./new-product.component.scss']
 })
 export class NewProductComponent implements OnInit {
-  constructor(private apiService: APIService) {}
+  constructor() {}
 
   @Output() closeEvent = new EventEmitter();
   @Input() formTitle = '';
