@@ -1,25 +1,33 @@
 import { Injectable } from '@angular/core';
-import { DataStore } from '@aws-amplify/datastore';
+import { DataStore, Predicates } from '@aws-amplify/datastore';
 import { Category, Product } from '../app-sync/src/models';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { APIService } from '../API.services';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestDataStoreService {
-
+  products = [];
   productList$ = new BehaviorSubject([]);
 
-  constructor() {
-    // Initialise DataStore avec une action "vide"
-    DataStore.query<Category>(Category);
+  constructor(private apiSrv: APIService) {
+    // this.api.query;
+    // DataStore.observe(Product, Predicates.ALL).subscribe(d => {
+    //   debugger;
+    // });
+    DataStore.query<Product>(Product, product => product.name('eq', '82382')).then(c => console.log(c));
+    // this.apiSrv.ListProducts({ id: { contains: '029fcbfe-3509-4b84-8168-6ec35a4db92e' }}).then(r => console.log(r));
+    DataStore.query<Product>(Product, '029fcbfe-3509-4b84-8168-6ec35a4db92e' )
+    .then( res => console.log(res));
+    // DataStore.query<Product>(Product, '029fcbfe-3509-4b84-8168-6ec35a4db92e')
+    //   .then(product => DataStore.save(Product.copyOf(product, updated => {
+    //     updated.name += ' edited';
+    //   })));
   }
 
   loadProducts() {
-    return DataStore.query<Product>(Product)
-    .then(r => {
-      this.productList$.next(r);
-    });
+
   }
 
 

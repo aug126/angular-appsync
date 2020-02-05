@@ -8,7 +8,9 @@ import { environment } from './environments/environment';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 import { DataStore } from '@aws-amplify/datastore';
-DataStore.configure({});
+DataStore.configure({
+  maxRecordsToSync: 15
+});
 Amplify.configure(awsconfig);
 /** End Amplify */
 

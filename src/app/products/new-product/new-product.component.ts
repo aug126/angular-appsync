@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { APIService } from '../../API.services';
+import { DataStore } from '@aws-amplify/datastore';
+import { Product } from 'src/app/app-sync/src/models';
 
 @Component({
   selector: 'app-new-product',
@@ -44,6 +46,7 @@ export class NewProductComponent implements OnInit {
     this.form.description = this.form.description || null;
     try {
       // TODO Créer le product
+      DataStore.save(new Product({ ...this.form }));
       this.close();
     } catch (err) {
       this.actionLoading = false;
