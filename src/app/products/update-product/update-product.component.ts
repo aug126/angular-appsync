@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { APIService } from '../../API.services';
 
 @Component({
   selector: 'app-update-product',
@@ -7,7 +6,7 @@ import { APIService } from '../../API.services';
   styleUrls: ['../new-product/new-product.component.scss'] // template from another component
 })
 export class UpdateProductComponent implements OnInit {
-  constructor(private apiService: APIService) {}
+  constructor() {}
   @Output() closeEvent = new EventEmitter();
   activeField = '';
   @Input() formTitle = '';
@@ -43,7 +42,7 @@ export class UpdateProductComponent implements OnInit {
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
-      await this.apiService.UpdateProduct(this.form);
+      // ! UPDATE
       this.close();
     } catch (err) {
       this.actionLoading = false;
@@ -59,7 +58,7 @@ export class UpdateProductComponent implements OnInit {
     if (this.deleteLoading === true) { return; }
     this.deleteLoading = true;
     try {
-      await this.apiService.DeleteProduct({ id });
+      // ! Delete
       this.close();
     } catch (err) {
       this.deleteLoading = false;

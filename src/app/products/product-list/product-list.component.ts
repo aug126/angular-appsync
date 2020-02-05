@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { DataStore, Predicates } from '@aws-amplify/datastore';
-import { Product } from '../../app-sync/src/models';
-import { TestDataStoreService } from 'src/app/services/test-data-store.service';
-// import { Product } from '../graphql';
 
 @Component({
   selector: 'app-product-list',
@@ -17,15 +13,21 @@ export class ProductListComponent {
 
   constructor(private testSrv: TestDataStoreService) {}
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> f13eb4897a0b9bfe263624161d20f86104bc1c39
 
   newProduct() {
     this.showNewProduct = true;
   }
 
+<<<<<<< HEAD
+=======
   createManyProducts() {
     this.testSrv.createManyProducts();
   }
+>>>>>>> f13eb4897a0b9bfe263624161d20f86104bc1c39
 
   closeModalNewProduct() {
     this.showNewProduct = false;

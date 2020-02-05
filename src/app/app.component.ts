@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
-import { TestDataStoreService } from './services/test-data-store.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +10,6 @@ export class AppComponent  implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private testSvc: TestDataStoreService
   ) {}
 
   title = 'test-angular';
@@ -19,7 +17,6 @@ export class AppComponent  implements OnInit {
 
   ngOnInit() {
     this.authService.checkUser('');
-    this.testSvc.loadProducts();
   }
 
   logout() {
