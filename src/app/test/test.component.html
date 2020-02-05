@@ -1,7 +1,32 @@
+<!-- CEDRIC -->
 
-    <p>Test 1</p>
-    <button>TEST 1</button>
+<!-- AUGUSTIn -->
+<div class="container">
 
-    <!-- CEDRIC -->
+    <!-- Simple List Product -->
+  <p>
+    Liste 10 produits avec une query graphql importée de amplify. utilise
+    L'authentification "AMAZON_COGNITO_USER_POOLS"
+  </p>
+  <div class="conclusion">
+      <ul>
+          <li>Les produits récupérés sont stockés dans le loalStorage (key = reduxPersist::appsync) (et en mémoire pour la prochaine requete)</li>
+          <li>Les call sont beaucoup plus rapides une fois mis en cache ou en mémoire 
+              <ul>
+                  <li>first time: 580ms</li>
+                  <li>from cache: 30ms</li>
+                  <li>from memory: 1ms</li>
+              </ul>
+      </ul>
+      <li>Crée une erreur à la prmière requete hors connexion.</li>
+  </div>
+  <button (click)="testSimpleListProductQuery()">Simple List Product</button>
 
-    <!-- AUGUSTIn -->
+  <!-- Simple List Product With Params -->
+  <p>
+      même chose mais en passant des paramètres
+  </p>
+
+</div>
+
+
