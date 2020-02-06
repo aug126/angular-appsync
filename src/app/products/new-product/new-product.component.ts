@@ -1,22 +1,26 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
+import { ProductsService } from "src/app/services/products.service";
+import * as uuid  from "uuid/v4";
+import { client } from 'src/app/init-client';
 
 @Component({
-  selector: 'app-new-product',
-  templateUrl: './new-product.component.html',
-  styleUrls: ['./new-product.component.scss']
+  selector: "app-new-product",
+  templateUrl: "./new-product.component.html",
+  styleUrls: ["./new-product.component.scss"]
 })
 export class NewProductComponent implements OnInit {
-  constructor() {}
+  constructor(private productsSvc: ProductsService) {}
 
   @Output() closeEvent = new EventEmitter();
-  @Input() formTitle = '';
-  @Input() formBtn = '';
-  activeField = '';
+  @Input() formTitle = "";
+  @Input() formBtn = "";
+  activeField = "";
   form = {
-    name: 'FIND ME',
-    supplierName: 'FIND ME SUPPLIER',
-    imageUrl: '',
-    description: ''
+    id: "",
+    name: "FIND ME",
+    supplierName: "FIND ME SUPPLIER",
+    imageUrl: "",
+    description: ""
   };
   actionLoading = false;
   showingClass = false;
@@ -28,7 +32,7 @@ export class NewProductComponent implements OnInit {
     this.activeField = field;
   }
   setInactive() {
-    this.activeField = '';
+    this.activeField = "";
   }
 
   // Create a new product
@@ -42,7 +46,13 @@ export class NewProductComponent implements OnInit {
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
-      // TODO Créer le product
+      this.form.id = uuid();
+      let test = this.productsSvc.createProduct(this.form)
+      .subscribe(() => {
+        client.reFetchObservableQueries();
+        test.unsubscribe();
+      });
+
       this.close();
     } catch (err) {
       this.actionLoading = false;

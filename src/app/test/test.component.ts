@@ -1,25 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import gql from 'graphql-tag';
-import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
-
-import awsconfig from '../app-sync/src/aws-exports';
 
 import * as queries from '../app-sync/src/graphql/queries';
 import * as mutations from '../app-sync/src/graphql/mutations';
-import { Auth } from 'aws-amplify';
 import { of, from } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
-const client = new AWSAppSyncClient({
-  url: awsconfig.aws_appsync_graphqlEndpoint,
-  region: awsconfig.aws_appsync_region,
-  auth: {
-    type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS, // authentication type in awsconfig.aws_appsync_authenticationType,
-    jwtToken: async () =>
-      (await Auth.currentSession()).getIdToken().getJwtToken()
-  }
-});
+import { client } from "../init-client"
 
 @Component({
   selector: 'app-test',
@@ -28,7 +16,7 @@ const client = new AWSAppSyncClient({
 })
 export class TestComponent implements OnInit {
   products$ = from(client.watchQuery({
-    query: gql([queries.listProducts]),
+    query: gql([queries.ListProducts]),
     // fetchPolicy: ''
   }))
   .pipe(
@@ -49,7 +37,7 @@ export class TestComponent implements OnInit {
     console.time("testSimpleListProductQuery");
     client
       .query({
-        query: gql([queries.listProducts])
+        query: gql([queries.ListProducts])
       })
       .then(data => {
         console.timeEnd("testSimpleListProductQuery");
@@ -61,7 +49,7 @@ export class TestComponent implements OnInit {
     console.time("testParamListProduct")
     client
       .query({
-        query: gql([queries.listProducts]),
+        query: gql([queries.ListProducts]),
         variables: {
           filter: {
             name: {contains: nameContains}
@@ -79,7 +67,7 @@ export class TestComponent implements OnInit {
 
     client
       .mutate({
-        mutation: gql([mutations.createProduct]),
+        mutation: gql([mutations.CreateProduct]),
         variables: {
           input: {
             name: 'Test Product Mutation',

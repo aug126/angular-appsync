@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-update-product',
@@ -6,7 +7,9 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
   styleUrls: ['../new-product/new-product.component.scss'] // template from another component
 })
 export class UpdateProductComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private productsSvc: ProductsService
+  ) {}
   @Output() closeEvent = new EventEmitter();
   activeField = '';
   @Input() formTitle = '';
@@ -16,7 +19,7 @@ export class UpdateProductComponent implements OnInit {
     name: '',
     supplierName: '',
     imageUrl: '',
-    description: ''
+    description: '',
   };
   actionLoading = false;
   deleteLoading = false;
@@ -42,7 +45,7 @@ export class UpdateProductComponent implements OnInit {
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
-      // ! UPDATE
+      this.productsSvc.updateProduct(this.form).subscribe();
       this.close();
     } catch (err) {
       this.actionLoading = false;
@@ -58,7 +61,10 @@ export class UpdateProductComponent implements OnInit {
     if (this.deleteLoading === true) { return; }
     this.deleteLoading = true;
     try {
-      // ! Delete
+      this.productsSvc.deleteProduct({
+        id: this.form.id,
+        _version: 1
+      });
       this.close();
     } catch (err) {
       this.deleteLoading = false;
