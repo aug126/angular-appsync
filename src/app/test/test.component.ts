@@ -27,7 +27,10 @@ const client = new AWSAppSyncClient({
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
-  products$ = from(client.watchQuery({ query: gql([queries.listProducts]) }))
+  products$ = from(client.watchQuery({
+    query: gql([queries.listProducts]),
+    // fetchPolicy: ''
+  }))
   .pipe(
     map((res: any) => res.data.listProducts.items)
   );
@@ -53,10 +56,13 @@ export class TestComponent implements OnInit {
   }
 
   testUpdate(product) {
-    const variables = { input : { id: product.id, name: product.name + ' Edit' } };
+    const variables = { input : { id: product.id, name: product.name + ' Edit', _version: product._version } };
     client.mutate({
-      mutation: gql([mutation.updateProduct]), variables }).catch(e => {
-      debugger;
+      mutation: gql([mutations.updateProduct]),
+      variables,
+    })
+      .catch(e => {
+        debugger;
     });
   }
 
@@ -69,9 +75,9 @@ export class TestComponent implements OnInit {
         variables: {
           input: {
             name: 'Test Product Mutation',
-            supplierName: 'supplier'
+            supplierName: 'supplier',
           }
-        }
+        },
       })
       .then(data => {
         console.timeEnd('testListProductQuery');

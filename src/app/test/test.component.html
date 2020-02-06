@@ -10,6 +10,14 @@
     <li *ngFor="let product of products$ | async" (click)="testUpdate(product)">{{ product.name }}</li>
   </ul>
 
+  <button (click)="testCreateSimpleProduct()"> create</button>
+
+  <div class="conclusion">
+    <ul>
+        <li>works when we specify version</li>
+        <li>Works offline but is refreshed in the view when we refresh only</li>
+        <li>Non optimistic by default</li>
+    </ul>
 </div>
 
 <!-- AUGUSTIn -->

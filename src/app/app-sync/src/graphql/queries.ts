@@ -7,6 +7,7 @@ export const getProduct = `query GetProduct($id: ID!) {
     name
     supplierName
     description
+    _version
   }
 }
 `;
@@ -21,6 +22,7 @@ export const listProducts = `query ListProducts(
       name
       supplierName
       description
+      _version
     }
     nextToken
   }
