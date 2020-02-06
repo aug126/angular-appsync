@@ -9,6 +9,7 @@ export const getProduct = `query GetProduct($id: ID!) {
     name
     supplierName
     description
+    _version
   }
 }
 `;
@@ -23,6 +24,7 @@ export const listProducts = gql([`query ListProducts(
       name
       supplierName
       description
+      _version
     }
     nextToken
   }

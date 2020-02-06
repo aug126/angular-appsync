@@ -1,13 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import gql from "graphql-tag";
-import AWSAppSyncClient, { AUTH_TYPE, buildSync } from "aws-appsync";
+import gql from 'graphql-tag';
+import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 
-import awsconfig from "../app-sync/src/aws-exports";
+import awsconfig from '../app-sync/src/aws-exports';
 
-import * as queries from "../app-sync/src/graphql/queries";
-import * as mutations from "../app-sync/src/graphql/mutations";
-import { Auth, API } from "aws-amplify";
+import * as queries from '../app-sync/src/graphql/queries';
+import * as mutations from '../app-sync/src/graphql/mutations';
+import { Auth } from 'aws-amplify';
+import { of, from } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
 const client = new AWSAppSyncClient({
   url: awsconfig.aws_appsync_graphqlEndpoint,
@@ -20,13 +22,20 @@ const client = new AWSAppSyncClient({
 });
 
 @Component({
-  selector: "app-test",
-  templateUrl: "./test.component.html",
-  styleUrls: ["./test.component.scss"]
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
-  constructor(
-  ) {}
+  products$ = from(client.watchQuery({
+    query: gql([queries.listProducts]),
+    // fetchPolicy: ''
+  }))
+  .pipe(
+    map((res: any) => res.data.listProducts.items)
+  );
+
+  constructor() {}
 
   ngOnInit() {
     this.testParamListProductQuery("Test");
@@ -66,20 +75,20 @@ export class TestComponent implements OnInit {
   }
 
   testCreateSimpleProduct() {
-    console.time("testListProductQuery");
+    console.time('testListProductQuery');
 
     client
       .mutate({
         mutation: gql([mutations.createProduct]),
         variables: {
           input: {
-            name: "Test Product Mutation",
-            supplierName: "supplier"
+            name: 'Test Product Mutation',
+            supplierName: 'supplier',
           }
-        }
+        },
       })
       .then(data => {
-        console.timeEnd("testListProductQuery");
+        console.timeEnd('testListProductQuery');
         console.log(data);
       });
   }

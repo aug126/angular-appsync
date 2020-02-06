@@ -22,6 +22,7 @@ export const updateProduct = `mutation UpdateProduct(
     name
     supplierName
     description
+    _version
   }
 }
 `;

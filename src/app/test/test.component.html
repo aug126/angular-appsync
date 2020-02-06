@@ -1,4 +1,24 @@
 <!-- CEDRIC -->
+<div class="container">
+
+  <!-- Updates-->
+  <p>
+    QueryList of products + QueryOne product, update the one product, is the product in the list updated as well. Click on Product to modify
+  </p>
+
+  <ul>
+    <li *ngFor="let product of products$ | async" (click)="testUpdate(product)">{{ product.name }}</li>
+  </ul>
+
+  <button (click)="testCreateSimpleProduct()"> create</button>
+
+  <div class="conclusion">
+    <ul>
+        <li>works when we specify version</li>
+        <li>Works offline but is refreshed in the view when we refresh only</li>
+        <li>Non optimistic by default</li>
+    </ul>
+</div>
 
 <!-- AUGUSTIn -->
 <div class="container">

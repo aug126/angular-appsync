@@ -8,7 +8,7 @@ import { environment } from './environments/environment';
 import Amplify from 'aws-amplify';
 import awsconfig from './app/app-sync/src/aws-exports';
 Amplify.configure(awsconfig);
-
+import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 
 /** End Amplify */
 
