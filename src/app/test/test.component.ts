@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 
 import gql from "graphql-tag";
-import AWSAppSyncClient, { AUTH_TYPE } from "aws-appsync";
+import AWSAppSyncClient, { AUTH_TYPE, buildSync } from "aws-appsync";
 
 import awsconfig from "../app-sync/src/aws-exports";
 
 import * as queries from "../app-sync/src/graphql/queries";
 import * as mutations from "../app-sync/src/graphql/mutations";
-import { Auth } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 
 const client = new AWSAppSyncClient({
   url: awsconfig.aws_appsync_graphqlEndpoint,
@@ -25,24 +25,44 @@ const client = new AWSAppSyncClient({
   styleUrls: ["./test.component.scss"]
 })
 export class TestComponent implements OnInit {
-  constructor() {}
+  constructor(
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.testParamListProductQuery("Test");
+  }
 
   // CEDRIC
 
   // AUGUSTIN
 
   testSimpleListProductQuery() {
-    console.time("testListProductQuery");
+    console.time("testSimpleListProductQuery");
     client
       .query({
-        query: gql([queries.listProducts])
+        query: queries.listProducts
       })
       .then(data => {
-        console.timeEnd("testListProductQuery");
+        console.timeEnd("testSimpleListProductQuery");
         console.log(data);
       });
+  }
+
+  testParamListProductQuery(nameContains) {
+    console.time("testParamListProduct")
+    client
+      .query({
+        query: queries.listProducts,
+        variables: {
+          filter: {
+            name: {contains: nameContains}
+          }
+        }
+      })
+      .then(
+        r => console.log(r)
+      )
+    console.timeEnd("testParamListProduct")
   }
 
   testCreateSimpleProduct() {
@@ -63,4 +83,25 @@ export class TestComponent implements OnInit {
         console.log(data);
       });
   }
+  
+
+  // testSyncAppsync() {
+  //   client.sync(
+  //   buildSync("Product", {
+  //     baseQuery: {
+  //       query: queries.listProducts 
+  //     } as any,
+  //     // subscriptionQuery: {
+  //     //   query: DeltaSync.Subscription
+  //     // },
+  //     // deltaQuery: {
+  //     //   query: DeltaSync.DeltaSync
+  //     // },
+  //     // cacheUpdates: ( deltaRecord  ) => {
+  //     //   const id = deltaRecord.id;
+  //     //   return [{ query: DeltaSync.GetItem, variables: { id: id } }];
+  //     // }
+  //   })
+  // )
+  // }
 }

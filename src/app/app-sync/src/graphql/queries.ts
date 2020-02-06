@@ -1,3 +1,5 @@
+import gql from 'graphql-tag';
+
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
@@ -10,7 +12,7 @@ export const getProduct = `query GetProduct($id: ID!) {
   }
 }
 `;
-export const listProducts = `query ListProducts(
+export const listProducts = gql([`query ListProducts(
   $filter: ModelProductFilterInput
   $limit: Int
   $nextToken: String
@@ -25,4 +27,32 @@ export const listProducts = `query ListProducts(
     nextToken
   }
 }
-`;
+`]);
+
+export const SyncProducts = gql`query SyncProducts(
+  $filter: ModelProductFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncProducts(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      name
+      supplierName
+      description
+      imageUrl
+      _version
+      _deleted
+      _lastChangedAt
+      version
+    }
+    nextToken
+    startedAt
+  }
+}`
