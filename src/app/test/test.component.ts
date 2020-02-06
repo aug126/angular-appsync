@@ -38,7 +38,7 @@ export class TestComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.testParamListProductQuery("Test");
+    // this.testParamListProductQuery("Test");
   }
 
   // CEDRIC
@@ -49,7 +49,7 @@ export class TestComponent implements OnInit {
     console.time("testSimpleListProductQuery");
     client
       .query({
-        query: queries.listProducts
+        query: gql([queries.listProducts])
       })
       .then(data => {
         console.timeEnd("testSimpleListProductQuery");
@@ -61,7 +61,7 @@ export class TestComponent implements OnInit {
     console.time("testParamListProduct")
     client
       .query({
-        query: queries.listProducts,
+        query: gql([queries.listProducts]),
         variables: {
           filter: {
             name: {contains: nameContains}

@@ -1,9 +1,10 @@
 <!-- Toolbar -->
 <div class="Rectangle toolbar" role="banner">
-  <span class="ShowSourcing">ShowSourcing</span>
+  <span routerLink="/product-list" style="cursor: pointer;" class="ShowSourcing">ShowSourcing</span>
   <button *ngIf="authService.isLoggedIn" (click)="logout()" class="btn-logout">
     Logout
-  </button>
+  </button> 
+  <button routerLink="/tests" style="margin-bottom: 0">TESTS</button>
 </div>
 
 <router-outlet></router-outlet>

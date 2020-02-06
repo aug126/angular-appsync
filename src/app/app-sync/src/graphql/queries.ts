@@ -13,7 +13,7 @@ export const getProduct = `query GetProduct($id: ID!) {
   }
 }
 `;
-export const listProducts = gql([`query ListProducts(
+export const listProducts = `query ListProducts(
   $filter: ModelProductFilterInput
   $limit: Int
   $nextToken: String
@@ -29,9 +29,9 @@ export const listProducts = gql([`query ListProducts(
     nextToken
   }
 }
-`]);
+`;
 
-export const SyncProducts = gql`query SyncProducts(
+export const SyncProducts = `query SyncProducts(
   $filter: ModelProductFilterInput
   $limit: Int
   $nextToken: String

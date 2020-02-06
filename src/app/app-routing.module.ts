@@ -17,7 +17,7 @@ const routes: Routes = [
     component: ProductListComponent,
     canActivate: [AuthGuard]
   },
-  { path: "", redirectTo: "/tests", pathMatch: "full" }
+  { path: "", redirectTo: "/product-list", pathMatch: "full" }
 ];
 
 @NgModule({
