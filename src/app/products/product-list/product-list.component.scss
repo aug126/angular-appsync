@@ -104,7 +104,10 @@
   width: 182px; // 296 -8 -12 - 80 -12
 }
 
-.new-product-btn {
+.new-wrapper {
   margin-left: auto;
-  margin-bottom: 0;
+  .new-product-btn {
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
 }

@@ -46,7 +46,8 @@ export class ProductsService {
           input: product
         }
       })
-    ).pipe(tap(() => this.productQuery.refetch()));
+    )
+    // .pipe(tap(() => this.productQuery.refetch()));
   }
 
   updateProduct(product: UpdateProductInput) {

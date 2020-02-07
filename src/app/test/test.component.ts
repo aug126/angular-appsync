@@ -8,6 +8,9 @@ import { of, from } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
 import { client } from "../init-client"
+import { CategoriesService } from '../services/categories.service';
+import { ProductsService } from '../services/products.service';
+import { CreateProductInput } from '../API2.services';
 
 @Component({
   selector: 'app-test',
@@ -23,7 +26,10 @@ export class TestComponent implements OnInit {
     map((res: any) => res.data.listProducts.items)
   );
 
-  constructor() {}
+  constructor(
+    private catSvc: CategoriesService,
+    private prodSvc: ProductsService
+  ) {}
 
   ngOnInit() {
     // this.testParamListProductQuery("Test");
@@ -79,6 +85,19 @@ export class TestComponent implements OnInit {
         console.timeEnd('testListProductQuery');
         console.log(data);
       });
+  }
+
+  createCategory() {
+    this.catSvc.createCategory({name: "Catégorie for Product"}).subscribe(
+      (data) => {
+        const product: CreateProductInput = {
+          name: "Produit with categoy",
+          supplierName: "supplier",
+          productCategoryId: data.data.createCategory.id
+        }
+          this.prodSvc.createProduct(product).subscribe(p => console.log(p))
+      }
+    )
   }
   
 
