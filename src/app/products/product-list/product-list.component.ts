@@ -34,6 +34,8 @@ export class ProductListComponent  implements  OnInit {
   updateProduct(product) {
     const productCopy = { ...product };
     delete productCopy.__typename;
+    delete productCopy._deleted;
+    delete productCopy._lastChangedAt;
     this.updatingProduct = productCopy;
   }
   closeModalUpdateProduct() {
