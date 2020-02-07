@@ -53,6 +53,9 @@
   color: #000000;
   margin-bottom: 4px;
   transition: all ease 0.3s;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .Supplier-Name {
   width: 184px;
