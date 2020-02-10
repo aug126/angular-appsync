@@ -11,6 +11,7 @@ import { client } from "../init-client"
 import { CategoriesService } from '../services/categories.service';
 import { ProductsService } from '../services/products.service';
 import { CreateProductInput } from '../API2.services';
+import { buildSync } from "aws-appsync";
 
 @Component({
   selector: 'app-test',
@@ -18,13 +19,13 @@ import { CreateProductInput } from '../API2.services';
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
-  products$ = from(client.watchQuery({
-    query: gql([queries.ListProducts]),
-    // fetchPolicy: ''
-  }))
-  .pipe(
-    map((res: any) => res.data.listProducts.items)
-  );
+  // products$ = from(client.watchQuery({
+  //   query: gql([queries.ListProducts]),
+  //   // fetchPolicy: ''
+  // }))
+  // .pipe(
+  //   map((res: any) => res.data.listProducts.items)
+  // );
 
   constructor(
     private catSvc: CategoriesService,
@@ -33,6 +34,10 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
     // this.testParamListProductQuery("Test");
+    // console.log(client.store.getCache().readQuery);
+    // for (let index = 0; index < 2000; index++) {
+    //   this.testCreateSimpleProduct()
+    // }
   }
 
   // CEDRIC
@@ -68,21 +73,21 @@ export class TestComponent implements OnInit {
     console.timeEnd("testParamListProduct")
   }
 
-  testCreateSimpleProduct() {
-    console.time('testListProductQuery');
+  testCreateSimpleProduct(i) {
+    console.time('testListProductQuery ' + i);
 
     client
       .mutate({
         mutation: gql([mutations.CreateProduct]),
         variables: {
           input: {
-            name: 'Test Product Mutation',
+            name: `Product ${i} of 2000`,
             supplierName: 'supplier',
           }
         },
       })
       .then(data => {
-        console.timeEnd('testListProductQuery');
+        console.timeEnd('testListProductQuery ' + i);
         console.log(data);
       });
   }
@@ -101,23 +106,28 @@ export class TestComponent implements OnInit {
   }
   
 
-  // testSyncAppsync() {
-  //   client.sync(
-  //   buildSync("Product", {
-  //     baseQuery: {
-  //       query: queries.listProducts 
-  //     } as any,
-  //     // subscriptionQuery: {
-  //     //   query: DeltaSync.Subscription
-  //     // },
-  //     // deltaQuery: {
-  //     //   query: DeltaSync.DeltaSync
-  //     // },
-  //     // cacheUpdates: ( deltaRecord  ) => {
-  //     //   const id = deltaRecord.id;
-  //     //   return [{ query: DeltaSync.GetItem, variables: { id: id } }];
-  //     // }
-  //   })
-  // )
-  // }
+  testSyncAppsync() {
+    client.sync(
+    // buildSync("Product", {
+      {
+      baseQuery: {
+        query: gql([queries.ListProducts]) ,
+        variables: {
+          limit: 1000
+        },
+        update: null
+      },
+
+      // subscriptionQuery: {
+      //   query: DeltaSync.Subscription
+      // },
+      // deltaQuery: {
+      //   query: DeltaSync.DeltaSync
+      // },
+      // cacheUpdates: ( deltaRecord  ) => {
+      //   const id = deltaRecord.id;
+      //   return [{ query: DeltaSync.GetItem, variables: { id: id } }];
+      // }
+    })
+  }
 }

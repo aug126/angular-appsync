@@ -9,21 +9,9 @@ export const CreateProduct = `mutation CreateProduct(
     name
     supplierName
     description
-    imageUrl
-    category {
-      id
-      name
-      _version
-      _deleted
-      _lastChangedAt
-      
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    
   }
-}`
+}`;
+
 
 export const UpdateProduct = `mutation UpdateProduct(
   $input: UpdateProductInput!
@@ -35,18 +23,8 @@ export const UpdateProduct = `mutation UpdateProduct(
     supplierName
     description
     imageUrl
-    category {
-      id
-      name
-      _version
-      _deleted
-      _lastChangedAt
-      
-    }
-    _version
     _deleted
     _lastChangedAt
-    
   }
 }`
 

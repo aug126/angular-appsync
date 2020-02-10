@@ -31,10 +31,11 @@ export class ProductsService {
     this.productQuery = this._client.watchQuery<ListProductsQuery>({
       query: gql([queries.ListProducts]),
       // fetchPolicy: "cache-and-network",
+      fetchPolicy: "cache-only",
       variables: {
-        limit: 100,
+        limit: 1000,
         // filter: {
-          // ! _deleted ne se trouve pas dans ModelProductFilterInput
+          // ! _deleted is not in ModelProductFilterInput
           // _deleted: {
           //   eq: null
           // }
@@ -57,7 +58,7 @@ export class ProductsService {
         mutation: gql([mutations.CreateProduct]),
         variables: {
           input: product
-        }
+        },
       })
     )
     // .pipe(tap(() => this.productQuery.refetch()));
