@@ -14,11 +14,14 @@ export class ProductListComponent  implements  OnInit {
 
   // observer pour refetch
 
-  products$ = this.productsSvc.getAllProducts();
+  products$
 
   constructor( private productsSvc: ProductsService){}
 
   ngOnInit() {
+    client.hydrated().then(() => {
+       this.products$ = this.productsSvc.getAllProducts();
+    })
   }
 
 

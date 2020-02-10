@@ -46,8 +46,6 @@ export class UpdateProductComponent implements OnInit {
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
     try {
-      // ! updateProduct ne peut pas recevoir de _deleted
-      // delete this.form._deleted;
       this.productsSvc.updateProduct(this.form).subscribe();
       this.close();
     } catch (err) {
@@ -66,7 +64,7 @@ export class UpdateProductComponent implements OnInit {
     try {
       this.productsSvc.deleteProduct({
         id: this.form.id,
-        _version: this.form._version
+        // _version: this.form._version
       });
       this.close();
     } catch (err) {
