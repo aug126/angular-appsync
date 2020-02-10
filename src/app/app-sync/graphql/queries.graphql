@@ -20,7 +20,6 @@ query SyncProducts(
       _version
       _deleted
       _lastChangedAt
-      version
     }
     nextToken
     startedAt
@@ -39,12 +38,10 @@ query GetProduct($id: ID!) {
       _version
       _deleted
       _lastChangedAt
-      version
     }
     _version
     _deleted
     _lastChangedAt
-    version
   }
 }
 query ListProducts(
@@ -62,7 +59,6 @@ query ListProducts(
       _version
       _deleted
       _lastChangedAt
-      version
     }
     nextToken
     startedAt
@@ -86,7 +82,6 @@ query SyncCategories(
       _version
       _deleted
       _lastChangedAt
-      version
     }
     nextToken
     startedAt
@@ -99,7 +94,6 @@ query GetCategory($id: ID!) {
     _version
     _deleted
     _lastChangedAt
-    version
   }
 }
 query ListCategorys(
@@ -114,9 +108,93 @@ query ListCategorys(
       _version
       _deleted
       _lastChangedAt
-      version
     }
     nextToken
     startedAt
+  }
+}
+query SyncVoitures(
+  $filter: ModelVoitureFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncVoitures(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      teamId
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetVoiture($teamId: ID!, $id: ID!) {
+  getVoiture(teamId: $teamId, id: $id) {
+    id
+    teamId
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+query ListVoitures(
+  $teamId: ID
+  $id: ModelIDKeyConditionInput
+  $filter: ModelVoitureFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listVoitures(
+    teamId: $teamId
+    id: $id
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      teamId
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query SearchProducts(
+  $filter: SearchableProductFilterInput
+  $sort: SearchableProductSortInput
+  $limit: Int
+  $nextToken: String
+) {
+  searchProducts(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      supplierName
+      description
+      imageUrl
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    nextToken
+    total
   }
 }

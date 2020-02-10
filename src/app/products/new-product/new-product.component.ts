@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
 import { ProductsService } from "src/app/services/products.service";
-import * as uuid  from "uuid/v4";
-import { client } from 'src/app/init-client';
+import * as uuid from "uuid/v4";
 
 @Component({
   selector: "app-new-product",
@@ -47,11 +46,11 @@ export class NewProductComponent implements OnInit {
     this.form.description = this.form.description || null;
     try {
       this.form.id = uuid();
-      let test = this.productsSvc.createProduct(this.form)
-      .subscribe(() => {
-        client.reFetchObservableQueries();
-        test.unsubscribe();
-      });
+      // let test = this.productsSvc.createProduct(this.form)
+      // .subscribe(() => {
+      //   client.reFetchObservableQueries();
+      //   test.unsubscribe();
+      // });
 
       this.close();
     } catch (err) {

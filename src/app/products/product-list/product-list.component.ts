@@ -1,46 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductsService } from 'src/app/services/products.service';
-import { client } from 'src/app/init-client';
+import { Component, OnInit } from "@angular/core";
+import { ProductsService } from "src/app/services/products.service";
+import { map } from "rxjs/operators";
+import { ListProductsQuery } from "src/app/app-sync/app/API2.services.service";
+import { Observable } from "rxjs";
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  selector: "app-product-list",
+  templateUrl: "./product-list.component.html",
+  styleUrls: ["./product-list.component.scss"]
 })
-export class ProductListComponent  implements  OnInit {
+export class ProductListComponent implements OnInit {
   showNewProduct = false;
   updatingProduct = null;
-  infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: '' };
+  infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: "" };
 
-  // observer pour refetch
+  products$;
 
-  products$
-
-  constructor( private productsSvc: ProductsService){}
+  constructor(private prodSvc: ProductsService) {}
 
   ngOnInit() {
-    client.hydrated().then(() => {
-       this.products$ = this.productsSvc.getAllProducts();
-    })
+    this.products$ = this.prodSvc
+      .ListProducts({ limit: 1000 })
+      .pipe(map(r => r.items));
+    this.products$.subscribe(products => console.log(products));
   }
-
 
   newProduct() {
     this.showNewProduct = true;
   }
 
-
   closeModalNewProduct() {
     this.showNewProduct = false;
   }
 
-  updateProduct(product) {
-    const productCopy = { ...product };
-    delete productCopy.__typename;
-    delete productCopy._deleted;
-    delete productCopy._lastChangedAt;
-    this.updatingProduct = productCopy;
-  }
+  updateProduct(product) {}
+
   closeModalUpdateProduct() {
     this.updatingProduct = null;
   }
@@ -58,5 +52,4 @@ export class ProductListComponent  implements  OnInit {
     //         }
     //       })
   }
-
 }
