@@ -7,11 +7,12 @@ export const CreateProduct = `mutation CreateProduct(
   createProduct(input: $input, condition: $condition) {
     id
     name
+    imageUrl
     supplierName
     description
+    _version
   }
 }`;
-
 
 export const UpdateProduct = `mutation UpdateProduct(
   $input: UpdateProductInput!
@@ -26,8 +27,7 @@ export const UpdateProduct = `mutation UpdateProduct(
     _deleted
     _lastChangedAt
   }
-}`
-
+}`;
 
 export const DeleteProduct = `mutation DeleteProduct(
   $input: DeleteProductInput!
@@ -52,8 +52,7 @@ export const DeleteProduct = `mutation DeleteProduct(
     _lastChangedAt
     
   }
-}`
-
+}`;
 
 export const CreateCategory = `mutation CreateCategory(
   $input: CreateCategoryInput!
@@ -67,8 +66,7 @@ export const CreateCategory = `mutation CreateCategory(
     _lastChangedAt
     
   }
-}`
-
+}`;
 
 export const UpdateCategory = `mutation UpdateCategory(
   $input: UpdateCategoryInput!
@@ -82,8 +80,7 @@ export const UpdateCategory = `mutation UpdateCategory(
     _lastChangedAt
     
   }
-}`
-
+}`;
 
 export const DeleteCategory = `mutation DeleteCategory(
   $input: DeleteCategoryInput!
@@ -97,4 +94,4 @@ export const DeleteCategory = `mutation DeleteCategory(
     _lastChangedAt
     
   }
-}`
+}`;

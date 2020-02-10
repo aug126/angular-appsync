@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
-import { client } from 'src/app/init-client';
+import { AppsyncClientService } from '../../services/appsync-client.service';
 
 @Component({
   selector: 'app-product-list',
@@ -16,10 +16,13 @@ export class ProductListComponent  implements  OnInit {
 
   products$
 
-  constructor( private productsSvc: ProductsService){}
+  constructor( 
+    private productsSvc: ProductsService,
+    private clientSvc: AppsyncClientService
+  ){}
 
   ngOnInit() {
-    client.hydrated().then(() => {
+    this.clientSvc.client.hydrated().then(() => {
        this.products$ = this.productsSvc.getAllProducts();
     })
   }

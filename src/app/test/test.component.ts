@@ -7,11 +7,11 @@ import * as mutations from '../app-sync/src/graphql/mutations';
 import { of, from } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
-import { client } from "../init-client"
 import { CategoriesService } from '../services/categories.service';
 import { ProductsService } from '../services/products.service';
 import { CreateProductInput } from '../API2.services';
 import { buildSync } from "aws-appsync";
+import { AppsyncClientService } from '../services/appsync-client.service';
 
 @Component({
   selector: 'app-test',
@@ -29,7 +29,8 @@ export class TestComponent implements OnInit {
 
   constructor(
     private catSvc: CategoriesService,
-    private prodSvc: ProductsService
+    private prodSvc: ProductsService,
+    private clientSvc: AppsyncClientService
   ) {}
 
   ngOnInit() {
@@ -46,7 +47,7 @@ export class TestComponent implements OnInit {
 
   testSimpleListProductQuery() {
     console.time("testSimpleListProductQuery");
-    client
+    this.clientSvc.client
       .query({
         query: gql([queries.ListProducts])
       })
@@ -58,7 +59,7 @@ export class TestComponent implements OnInit {
 
   testParamListProductQuery(nameContains) {
     console.time("testParamListProduct")
-    client
+    this.clientSvc.client
       .query({
         query: gql([queries.ListProducts]),
         variables: {
@@ -76,7 +77,7 @@ export class TestComponent implements OnInit {
   testCreateSimpleProduct(i) {
     console.time('testListProductQuery ' + i);
 
-    client
+    this.clientSvc.client
       .mutate({
         mutation: gql([mutations.CreateProduct]),
         variables: {
@@ -107,7 +108,7 @@ export class TestComponent implements OnInit {
   
 
   testSyncAppsync() {
-    client.sync(
+    this.clientSvc.client.sync(
     // buildSync("Product", {
       {
       baseQuery: {

@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
 import { ProductsService } from "src/app/services/products.service";
 import * as uuid  from "uuid/v4";
-import { client } from 'src/app/init-client';
+import { AppsyncClientService } from '../../services/appsync-client.service';
 
 @Component({
   selector: "app-new-product",
@@ -9,7 +9,10 @@ import { client } from 'src/app/init-client';
   styleUrls: ["./new-product.component.scss"]
 })
 export class NewProductComponent implements OnInit {
-  constructor(private productsSvc: ProductsService) {}
+  constructor(
+    private productsSvc: ProductsService,
+    private clientSvc: AppsyncClientService
+  ) {}
 
   @Output() closeEvent = new EventEmitter();
   @Input() formTitle = "";
@@ -47,11 +50,10 @@ export class NewProductComponent implements OnInit {
     this.form.description = this.form.description || null;
     try {
       this.form.id = uuid();
-      let test = this.productsSvc.createProduct(this.form)
-      .subscribe(() => {
-        client.reFetchObservableQueries();
-        test.unsubscribe();
-      });
+      this.clientSvc.client.hydrated().then(() => {
+        this.productsSvc.createProduct(this.form);
+      })
+
 
       this.close();
     } catch (err) {
