@@ -1,6 +1,6 @@
 <div class="content" role="main">
   <div
-    [class.mobile-hidden]="showNewProduct || updatingProduct"
+    [class.mobile-hidden]="showNewProduct || (updatingProduct$ | async)"
     class="displayed-content"
   >
     <div class="Rectangle">

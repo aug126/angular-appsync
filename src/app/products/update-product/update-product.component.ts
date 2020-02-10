@@ -1,6 +1,10 @@
 import { Component, OnInit, Output, Input, EventEmitter } from "@angular/core";
 import { ProductsService } from "src/app/services/products.service";
-import { UpdateProductInput } from "../../app-sync/app/API2.services.service";
+import {
+  UpdateProductInput,
+  CreateProductInput
+} from "../../app-sync/app/API2.services.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-update-product",
@@ -14,13 +18,7 @@ export class UpdateProductComponent implements OnInit {
   @Input() formTitle = "";
   @Input() formBtn = "";
   @Input()
-  form = {}; /*  = {
-    id: '',
-    name: '',
-    supplierName: '',
-    imageUrl: '',
-    description: '',
-  };*/
+  form: UpdateProductInput | CreateProductInput | null;
   actionLoading = false;
   deleteLoading = false;
   deleteConfirm = false;

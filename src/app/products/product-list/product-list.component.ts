@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ProductsService } from "src/app/services/products.service";
 import { map } from "rxjs/operators";
-import { ListProductsQuery } from "src/app/app-sync/app/API2.services.service";
+import {
+  ListProductsQuery,
+  CreateProductInput,
+  UpdateProductInput
+} from "src/app/app-sync/app/API2.services.service";
 import { Observable } from "rxjs";
 
 @Component({
@@ -11,7 +15,9 @@ import { Observable } from "rxjs";
 })
 export class ProductListComponent implements OnInit {
   showNewProduct = false;
-  updatingProduct = null;
+
+  updatingProduct: CreateProductInput | UpdateProductInput | null;
+
   infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: "" };
 
   products$;
@@ -20,9 +26,11 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.products$ = this.prodSvc
-      .ListProducts({ limit: 1000 })
+      .listProducts({ limit: 1000 })
       .pipe(map(r => r.items));
-    this.products$.subscribe(products => console.log(products));
+    this.products$.subscribe(products =>
+      console.log("liste des produits affichés : ", products)
+    );
   }
 
   newProduct() {
@@ -33,7 +41,11 @@ export class ProductListComponent implements OnInit {
     this.showNewProduct = false;
   }
 
-  updateProduct(product) {}
+  updateProduct(product) {
+    this.prodSvc
+      .getProduct({ id: product.id })
+      .subscribe(product => (this.updatingProduct = product));
+  }
 
   closeModalUpdateProduct() {
     this.updatingProduct = null;
