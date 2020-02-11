@@ -56,12 +56,20 @@ export class ProductsService {
       }`
     ];
     return from(
-      client.query<{ listProducts: ListProductsQuery }>({
+      client.watchQuery<{ listProducts: ListProductsQuery }>({
         query: gql(listProducts),
         variables,
         fetchPolicy
       })
-    ).pipe(map(r => r.data.listProducts));
+    ).pipe(
+      map(r => r.data.listProducts),
+      map(d => ({
+        items: d.items.filter(p => p._deleted === null), // hide the deleted products : should be on the backend
+        __typename: d.__typename,
+        nextToken: d.nextToken,
+        startedAt: d.startedAt
+      }))
+    );
   }
 
   searchProducts(
