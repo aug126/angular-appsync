@@ -16,10 +16,11 @@ import {
   CreateProductInput,
   CreateProductMutation
 } from "../app-sync/app/API2.services.service";
-import { from, Observable } from "rxjs";
-import { map } from "rxjs/operators";
-
+import { from, Observable, ObjectUnsubscribedError, of } from "rxjs";
+import { map, filter, catchError } from "rxjs/operators";
 import { FetchPolicy } from "apollo-client";
+import uuid from "uuid"
+import { title } from 'process';
 
 @Injectable({
   providedIn: "root"
@@ -67,14 +68,36 @@ export class ProductsService {
         fetchPolicy
       })
     ).pipe(
+      // filter((r: any) => this.checkError(r, 'Search in products')),
       map(r => r.data.listProducts),
       map(d => ({
         items: d.items.filter(p => !p._deleted), // hide the deleted products : should be on the backend
         __typename: d.__typename,
         nextToken: d.nextToken,
         startedAt: d.startedAt
-      }))
+      })),
+      catchError(err => {
+        console.log(err);
+        return of(err);
+      })
     );
+  }
+
+  /** check if a graphql call has given any error */
+  protected checkError(r: { data: any, errors: any[], loading: boolean }, title: string) {
+    console.log(r)
+    const log = console
+    if (r.errors) {
+      r.errors.forEach(e => log.error(e));
+      return false;
+    } else if (r.loading) {
+      return false;
+    } else if (!r.data) {
+      log.error(`No data, there must be something wrong with the query "${title}", here is the response`);
+      log.debug(r);
+      return false;
+    }
+    return true;
   }
 
   searchProducts(
@@ -195,12 +218,35 @@ export class ProductsService {
         }
       }`
     ];
-
+    variables.input.id = uuid();
     return from(
       client.mutate<CreateProductMutation>({
         mutation: gql(createProduct),
         variables,
-        fetchPolicy
+        fetchPolicy,
+        optimisticResponse: {
+          createProduct: {
+            __typename: 'Product', // ! same as delete
+            _deleted: false,
+            _version: 1,
+            _lastChangedAt: new Date(),
+            ...variables.input
+          }
+        },
+        update: (cache, { data: { createProduct } }) => {  // * we have to write on the cache because the last query didn't get the new item
+          const query = gql(this.listProductsQuery);
+          // Read query from cache
+          const data: { listProducts: ListProductsQuery } = cache.readQuery({
+            query,
+            variables: { limit: 1000 }
+          });
+          if (!data.listProducts.items.find(p => p.id === createProduct.id)){
+            data.listProducts.items = [createProduct, ...data.listProducts.items]
+          }
+          
+          //Overwrite the cache with the new results
+          cache.writeQuery({ query, data, variables: { limit: 1000 } });
+        }
       })
     ).pipe(map(r => r.data.createProduct));
   }
@@ -224,7 +270,7 @@ export class ProductsService {
           description
           imageUrl
           ` +
-        /* category {
+        /* category { // ! the category give an error
             id
             name
             _version
@@ -251,9 +297,8 @@ export class ProductsService {
             ...variables.input
           }
         },
-        // update: (cache, { data: { updateProduct } }) => {
+        // update: (cache, { data: { updateProduct } }) => {  // * we don't need to update the cache, the optimistic response do it for us
         //   const query = gql(this.listProductsQuery);
-
         //   // Read query from cache
         //   const data: { listProducts: ListProductsQuery } = cache.readQuery({
         //     query,

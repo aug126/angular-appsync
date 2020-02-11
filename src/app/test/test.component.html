@@ -2,16 +2,15 @@
 <div class="container">
 
   <!-- Updates-->
-  <p>
+  <!-- <p>
     QueryList of products + QueryOne product, update the one product, is the product in the list updated as well. Click on Product to modify
-  </p>
+  </p> -->
 
-  <ul>
-    <!-- <li *ngFor="let product of products$ | async" (click)="testUpdate(product)">{{ product.name }}</li> -->
-  </ul>
+  <!-- <ul>
+    <li *ngFor="let product of products$ | async" (click)="testUpdate(product)">{{ product.name }}</li>
+  </ul> -->
 
-  <button (click)="testCreateSimpleProduct()"> create</button>
-
+  <!-- <button (click)="testCreateSimpleProduct()"> create</button>
   <div class="conclusion">
     <ul>
         <li>works when we specify version</li>
@@ -19,12 +18,13 @@
         <li>Non optimistic by default</li>
     </ul>
 </div>
+</div> -->
 
 <!-- AUGUSTIn -->
 <div class="container">
 
     <!-- Simple List Product -->
-  <p>
+  <!-- <p>
     Liste 10 produits avec une query graphql importée de amplify. utilise
     L'authentification "AMAZON_COGNITO_USER_POOLS"
   </p>
@@ -40,11 +40,11 @@
       </ul>
       <li>Crée une erreur à la prmière requete hors connexion.</li>
   </div>
-  <button (click)="testSimpleListProductQuery()">Simple List Product</button>
+  <button (click)="testSimpleListProductQuery()">Simple List Product</button> -->
 
 
   <!-- Simple List Product With Params -->
-  <p>Query 10 éléments avec un filtre sur le name</p>
+  <!-- <p>Query 10 éléments avec un filtre sur le name</p>
   <button (click)="testParamListProductQuery('Test')">Query List Product</button>
   
 
@@ -52,21 +52,20 @@
       Creation d'un produit "Test Product Mutation"
   </p>
   <button (click)="testCreateSimpleProduct()">Create Product</button>
-
+ -->
   
   <!-- CREATE CATEGORY -->
-  <p>Création d'une categorie puis d'un produit qui contient cette catégorie</p>
+  <!-- <p>Création d'une categorie puis d'un produit qui contient cette catégorie</p>
   <button (click)="createCategory()">Create</button>
 
 
   <p>test sync app</p>
   <button (click)="testSyncAppsync()">sync</button>
+ -->
 
 
-
-  <p>Get query 1000 products from cache</p>
+  <p>Get query 1000 products from cache and search by name (logged in console)</p>
   <input type="text" [(ngModel)]="searchProduct">
-  <button (click)="getQuery()">get</button>
+  <button (click)="getQuery()">search</button>
 </div>
-
 

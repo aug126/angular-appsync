@@ -18,7 +18,7 @@ export class TestComponent implements OnInit {
   ngOnInit() {}
 
   getQuery() {
-    this.prodSvc.listProducts({limit: 1000}, 'cache-only').subscribe(d => {
+    this.prodSvc.listProducts({limit: 1000}, 'cache-and-network').subscribe(d => {
       console.log('products filtered from cache : ', d.items.filter(p => p.name.includes(this.searchProduct)));
     })
   }
