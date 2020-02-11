@@ -4,7 +4,7 @@ import { map } from "rxjs/operators";
 import {
   CreateProductInput,
   UpdateProductInput
-} from "src/app/app-sync/app/API2.services.service";
+} from "../../app-sync/app/API2.services.service";
 
 @Component({
   selector: "app-product-list",
@@ -47,7 +47,7 @@ export class ProductListComponent implements OnInit {
     // this.prodSvc.getProduct({ id: product.id }).subscribe(product => {
     //   console.log("the product to update : ", product);
     //   this.updatingProduct = product;
-    // });
+    // }); // * getProduct is a bad way for offline (and speed)
     this.updatingProduct = {...product};
   }
 
@@ -56,16 +56,5 @@ export class ProductListComponent implements OnInit {
   }
 
   loadMore() {
-    // ({
-    //         variables: {
-    //           offset: data.feed.length
-    //         },
-    //         updateQuery: (prev, { fetchMoreResult }) => {
-    //           if (!fetchMoreResult) return prev;
-    //           return Object.assign({}, prev, {
-    //             feed: [...prev.feed, ...fetchMoreResult.feed]
-    //           });
-    //         }
-    //       })
   }
 }

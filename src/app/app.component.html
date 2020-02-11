@@ -1,10 +1,12 @@
 <!-- Toolbar -->
 <div class="Rectangle toolbar" role="banner">
   <span routerLink="/product-list" style="cursor: pointer;" class="ShowSourcing">ShowSourcing</span>
-  <button *ngIf="authService.isLoggedIn" (click)="logout()" class="btn-logout">
-    Logout
-  </button> 
-  <button routerLink="/tests" style="margin-bottom: 0">TESTS</button>
+  <div class="ml-auto">
+    <button *ngIf="authService.isLoggedIn" (click)="logout()" class="btn-logout">
+      Logout
+    </button> 
+    <button routerLink="/tests" style="margin-bottom: 0">TESTS</button>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
