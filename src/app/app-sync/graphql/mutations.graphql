@@ -15,12 +15,10 @@ mutation CreateProduct(
       _version
       _deleted
       _lastChangedAt
-      version
     }
     _version
     _deleted
     _lastChangedAt
-    version
   }
 }
 mutation UpdateProduct(
@@ -39,12 +37,10 @@ mutation UpdateProduct(
       _version
       _deleted
       _lastChangedAt
-      version
     }
     _version
     _deleted
     _lastChangedAt
-    version
   }
 }
 mutation DeleteProduct(
@@ -63,12 +59,10 @@ mutation DeleteProduct(
       _version
       _deleted
       _lastChangedAt
-      version
     }
     _version
     _deleted
     _lastChangedAt
-    version
   }
 }
 mutation CreateCategory(
@@ -81,7 +75,6 @@ mutation CreateCategory(
     _version
     _deleted
     _lastChangedAt
-    version
   }
 }
 mutation UpdateCategory(
@@ -94,7 +87,6 @@ mutation UpdateCategory(
     _version
     _deleted
     _lastChangedAt
-    version
   }
 }
 mutation DeleteCategory(
@@ -107,6 +99,41 @@ mutation DeleteCategory(
     _version
     _deleted
     _lastChangedAt
-    version
+  }
+}
+mutation CreateVoiture(
+  $input: CreateVoitureInput!
+  $condition: ModelVoitureConditionInput
+) {
+  createVoiture(input: $input, condition: $condition) {
+    id
+    teamId
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateVoiture(
+  $input: UpdateVoitureInput!
+  $condition: ModelVoitureConditionInput
+) {
+  updateVoiture(input: $input, condition: $condition) {
+    id
+    teamId
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteVoiture(
+  $input: DeleteVoitureInput!
+  $condition: ModelVoitureConditionInput
+) {
+  deleteVoiture(input: $input, condition: $condition) {
+    id
+    teamId
+    _version
+    _deleted
+    _lastChangedAt
   }
 }

@@ -1,89 +1,310 @@
 import { Injectable } from "@angular/core";
-
-import * as mutations from "../app-sync/src/graphql/mutations";
-import * as queries from "../app-sync/src/graphql/queries";
-
+import client from "../app-sync/init-client";
 import gql from "graphql-tag";
-
-import { client } from "../init-client";
-import { from } from "rxjs";
-import { map, switchMap, tap } from "rxjs/operators";
-
-import * as models from "../app-sync/src/models";
 import {
-  UpdateProductInput,
-  CreateProductInput,
-  DeleteProductInput,
   ListProductsQuery,
-} from "../app-sync/src/app/API2.services";
-import { APIService } from '../API2.services';
+  ModelProductFilterInput,
+  SearchableProductFilterInput,
+  SearchableProductSortInput,
+  SearchProductsQuery,
+  GetProductQuery,
+  DeleteProductInput,
+  ModelProductConditionInput,
+  DeleteProductMutation,
+  UpdateProductInput,
+  UpdateProductMutation,
+  CreateProductInput,
+  CreateProductMutation
+} from "../app-sync/app/API2.services.service";
+import { from, Observable } from "rxjs";
+import { map } from "rxjs/operators";
+
+import { FetchPolicy } from "apollo-client";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProductsService {
-  _client = client;
-  productQuery;
-
+  listProductsQuery: Array<string>;
   constructor() {}
 
-  getAllProducts() {
-    this.productQuery = this._client.watchQuery<ListProductsQuery>({
-      query: gql([queries.ListProducts]),
-      // fetchPolicy: "cache-and-network",
-      fetchPolicy: "cache-only",
-      variables: {
-        limit: 1000,
-        // filter: {
-          // ! _deleted is not in ModelProductFilterInput
-          // _deleted: {
-          //   eq: null
-          // }
-        // }
+  /** ===== QUERIES ===== */
+  listProducts(
+    variables?: {
+      filter?: ModelProductFilterInput;
+      limit?: number;
+      nextToken?: string;
+    },
+    fetchPolicy?: FetchPolicy
+  ): Observable<ListProductsQuery> {
+    const listProducts = [
+      `query ListProducts(
+        $filter: ModelProductFilterInput
+        $limit: Int
+        $nextToken: String
+      ) {
+        listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          items {
+            id
+            name
+            supplierName
+            description
+            imageUrl
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`
+    ];
+    this.listProductsQuery = listProducts;
+    return from(
+      client.watchQuery<{ listProducts: ListProductsQuery }>({
+        query: gql(listProducts),
+        variables,
+        fetchPolicy
+      })
+    ).pipe(
+      map(r => r.data.listProducts),
+      map(d => ({
+        items: d.items.filter(p => !p._deleted), // hide the deleted products : should be on the backend
+        __typename: d.__typename,
+        nextToken: d.nextToken,
+        startedAt: d.startedAt
+      }))
+    );
+  }
+
+  searchProducts(
+    variables?: {
+      filter?: SearchableProductFilterInput;
+      sort?: SearchableProductSortInput;
+      limit?: number;
+      nextToken?: string;
+    },
+    fetchPolicy?: FetchPolicy
+  ): Observable<SearchProductsQuery> {
+    const searchProducts = [
+      `query SearchProducts(
+        $filter: SearchableProductFilterInput
+        $sort: SearchableProductSortInput
+        $limit: Int
+        $nextToken: String
+      ) {
+        searchProducts(
+          filter: $filter
+          sort: $sort
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          items {
+            id
+            name
+            supplierName
+            description
+            imageUrl
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          total
+        }
       }
-    });
-    return from(this.productQuery).pipe(
-      map((d: any) => {
-        console.log(d);
-        if (d.data.listProducts)
-          return d.data.listProducts.items
-        return [];
+      `
+    ];
+    return from(
+      client.query<{ searchProducts: SearchProductsQuery }>({
+        query: gql(searchProducts),
+        variables,
+        fetchPolicy
       })
-    );
+    ).pipe(map(r => r.data.searchProducts));
   }
 
-  createProduct(product: CreateProductInput) {
+  getProduct(
+    variables: {
+      id: string;
+    },
+    fetchPolicy?: FetchPolicy
+  ): Observable<GetProductQuery> {
+    const getProduct = [
+      `query GetProduct($id: ID!) {
+        getProduct(id: $id) {
+          id
+          name
+          supplierName
+          description
+          imageUrl
+          ` + // ! category give an erreur ...
+        /* category {
+            id
+            name
+            _version
+            _deleted
+            _lastChangedAt
+          } */
+        `_version
+          _deleted
+          _lastChangedAt
+        }
+      }`
+    ];
+
     return from(
-      this._client.mutate<models.Product[]>({
-        mutation: gql([mutations.CreateProduct]),
-        variables: {
-          input: product
+      client.query<{ getProduct: GetProductQuery }>({
+        query: gql(getProduct),
+        variables,
+        fetchPolicy
+      })
+    ).pipe(map(d => d.data.getProduct));
+  }
+
+  /** ===== MUTATIONS ===== */
+  createProduct(
+    variables: {
+      input: CreateProductInput;
+      condition?: ModelProductConditionInput;
+    },
+    fetchPolicy?: FetchPolicy
+  ): Observable<CreateProductMutation> {
+    const createProduct = [
+      `mutation CreateProduct(
+        $input: CreateProductInput!
+        $condition: ModelProductConditionInput
+      ) {
+        createProduct(input: $input, condition: $condition) {
+          id
+          name
+          supplierName
+          description
+          imageUrl
+          ` + // ! Category give an error
+        /* category {
+            id
+            name
+            _version
+            _deleted
+            _lastChangedAt
+          } */
+        `_version
+          _deleted
+          _lastChangedAt
+        }
+      }`
+    ];
+
+    return from(
+      client.mutate<CreateProductMutation>({
+        mutation: gql(createProduct),
+        variables,
+        fetchPolicy
+      })
+    ).pipe(map(r => r.data.createProduct));
+  }
+
+  updateProduct(
+    variables: {
+      input: UpdateProductInput;
+      condition?: ModelProductConditionInput;
+    },
+    fetchPolicy?: FetchPolicy
+  ): Observable<UpdateProductMutation> {
+    const updateProduct = [
+      `mutation UpdateProduct(
+        $input: UpdateProductInput!
+        $condition: ModelProductConditionInput
+      ) {
+        updateProduct(input: $input, condition: $condition) {
+          id
+          name
+          supplierName
+          description
+          imageUrl
+          ` +
+        /* category {
+            id
+            name
+            _version
+            _deleted
+            _lastChangedAt
+          } */
+        `_version
+          _deleted
+          _lastChangedAt
+        }
+      }`
+    ];
+
+    return from(
+      client.mutate<UpdateProductMutation>({
+        mutation: gql(updateProduct),
+        variables,
+        fetchPolicy,
+        optimisticResponse: {
+          updateProduct: {
+            __typename: "Product", // ! added because deleted for match the UpdateProductInput
+            _deleted: false,
+            _lastChangedAt: new Date(),
+            ...variables.input
+          }
         },
-      })
-    )
-    // .pipe(tap(() => this.productQuery.refetch()));
-  }
+        update: (cache, { data: { updateProduct } }) => {
+          const query = gql(this.listProductsQuery);
 
-  updateProduct(product: UpdateProductInput) {
-    console.log('produt à update : ', product)
-    return from(
-      this._client.mutate<models.Product[]>({
-        mutation: gql([mutations.UpdateProduct]),
-        variables: {
-          input: product
+          // Read query from cache
+          const data: { listProducts: ListProductsQuery } = cache.readQuery({
+            query,
+            variables: { limit: 1000 }
+          });
+          //Overwrite the cache with the new results
+          cache.writeQuery({ query, data, variables: { limit: 1000 } });
         }
       })
-    );
+    ).pipe(map(r => r.data.updateProduct));
   }
 
-  deleteProduct(productId: DeleteProductInput) {
-    return from(
-      this._client.mutate<models.Product>({
-        mutation: gql([mutations.DeleteProduct]),
-        variables: {
-          input: productId
+  deleteProduct(
+    variables: {
+      input: DeleteProductInput;
+      condition?: ModelProductConditionInput;
+    },
+    fetchPolicy?: FetchPolicy
+  ): Observable<DeleteProductMutation> {
+    const deleteProduct = [
+      `mutation DeleteProduct(
+        $input: DeleteProductInput!
+        $condition: ModelProductConditionInput
+      ) {
+        deleteProduct(input: $input, condition: $condition) {
+          id
+          name
+          supplierName
+          description
+          imageUrl
+          ` +
+        /* category { // ! The category give an error
+            id
+            name
+            _version
+            _deleted
+            _lastChangedAt
+          } */
+        `_version
+          _deleted
+          _lastChangedAt
         }
+      }`
+    ];
+
+    return from(
+      client.mutate<{ deleteProduct: DeleteProductMutation }>({
+        mutation: gql(deleteProduct),
+        variables,
+        fetchPolicy
       })
-    ).pipe(tap(() => this.productQuery.refetch()));;
+    ).pipe(map(d => d.data.deleteProduct));
   }
 }

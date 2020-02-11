@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from "@angular/core";
 import { ProductsService } from "src/app/services/products.service";
-import * as uuid  from "uuid/v4";
-import { client } from 'src/app/init-client';
+import * as uuid from "uuid/v4";
 
 @Component({
   selector: "app-new-product",
@@ -9,7 +8,7 @@ import { client } from 'src/app/init-client';
   styleUrls: ["./new-product.component.scss"]
 })
 export class NewProductComponent implements OnInit {
-  constructor(private productsSvc: ProductsService) {}
+  constructor(private prodSvc: ProductsService) {}
 
   @Output() closeEvent = new EventEmitter();
   @Input() formTitle = "";
@@ -42,22 +41,20 @@ export class NewProductComponent implements OnInit {
       return;
     }
     this.actionLoading = true;
-    // prevent empty string for optional values.
+    // prevent empty string for optional values. // ! the empty strings are not accepted
     this.form.imageUrl = this.form.imageUrl || null;
     this.form.description = this.form.description || null;
-    try {
-      this.form.id = uuid();
-      let test = this.productsSvc.createProduct(this.form)
-      .subscribe(() => {
-        client.reFetchObservableQueries();
-        test.unsubscribe();
-      });
-
-      this.close();
-    } catch (err) {
-      this.actionLoading = false;
-      console.log(err);
-    }
+    // this.form.id = uuid();
+    this.prodSvc.createProduct({ input: { ...(this.form as any) } }).subscribe(
+      d => {
+        console.log("création du produit : ", d);
+        this.close();
+      },
+      err => {
+        this.actionLoading = false;
+        console.log(err);
+      }
+    );
   }
 
   close() {

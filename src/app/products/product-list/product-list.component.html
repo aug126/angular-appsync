@@ -9,13 +9,15 @@
       </h1>
       <div class="new-wrapper">
         <!-- <button class="new-product-btn" (click)="newProduct()">New Category</button> -->
-        <button class="new-product-btn" (click)="newProduct()">New Product</button>
+        <button class="new-product-btn" (click)="newProduct()">
+          New Product
+        </button>
       </div>
     </div>
     <div class="product-list">
       <div
         (click)="updateProduct(product)"
-        *ngFor="let product of products$ | async"
+        *ngFor="let product of products$ | async; trackBy: trackByFn"
         class="Background product-single"
       >
         <div
@@ -31,6 +33,9 @@
           <h3 class="Product-Name">{{ product.name }}</h3>
           <span class="Supplier-Name">{{ product.supplierName }}</span>
           <p class="Description">{{ product.description }}</p>
+          <p *ngIf="product._deleted" class="Description" style="color: red">
+            DELETED !
+          </p>
         </div>
       </div>
     </div>

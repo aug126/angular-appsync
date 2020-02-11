@@ -1,14 +1,13 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode } from "@angular/core";
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { AppModule } from "./app/app.module";
+import { environment } from "./environments/environment";
 
 /** Amplify */
-import Amplify from 'aws-amplify';
-import awsconfig from './app/app-sync/src/aws-exports';
+import Amplify from "aws-amplify";
+import awsconfig from "./app/app-sync/aws-exports";
 Amplify.configure(awsconfig);
-import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 
 /** End Amplify */
 
