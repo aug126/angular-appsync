@@ -84,7 +84,6 @@ export class ProductsService {
 
   /** check if a graphql call has given any error */
   protected checkError(r: { data: any, errors: any[], loading: boolean }, title: string) {
-    console.log(r)
     const log = console
     if (r.errors) {
       r.errors.forEach(e => log.error(e));

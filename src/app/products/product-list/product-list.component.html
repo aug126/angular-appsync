@@ -9,6 +9,8 @@
       </h1>
       <div class="new-wrapper">
         <!-- <button class="new-product-btn" (click)="newProduct()">New Category</button> -->
+        <label for="filter-input">filter: </label>
+        <input (input)="filterProducts($event)" id="filter-input" type="text">
         <button class="new-product-btn" (click)="newProduct()">
           New Product
         </button>
@@ -17,7 +19,7 @@
     <div class="product-list">
       <div
         (click)="updateProduct(product)"
-        *ngFor="let product of products$ | async; trackBy: trackByFn"
+        *ngFor="let product of productsFiltered$ | async; trackBy: trackByFn"
         class="Background product-single"
       >
         <div
