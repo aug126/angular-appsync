@@ -17,7 +17,7 @@
     <div class="product-list">
       <div
         (click)="updateProduct(product)"
-        *ngFor="let product of products$ | async"
+        *ngFor="let product of products$ | async; trackBy: trackByFn"
         class="Background product-single"
       >
         <div

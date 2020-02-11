@@ -2,11 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { ProductsService } from "src/app/services/products.service";
 import { map } from "rxjs/operators";
 import {
-  ListProductsQuery,
   CreateProductInput,
   UpdateProductInput
 } from "src/app/app-sync/app/API2.services.service";
-import { Observable } from "rxjs";
 
 @Component({
   selector: "app-product-list",
@@ -31,6 +29,10 @@ export class ProductListComponent implements OnInit {
     this.products$.subscribe(products =>
       console.log("liste des produits affichés : ", products)
     );
+  }
+
+  public trackByFn(index, product) {
+    return product.id;
   }
 
   newProduct() {

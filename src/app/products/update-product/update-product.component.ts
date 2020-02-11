@@ -4,7 +4,6 @@ import {
   UpdateProductInput,
   CreateProductInput
 } from "../../app-sync/app/API2.services.service";
-import { Observable } from "rxjs";
 
 @Component({
   selector: "app-update-product",
@@ -41,24 +40,20 @@ export class UpdateProductComponent implements OnInit {
       return;
     }
     this.actionLoading = true;
-    try {
-      const input: UpdateProductInput = {
-        id: this.form.id,
-        _version: this.form._version,
-        description: this.form.description,
-        imageUrl: this.form.imageUrl,
-        name: this.form.name,
-        productCategoryId: this.form.productCategoryId, // doesn't exist at the moment
-        supplierName: this.form.supplierName
-      };
-      this.prodSvc.updateProduct({ input }).subscribe(product => {
+    const input: any = { ...this.form };
+    delete input._deleted; // ! these fields have to be deleted to don't have an error but the optimistic response give us warnings for theses missing fields
+    delete input._lastChangedAt;
+    delete input.__typename;
+    this.prodSvc.updateProduct({ input }).subscribe(
+      product => {
         console.log("product updated : ", product);
         this.close();
-      });
-    } catch (err) {
-      this.actionLoading = false;
-      setTimeout(() => alert(err.errors[0].message), 1);
-    }
+      },
+      err => {
+        this.actionLoading = false;
+        setTimeout(() => alert(err.errors[0].message), 1);
+      }
+    );
   }
 
   async deleteProduct({ id, _version }) {
@@ -70,18 +65,17 @@ export class UpdateProductComponent implements OnInit {
       return;
     }
     this.deleteLoading = true;
-    try {
-      this.prodSvc
-        .deleteProduct({
-          input: { id, _version }
-        })
-        .subscribe(d => {
+    this.prodSvc
+      .deleteProduct({
+        input: { id, _version }
+      })
+      .subscribe(
+        d => {
           console.log("product deleted : ", d);
           this.close();
-        });
-    } catch (err) {
-      this.deleteLoading = false;
-    }
+        },
+        err => (this.deleteLoading = false)
+      );
   }
 
   close() {

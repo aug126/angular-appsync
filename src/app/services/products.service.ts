@@ -11,7 +11,10 @@ import {
   DeleteProductInput,
   ModelProductConditionInput,
   DeleteProductMutation,
-  UpdateProductInput
+  UpdateProductInput,
+  UpdateProductMutation,
+  CreateProductInput,
+  CreateProductMutation
 } from "../app-sync/app/API2.services.service";
 import { from, Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -22,6 +25,7 @@ import { FetchPolicy } from "apollo-client";
   providedIn: "root"
 })
 export class ProductsService {
+  listProductsQuery: Array<string>;
   constructor() {}
 
   /** ===== QUERIES ===== */
@@ -55,6 +59,7 @@ export class ProductsService {
         }
       }`
     ];
+    this.listProductsQuery = listProducts;
     return from(
       client.watchQuery<{ listProducts: ListProductsQuery }>({
         query: gql(listProducts),
@@ -64,7 +69,7 @@ export class ProductsService {
     ).pipe(
       map(r => r.data.listProducts),
       map(d => ({
-        items: d.items.filter(p => p._deleted === null), // hide the deleted products : should be on the backend
+        items: d.items.filter(p => !p._deleted), // hide the deleted products : should be on the backend
         __typename: d.__typename,
         nextToken: d.nextToken,
         startedAt: d.startedAt
@@ -158,7 +163,47 @@ export class ProductsService {
   }
 
   /** ===== MUTATIONS ===== */
-  createProduct() {}
+  createProduct(
+    variables: {
+      input: CreateProductInput;
+      condition?: ModelProductConditionInput;
+    },
+    fetchPolicy?: FetchPolicy
+  ): Observable<CreateProductMutation> {
+    const createProduct = [
+      `mutation CreateProduct(
+        $input: CreateProductInput!
+        $condition: ModelProductConditionInput
+      ) {
+        createProduct(input: $input, condition: $condition) {
+          id
+          name
+          supplierName
+          description
+          imageUrl
+          ` + // ! Category give an error
+        /* category {
+            id
+            name
+            _version
+            _deleted
+            _lastChangedAt
+          } */
+        `_version
+          _deleted
+          _lastChangedAt
+        }
+      }`
+    ];
+
+    return from(
+      client.mutate<CreateProductMutation>({
+        mutation: gql(createProduct),
+        variables,
+        fetchPolicy
+      })
+    ).pipe(map(r => r.data.createProduct));
+  }
 
   updateProduct(
     variables: {
@@ -166,7 +211,7 @@ export class ProductsService {
       condition?: ModelProductConditionInput;
     },
     fetchPolicy?: FetchPolicy
-  ) {
+  ): Observable<UpdateProductMutation> {
     const updateProduct = [
       `mutation UpdateProduct(
         $input: UpdateProductInput!
@@ -194,12 +239,31 @@ export class ProductsService {
     ];
 
     return from(
-      client.mutate({
+      client.mutate<UpdateProductMutation>({
         mutation: gql(updateProduct),
         variables,
-        fetchPolicy
+        fetchPolicy,
+        optimisticResponse: {
+          updateProduct: {
+            __typename: "Product", // ! added because deleted for match the UpdateProductInput
+            _deleted: false,
+            _lastChangedAt: new Date(),
+            ...variables.input
+          }
+        },
+        update: (cache, { data: { updateProduct } }) => {
+          const query = gql(this.listProductsQuery);
+
+          // Read query from cache
+          const data: { listProducts: ListProductsQuery } = cache.readQuery({
+            query,
+            variables: { limit: 1000 }
+          });
+          //Overwrite the cache with the new results
+          cache.writeQuery({ query, data, variables: { limit: 1000 } });
+        }
       })
-    );
+    ).pipe(map(r => r.data.updateProduct));
   }
 
   deleteProduct(
