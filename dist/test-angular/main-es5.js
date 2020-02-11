@@ -6,6 +6,14 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -2246,7 +2254,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"content\" role=\"main\">\n  <div\n    [class.mobile-hidden]=\"showNewProduct || updatingProduct\"\n    class=\"displayed-content\"\n  >\n    <div class=\"Rectangle\">\n      <h1 class=\"My-Products\">\n        My Products\n      </h1>\n      <div class=\"new-wrapper\">\n        <!-- <button class=\"new-product-btn\" (click)=\"newProduct()\">New Category</button> -->\n        <button class=\"new-product-btn\" (click)=\"newProduct()\">\n          New Product\n        </button>\n      </div>\n    </div>\n    <div class=\"product-list\">\n      <div\n        (click)=\"updateProduct(product)\"\n        *ngFor=\"let product of products$ | async; trackBy: trackByFn\"\n        class=\"Background product-single\"\n      >\n        <div\n          class=\"product-img\"\n          [style.backgroundImage]=\"\n            'url(' +\n            (product.imageUrl ||\n              'https://informaticapubblica.com/wp-content/uploads/2016/12/default.jpg') +\n            ')'\n          \"\n        ></div>\n        <div class=\"product-detail\">\n          <h3 class=\"Product-Name\">{{ product.name }}</h3>\n          <span class=\"Supplier-Name\">{{ product.supplierName }}</span>\n          <p class=\"Description\">{{ product.description }}</p>\n          <p *ngIf=\"product._deleted\" class=\"Description\" style=\"color: red\">\n            DELETED !\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"loader-container\">\n      <div *ngIf=\"infiniteScroll.loading === true\" class=\"loader\">\n        <div></div>\n        <div></div>\n      </div>\n      <!-- <button\n        *ngIf=\"\n          infiniteScroll.loading === false && infiniteScroll.maxDone === false\">\n        Load More\n      </button> -->\n    </div>\n  </div>\n  <app-new-product\n    (closeEvent)=\"closeModalNewProduct()\"\n    *ngIf=\"showNewProduct\"\n    formTitle=\"Create Product\"\n    formBtn=\"Create\"\n  ></app-new-product>\n  <app-update-product\n    (closeEvent)=\"closeModalUpdateProduct()\"\n    *ngIf=\"updatingProduct\"\n    formTitle=\"Update Product\"\n    formBtn=\"Update\"\n    [form]=\"updatingProduct\"\n  ></app-update-product>\n</div>\n";
+    __webpack_exports__["default"] = "<div class=\"content\" role=\"main\">\n  <div\n    [class.mobile-hidden]=\"showNewProduct || updatingProduct\"\n    class=\"displayed-content\"\n  >\n    <div class=\"Rectangle\">\n      <h1 class=\"My-Products\">\n        My Products\n      </h1>\n      <div class=\"new-wrapper\">\n        <!-- <button class=\"new-product-btn\" (click)=\"newProduct()\">New Category</button> -->\n        <label for=\"filter-input\">filter: </label>\n        <input (input)=\"filterProducts($event)\" id=\"filter-input\" type=\"text\">\n        <button class=\"new-product-btn\" (click)=\"newProduct()\">\n          New Product\n        </button>\n      </div>\n    </div>\n    <div class=\"product-list\">\n      <div\n        (click)=\"updateProduct(product)\"\n        *ngFor=\"let product of productsFiltered$ | async; trackBy: trackByFn\"\n        class=\"Background product-single\"\n      >\n        <div\n          class=\"product-img\"\n          [style.backgroundImage]=\"\n            'url(' +\n            (product.imageUrl ||\n              'https://informaticapubblica.com/wp-content/uploads/2016/12/default.jpg') +\n            ')'\n          \"\n        ></div>\n        <div class=\"product-detail\">\n          <h3 class=\"Product-Name\">{{ product.name }}</h3>\n          <span class=\"Supplier-Name\">{{ product.supplierName }}</span>\n          <p class=\"Description\">{{ product.description }}</p>\n          <p *ngIf=\"product._deleted\" class=\"Description\" style=\"color: red\">\n            DELETED !\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"loader-container\">\n      <div *ngIf=\"infiniteScroll.loading === true\" class=\"loader\">\n        <div></div>\n        <div></div>\n      </div>\n      <!-- <button\n        *ngIf=\"\n          infiniteScroll.loading === false && infiniteScroll.maxDone === false\">\n        Load More\n      </button> -->\n    </div>\n  </div>\n  <app-new-product\n    (closeEvent)=\"closeModalNewProduct()\"\n    *ngIf=\"showNewProduct\"\n    formTitle=\"Create Product\"\n    formBtn=\"Create\"\n  ></app-new-product>\n  <app-update-product\n    (closeEvent)=\"closeModalUpdateProduct()\"\n    *ngIf=\"updatingProduct\"\n    formTitle=\"Update Product\"\n    formBtn=\"Update\"\n    [form]=\"updatingProduct\"\n  ></app-update-product>\n</div>\n";
     /***/
   },
 
@@ -4576,7 +4584,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".content {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n}\n\n.Rectangle {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  width: 100%;\n  padding: 0 24px;\n  height: 80px;\n  box-shadow: 0 2px 4px 0 rgba(93, 109, 139, 0.2);\n  background-color: #ffffff;\n}\n\n.My-Products {\n  width: 127px;\n  height: 31px;\n  font-family: SourceSansPro;\n  font-size: 24px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n}\n\n.Background {\n  width: 296px;\n  margin: 12px;\n  border-radius: 4px;\n  background-color: #ffffff;\n  -webkit-transition: all ease 0.3s;\n  transition: all ease 0.3s;\n}\n\n.Background:hover {\n  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);\n}\n\n.Background:hover .Product-Name {\n  color: #50c2ff;\n}\n\n.Product-Name {\n  width: 184px;\n  height: 24px;\n  font-family: SourceSansPro;\n  font-size: 18px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n  margin-bottom: 4px;\n  -webkit-transition: all ease 0.3s;\n  transition: all ease 0.3s;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n\n.Supplier-Name {\n  width: 184px;\n  height: 18px;\n  font-family: SourceSansPro;\n  font-size: 14px;\n  font-weight: normal;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n  margin-bottom: 8px;\n  display: block;\n}\n\n.Description {\n  font-family: SourceSansPro;\n  font-size: 14px;\n  font-weight: normal;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #4a4a4a;\n}\n\n.product-list {\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap;\n  margin: 12px;\n}\n\n.product-single {\n  display: -webkit-box;\n  display: flex;\n  padding: 8px 12px 12px 8px;\n  cursor: pointer;\n}\n\n.product-img {\n  height: 80px;\n  width: 80px;\n  border-radius: 4px;\n  background-size: cover;\n  background-position: center;\n  margin-right: 12px;\n}\n\n.product-detail {\n  width: 182px;\n}\n\n.new-wrapper {\n  margin-left: auto;\n}\n\n.new-wrapper .new-product-btn {\n  margin-bottom: 0;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL3Byb2R1Y3RzL3Byb2R1Y3QtbGlzdC9wcm9kdWN0LWxpc3QuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3Byb2R1Y3RzL3Byb2R1Y3QtbGlzdC9wcm9kdWN0LWxpc3QuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSw0QkFBQTtFQUFBLDZCQUFBO1VBQUEsc0JBQUE7QUNDRjs7QURFQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7RUFDQSxXQUFBO0VBQ0EsZUFBQTtFQUNBLFlBQUE7RUFDQSwrQ0FBQTtFQUNBLHlCQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsWUFBQTtFQUNBLDBCQUFBO0VBQ0EsZUFBQTtFQUNBLGdCQUFBO0VBQ0Esb0JBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0VBQ0Esc0JBQUE7RUFDQSxjQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsWUFBQTtFQUNBLGtCQUFBO0VBQ0EseUJBQUE7RUFDQSxpQ0FBQTtFQUFBLHlCQUFBO0FDQ0Y7O0FEQUU7RUFDRSwwQ0FBQTtBQ0VKOztBRERJO0VBQ0UsY0FBQTtBQ0dOOztBREVBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsaUNBQUE7RUFBQSx5QkFBQTtFQUNBLG1CQUFBO0VBQ0EsdUJBQUE7RUFDQSxnQkFBQTtBQ0NGOztBRENBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7RUFDQSxtQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtBQ0VGOztBREFBO0VBQ0UsMEJBQUE7RUFDQSxlQUFBO0VBQ0EsbUJBQUE7RUFDQSxvQkFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGNBQUE7QUNHRjs7QURBQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLGVBQUE7RUFDQSxZQUFBO0FDR0Y7O0FEQUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7QUNHRjs7QURBQTtFQUNFLFlBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxzQkFBQTtFQUNBLDJCQUFBO0VBQ0Esa0JBQUE7QUNHRjs7QURBQTtFQUNFLFlBQUE7QUNHRjs7QURBQTtFQUNFLGlCQUFBO0FDR0Y7O0FERkU7RUFDRSxnQkFBQTtFQUNBLG1CQUFBO0FDSUoiLCJmaWxlIjoic3JjL2FwcC9wcm9kdWN0cy9wcm9kdWN0LWxpc3QvcHJvZHVjdC1saXN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRlbnQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG4uUmVjdGFuZ2xlIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDAgMjRweDtcbiAgaGVpZ2h0OiA4MHB4O1xuICBib3gtc2hhZG93OiAwIDJweCA0cHggMCByZ2JhKDkzLCAxMDksIDEzOSwgMC4yKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbn1cblxuLk15LVByb2R1Y3RzIHtcbiAgd2lkdGg6IDEyN3B4O1xuICBoZWlnaHQ6IDMxcHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDI0cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xufVxuXG4uQmFja2dyb3VuZCB7XG4gIHdpZHRoOiAyOTZweDtcbiAgbWFyZ2luOiAxMnB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG4gICY6aG92ZXIge1xuICAgIGJveC1zaGFkb3c6IDAgMCA4cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAuUHJvZHVjdC1OYW1lIHtcbiAgICAgIGNvbG9yOiAjNTBjMmZmO1xuICAgIH1cbiAgfVxufVxuXG4uUHJvZHVjdC1OYW1lIHtcbiAgd2lkdGg6IDE4NHB4O1xuICBoZWlnaHQ6IDI0cHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE4cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xuICBtYXJnaW4tYm90dG9tOiA0cHg7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuLlN1cHBsaWVyLU5hbWUge1xuICB3aWR0aDogMTg0cHg7XG4gIGhlaWdodDogMThweDtcbiAgZm9udC1mYW1pbHk6IFNvdXJjZVNhbnNQcm87XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcbiAgZm9udC1zdHJldGNoOiBub3JtYWw7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgbGluZS1oZWlnaHQ6IG5vcm1hbDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgY29sb3I6ICMwMDAwMDA7XG4gIG1hcmdpbi1ib3R0b206IDhweDtcbiAgZGlzcGxheTogYmxvY2s7XG59XG4uRGVzY3JpcHRpb24ge1xuICBmb250LWZhbWlseTogU291cmNlU2Fuc1BybztcbiAgZm9udC1zaXplOiAxNHB4O1xuICBmb250LXdlaWdodDogbm9ybWFsO1xuICBmb250LXN0cmV0Y2g6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xuICBsZXR0ZXItc3BhY2luZzogbm9ybWFsO1xuICBjb2xvcjogIzRhNGE0YTtcbn1cblxuLnByb2R1Y3QtbGlzdCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAgbWFyZ2luOiAxMnB4O1xufVxuXG4ucHJvZHVjdC1zaW5nbGUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBwYWRkaW5nOiA4cHggMTJweCAxMnB4IDhweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4ucHJvZHVjdC1pbWcge1xuICBoZWlnaHQ6IDgwcHg7XG4gIHdpZHRoOiA4MHB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjtcbiAgbWFyZ2luLXJpZ2h0OiAxMnB4O1xufVxuXG4ucHJvZHVjdC1kZXRhaWwge1xuICB3aWR0aDogMTgycHg7IC8vIDI5NiAtOCAtMTIgLSA4MCAtMTJcbn1cblxuLm5ldy13cmFwcGVyIHtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gIC5uZXctcHJvZHVjdC1idG4ge1xuICAgIG1hcmdpbi1ib3R0b206IDA7XG4gICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgfVxufVxuIiwiLmNvbnRlbnQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG4uUmVjdGFuZ2xlIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDAgMjRweDtcbiAgaGVpZ2h0OiA4MHB4O1xuICBib3gtc2hhZG93OiAwIDJweCA0cHggMCByZ2JhKDkzLCAxMDksIDEzOSwgMC4yKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbn1cblxuLk15LVByb2R1Y3RzIHtcbiAgd2lkdGg6IDEyN3B4O1xuICBoZWlnaHQ6IDMxcHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDI0cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xufVxuXG4uQmFja2dyb3VuZCB7XG4gIHdpZHRoOiAyOTZweDtcbiAgbWFyZ2luOiAxMnB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG59XG4uQmFja2dyb3VuZDpob3ZlciB7XG4gIGJveC1zaGFkb3c6IDAgMCA4cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbn1cbi5CYWNrZ3JvdW5kOmhvdmVyIC5Qcm9kdWN0LU5hbWUge1xuICBjb2xvcjogIzUwYzJmZjtcbn1cblxuLlByb2R1Y3QtTmFtZSB7XG4gIHdpZHRoOiAxODRweDtcbiAgaGVpZ2h0OiAyNHB4O1xuICBmb250LWZhbWlseTogU291cmNlU2Fuc1BybztcbiAgZm9udC1zaXplOiAxOHB4O1xuICBmb250LXdlaWdodDogNjAwO1xuICBmb250LXN0cmV0Y2g6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xuICBsZXR0ZXItc3BhY2luZzogbm9ybWFsO1xuICBjb2xvcjogIzAwMDAwMDtcbiAgbWFyZ2luLWJvdHRvbTogNHB4O1xuICB0cmFuc2l0aW9uOiBhbGwgZWFzZSAwLjNzO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuLlN1cHBsaWVyLU5hbWUge1xuICB3aWR0aDogMTg0cHg7XG4gIGhlaWdodDogMThweDtcbiAgZm9udC1mYW1pbHk6IFNvdXJjZVNhbnNQcm87XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcbiAgZm9udC1zdHJldGNoOiBub3JtYWw7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgbGluZS1oZWlnaHQ6IG5vcm1hbDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgY29sb3I6ICMwMDAwMDA7XG4gIG1hcmdpbi1ib3R0b206IDhweDtcbiAgZGlzcGxheTogYmxvY2s7XG59XG5cbi5EZXNjcmlwdGlvbiB7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE0cHg7XG4gIGZvbnQtd2VpZ2h0OiBub3JtYWw7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjNGE0YTRhO1xufVxuXG4ucHJvZHVjdC1saXN0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC13cmFwOiB3cmFwO1xuICBtYXJnaW46IDEycHg7XG59XG5cbi5wcm9kdWN0LXNpbmdsZSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHBhZGRpbmc6IDhweCAxMnB4IDEycHggOHB4O1xuICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5wcm9kdWN0LWltZyB7XG4gIGhlaWdodDogODBweDtcbiAgd2lkdGg6IDgwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgYmFja2dyb3VuZC1wb3NpdGlvbjogY2VudGVyO1xuICBtYXJnaW4tcmlnaHQ6IDEycHg7XG59XG5cbi5wcm9kdWN0LWRldGFpbCB7XG4gIHdpZHRoOiAxODJweDtcbn1cblxuLm5ldy13cmFwcGVyIHtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG59XG4ubmV3LXdyYXBwZXIgLm5ldy1wcm9kdWN0LWJ0biB7XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG59Il19 */";
+    __webpack_exports__["default"] = ".content {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n}\n\n.Rectangle {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  width: 100%;\n  padding: 0 24px;\n  height: 80px;\n  box-shadow: 0 2px 4px 0 rgba(93, 109, 139, 0.2);\n  background-color: #ffffff;\n}\n\n.My-Products {\n  width: 127px;\n  height: 31px;\n  font-family: SourceSansPro;\n  font-size: 24px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n}\n\n.Background {\n  width: 296px;\n  margin: 12px;\n  border-radius: 4px;\n  background-color: #ffffff;\n  -webkit-transition: all ease 0.3s;\n  transition: all ease 0.3s;\n}\n\n.Background:hover {\n  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);\n}\n\n.Background:hover .Product-Name {\n  color: #50c2ff;\n}\n\n.Product-Name {\n  width: 184px;\n  height: 24px;\n  font-family: SourceSansPro;\n  font-size: 18px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n  margin-bottom: 4px;\n  -webkit-transition: all ease 0.3s;\n  transition: all ease 0.3s;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n\n.Supplier-Name {\n  width: 184px;\n  height: 18px;\n  font-family: SourceSansPro;\n  font-size: 14px;\n  font-weight: normal;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n  margin-bottom: 8px;\n  display: block;\n}\n\n.Description {\n  font-family: SourceSansPro;\n  font-size: 14px;\n  font-weight: normal;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #4a4a4a;\n}\n\n.product-list {\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap;\n  margin: 12px;\n}\n\n.product-single {\n  display: -webkit-box;\n  display: flex;\n  padding: 8px 12px 12px 8px;\n  cursor: pointer;\n}\n\n.product-img {\n  height: 80px;\n  width: 80px;\n  border-radius: 4px;\n  background-size: cover;\n  background-position: center;\n  margin-right: 12px;\n}\n\n.product-detail {\n  width: 182px;\n}\n\n.new-wrapper {\n  margin-left: auto;\n}\n\n.new-wrapper .new-product-btn {\n  margin-bottom: 0;\n  white-space: nowrap;\n}\n\n#filter-input {\n  border-radius: 4px;\n  border: solid 1px #a3afc6;\n  margin-bottom: 24px;\n  -webkit-transition: border-color ease 0.3s;\n  transition: border-color ease 0.3s;\n  font-size: 14px;\n  outline: none;\n  height: 30px;\n  padding: 0 8px;\n  margin-right: 4rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL3Byb2R1Y3RzL3Byb2R1Y3QtbGlzdC9wcm9kdWN0LWxpc3QuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3Byb2R1Y3RzL3Byb2R1Y3QtbGlzdC9wcm9kdWN0LWxpc3QuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSw0QkFBQTtFQUFBLDZCQUFBO1VBQUEsc0JBQUE7QUNDRjs7QURFQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7RUFDQSxXQUFBO0VBQ0EsZUFBQTtFQUNBLFlBQUE7RUFDQSwrQ0FBQTtFQUNBLHlCQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsWUFBQTtFQUNBLDBCQUFBO0VBQ0EsZUFBQTtFQUNBLGdCQUFBO0VBQ0Esb0JBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0VBQ0Esc0JBQUE7RUFDQSxjQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsWUFBQTtFQUNBLGtCQUFBO0VBQ0EseUJBQUE7RUFDQSxpQ0FBQTtFQUFBLHlCQUFBO0FDQ0Y7O0FEQUU7RUFDRSwwQ0FBQTtBQ0VKOztBRERJO0VBQ0UsY0FBQTtBQ0dOOztBREVBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsaUNBQUE7RUFBQSx5QkFBQTtFQUNBLG1CQUFBO0VBQ0EsdUJBQUE7RUFDQSxnQkFBQTtBQ0NGOztBRENBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7RUFDQSxtQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtBQ0VGOztBREFBO0VBQ0UsMEJBQUE7RUFDQSxlQUFBO0VBQ0EsbUJBQUE7RUFDQSxvQkFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGNBQUE7QUNHRjs7QURBQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLGVBQUE7RUFDQSxZQUFBO0FDR0Y7O0FEQUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7QUNHRjs7QURBQTtFQUNFLFlBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxzQkFBQTtFQUNBLDJCQUFBO0VBQ0Esa0JBQUE7QUNHRjs7QURBQTtFQUNFLFlBQUE7QUNHRjs7QURBQTtFQUNFLGlCQUFBO0FDR0Y7O0FERkU7RUFDRSxnQkFBQTtFQUNBLG1CQUFBO0FDSUo7O0FEQUE7RUFDRSxrQkFBQTtFQUNBLHlCQUFBO0VBQ0EsbUJBQUE7RUFDQSwwQ0FBQTtFQUNBLGtDQUFBO0VBQ0EsZUFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0FDR0YiLCJmaWxlIjoic3JjL2FwcC9wcm9kdWN0cy9wcm9kdWN0LWxpc3QvcHJvZHVjdC1saXN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRlbnQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG4uUmVjdGFuZ2xlIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDAgMjRweDtcbiAgaGVpZ2h0OiA4MHB4O1xuICBib3gtc2hhZG93OiAwIDJweCA0cHggMCByZ2JhKDkzLCAxMDksIDEzOSwgMC4yKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbn1cblxuLk15LVByb2R1Y3RzIHtcbiAgd2lkdGg6IDEyN3B4O1xuICBoZWlnaHQ6IDMxcHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDI0cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xufVxuXG4uQmFja2dyb3VuZCB7XG4gIHdpZHRoOiAyOTZweDtcbiAgbWFyZ2luOiAxMnB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG4gICY6aG92ZXIge1xuICAgIGJveC1zaGFkb3c6IDAgMCA4cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAuUHJvZHVjdC1OYW1lIHtcbiAgICAgIGNvbG9yOiAjNTBjMmZmO1xuICAgIH1cbiAgfVxufVxuXG4uUHJvZHVjdC1OYW1lIHtcbiAgd2lkdGg6IDE4NHB4O1xuICBoZWlnaHQ6IDI0cHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE4cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xuICBtYXJnaW4tYm90dG9tOiA0cHg7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuLlN1cHBsaWVyLU5hbWUge1xuICB3aWR0aDogMTg0cHg7XG4gIGhlaWdodDogMThweDtcbiAgZm9udC1mYW1pbHk6IFNvdXJjZVNhbnNQcm87XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcbiAgZm9udC1zdHJldGNoOiBub3JtYWw7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgbGluZS1oZWlnaHQ6IG5vcm1hbDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgY29sb3I6ICMwMDAwMDA7XG4gIG1hcmdpbi1ib3R0b206IDhweDtcbiAgZGlzcGxheTogYmxvY2s7XG59XG4uRGVzY3JpcHRpb24ge1xuICBmb250LWZhbWlseTogU291cmNlU2Fuc1BybztcbiAgZm9udC1zaXplOiAxNHB4O1xuICBmb250LXdlaWdodDogbm9ybWFsO1xuICBmb250LXN0cmV0Y2g6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xuICBsZXR0ZXItc3BhY2luZzogbm9ybWFsO1xuICBjb2xvcjogIzRhNGE0YTtcbn1cblxuLnByb2R1Y3QtbGlzdCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAgbWFyZ2luOiAxMnB4O1xufVxuXG4ucHJvZHVjdC1zaW5nbGUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBwYWRkaW5nOiA4cHggMTJweCAxMnB4IDhweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4ucHJvZHVjdC1pbWcge1xuICBoZWlnaHQ6IDgwcHg7XG4gIHdpZHRoOiA4MHB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjtcbiAgbWFyZ2luLXJpZ2h0OiAxMnB4O1xufVxuXG4ucHJvZHVjdC1kZXRhaWwge1xuICB3aWR0aDogMTgycHg7IC8vIDI5NiAtOCAtMTIgLSA4MCAtMTJcbn1cblxuLm5ldy13cmFwcGVyIHtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gIC5uZXctcHJvZHVjdC1idG4ge1xuICAgIG1hcmdpbi1ib3R0b206IDA7XG4gICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgfVxufVxuXG4jZmlsdGVyLWlucHV0IHtcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xuICBib3JkZXI6IHNvbGlkIDFweCAjYTNhZmM2O1xuICBtYXJnaW4tYm90dG9tOiAyNHB4O1xuICAtd2Via2l0LXRyYW5zaXRpb246IGJvcmRlci1jb2xvciBlYXNlIDAuM3M7XG4gIHRyYW5zaXRpb246IGJvcmRlci1jb2xvciBlYXNlIDAuM3M7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgb3V0bGluZTogbm9uZTtcbiAgaGVpZ2h0OiAzMHB4O1xuICBwYWRkaW5nOiAwIDhweDtcbiAgbWFyZ2luLXJpZ2h0OiA0cmVtO1xufSIsIi5jb250ZW50IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbn1cblxuLlJlY3RhbmdsZSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIHdpZHRoOiAxMDAlO1xuICBwYWRkaW5nOiAwIDI0cHg7XG4gIGhlaWdodDogODBweDtcbiAgYm94LXNoYWRvdzogMCAycHggNHB4IDAgcmdiYSg5MywgMTA5LCAxMzksIDAuMik7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XG59XG5cbi5NeS1Qcm9kdWN0cyB7XG4gIHdpZHRoOiAxMjdweDtcbiAgaGVpZ2h0OiAzMXB4O1xuICBmb250LWZhbWlseTogU291cmNlU2Fuc1BybztcbiAgZm9udC1zaXplOiAyNHB4O1xuICBmb250LXdlaWdodDogNjAwO1xuICBmb250LXN0cmV0Y2g6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xuICBsZXR0ZXItc3BhY2luZzogbm9ybWFsO1xuICBjb2xvcjogIzAwMDAwMDtcbn1cblxuLkJhY2tncm91bmQge1xuICB3aWR0aDogMjk2cHg7XG4gIG1hcmdpbjogMTJweDtcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO1xuICB0cmFuc2l0aW9uOiBhbGwgZWFzZSAwLjNzO1xufVxuLkJhY2tncm91bmQ6aG92ZXIge1xuICBib3gtc2hhZG93OiAwIDAgOHB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG59XG4uQmFja2dyb3VuZDpob3ZlciAuUHJvZHVjdC1OYW1lIHtcbiAgY29sb3I6ICM1MGMyZmY7XG59XG5cbi5Qcm9kdWN0LU5hbWUge1xuICB3aWR0aDogMTg0cHg7XG4gIGhlaWdodDogMjRweDtcbiAgZm9udC1mYW1pbHk6IFNvdXJjZVNhbnNQcm87XG4gIGZvbnQtc2l6ZTogMThweDtcbiAgZm9udC13ZWlnaHQ6IDYwMDtcbiAgZm9udC1zdHJldGNoOiBub3JtYWw7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgbGluZS1oZWlnaHQ6IG5vcm1hbDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgY29sb3I6ICMwMDAwMDA7XG4gIG1hcmdpbi1ib3R0b206IDRweDtcbiAgdHJhbnNpdGlvbjogYWxsIGVhc2UgMC4zcztcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XG4gIG92ZXJmbG93OiBoaWRkZW47XG59XG5cbi5TdXBwbGllci1OYW1lIHtcbiAgd2lkdGg6IDE4NHB4O1xuICBoZWlnaHQ6IDE4cHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE0cHg7XG4gIGZvbnQtd2VpZ2h0OiBub3JtYWw7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xuICBtYXJnaW4tYm90dG9tOiA4cHg7XG4gIGRpc3BsYXk6IGJsb2NrO1xufVxuXG4uRGVzY3JpcHRpb24ge1xuICBmb250LWZhbWlseTogU291cmNlU2Fuc1BybztcbiAgZm9udC1zaXplOiAxNHB4O1xuICBmb250LXdlaWdodDogbm9ybWFsO1xuICBmb250LXN0cmV0Y2g6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xuICBsZXR0ZXItc3BhY2luZzogbm9ybWFsO1xuICBjb2xvcjogIzRhNGE0YTtcbn1cblxuLnByb2R1Y3QtbGlzdCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAgbWFyZ2luOiAxMnB4O1xufVxuXG4ucHJvZHVjdC1zaW5nbGUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBwYWRkaW5nOiA4cHggMTJweCAxMnB4IDhweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4ucHJvZHVjdC1pbWcge1xuICBoZWlnaHQ6IDgwcHg7XG4gIHdpZHRoOiA4MHB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjtcbiAgbWFyZ2luLXJpZ2h0OiAxMnB4O1xufVxuXG4ucHJvZHVjdC1kZXRhaWwge1xuICB3aWR0aDogMTgycHg7XG59XG5cbi5uZXctd3JhcHBlciB7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufVxuLm5ldy13cmFwcGVyIC5uZXctcHJvZHVjdC1idG4ge1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xufVxuXG4jZmlsdGVyLWlucHV0IHtcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xuICBib3JkZXI6IHNvbGlkIDFweCAjYTNhZmM2O1xuICBtYXJnaW4tYm90dG9tOiAyNHB4O1xuICAtd2Via2l0LXRyYW5zaXRpb246IGJvcmRlci1jb2xvciBlYXNlIDAuM3M7XG4gIHRyYW5zaXRpb246IGJvcmRlci1jb2xvciBlYXNlIDAuM3M7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgb3V0bGluZTogbm9uZTtcbiAgaGVpZ2h0OiAzMHB4O1xuICBwYWRkaW5nOiAwIDhweDtcbiAgbWFyZ2luLXJpZ2h0OiA0cmVtO1xufSJdfQ== */";
     /***/
   },
 
@@ -4623,6 +4631,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! rxjs/operators */
     "./node_modules/rxjs/_esm2015/operators/index.js");
+    /* harmony import */
+
+
+    var fuse_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! fuse.js */
+    "./node_modules/fuse.js/dist/fuse.js");
+    /* harmony import */
+
+
+    var fuse_js__WEBPACK_IMPORTED_MODULE_4___default =
+    /*#__PURE__*/
+    __webpack_require__.n(fuse_js__WEBPACK_IMPORTED_MODULE_4__);
+    /* harmony import */
+
+
+    var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! rxjs */
+    "./node_modules/rxjs/_esm2015/index.js");
 
     var ProductListComponent =
     /*#__PURE__*/
@@ -4638,24 +4664,76 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           limit: 0,
           nextToken: ""
         };
+        this.search$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"]('');
       }
 
       _createClass(ProductListComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          var _this4 = this;
+
           this.products$ = this.prodSvc.listProducts({
             limit: 1000
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (r) {
-            return r.items;
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            _this4.fuse = _this4._initFuse(data.items);
+            console.log("init fuse for search");
+            return data.items;
           }));
           this.products$.subscribe(function (products) {
-            return console.log("liste des produits affichés : ", products);
+            console.log("liste des produits affichés : ", products);
           });
+          this.productsFiltered$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["combineLatest"])(this.products$, this.search$).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref) {
+            var _ref2 = _slicedToArray(_ref, 2),
+                products = _ref2[0],
+                search = _ref2[1];
+
+            if (search) {
+              return _this4.fuse.search(search);
+            }
+
+            return products;
+          }));
         }
       }, {
         key: "trackByFn",
         value: function trackByFn(index, product) {
           return product.id;
+        }
+      }, {
+        key: "_initFuse",
+        value: function _initFuse(products) {
+          var fuseOptions = {
+            shouldSort: true,
+            includeScore: false,
+            threshold: 0.4,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            keys: ["name", "supplierName"]
+          };
+          return new fuse_js__WEBPACK_IMPORTED_MODULE_4___default.a(products, fuseOptions);
+        }
+      }, {
+        key: "filterProducts",
+        value: function filterProducts(e) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0,
+          /*#__PURE__*/
+          regeneratorRuntime.mark(function _callee7() {
+            var searchWord;
+            return regeneratorRuntime.wrap(function _callee7$(_context7) {
+              while (1) {
+                switch (_context7.prev = _context7.next) {
+                  case 0:
+                    searchWord = e.target.value;
+                    this.search$.next(searchWord);
+
+                  case 2:
+                  case "end":
+                    return _context7.stop();
+                }
+              }
+            }, _callee7, this);
+          }));
         }
       }, {
         key: "newProduct",
@@ -4765,10 +4843,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(UpdateProductComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this4 = this;
+          var _this5 = this;
 
           setTimeout(function () {
-            return _this4.showingClass = true;
+            return _this5.showingClass = true;
           }, 10);
         }
       }, {
@@ -4787,22 +4865,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function formAction($event) {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0,
           /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee7() {
-            var _this5 = this;
+          regeneratorRuntime.mark(function _callee8() {
+            var _this6 = this;
 
             var input;
-            return regeneratorRuntime.wrap(function _callee7$(_context7) {
+            return regeneratorRuntime.wrap(function _callee8$(_context8) {
               while (1) {
-                switch (_context7.prev = _context7.next) {
+                switch (_context8.prev = _context8.next) {
                   case 0:
                     $event.preventDefault();
 
                     if (!(this.actionLoading === true)) {
-                      _context7.next = 3;
+                      _context8.next = 3;
                       break;
                     }
 
-                    return _context7.abrupt("return");
+                    return _context8.abrupt("return");
 
                   case 3:
                     this.actionLoading = true;
@@ -4816,7 +4894,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }).subscribe(function (product) {
                       console.log("product updated : ", product);
                     }, function (err) {
-                      _this5.actionLoading = false;
+                      _this6.actionLoading = false;
                       setTimeout(function () {
                         return alert(err.errors[0].message);
                       }, 1);
@@ -4825,41 +4903,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 10:
                   case "end":
-                    return _context7.stop();
+                    return _context8.stop();
                 }
               }
-            }, _callee7, this);
+            }, _callee8, this);
           }));
         }
       }, {
         key: "deleteProduct",
-        value: function deleteProduct(_ref) {
-          var id = _ref.id,
-              _version = _ref._version;
+        value: function deleteProduct(_ref3) {
+          var id = _ref3.id,
+              _version = _ref3._version;
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0,
           /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee8() {
-            var _this6 = this;
+          regeneratorRuntime.mark(function _callee9() {
+            var _this7 = this;
 
-            return regeneratorRuntime.wrap(function _callee8$(_context8) {
+            return regeneratorRuntime.wrap(function _callee9$(_context9) {
               while (1) {
-                switch (_context8.prev = _context8.next) {
+                switch (_context9.prev = _context9.next) {
                   case 0:
                     if (!(this.deleteConfirm === false)) {
-                      _context8.next = 3;
+                      _context9.next = 3;
                       break;
                     }
 
                     this.deleteConfirm = true;
-                    return _context8.abrupt("return");
+                    return _context9.abrupt("return");
 
                   case 3:
                     if (!(this.deleteLoading === true)) {
-                      _context8.next = 5;
+                      _context9.next = 5;
                       break;
                     }
 
-                    return _context8.abrupt("return");
+                    return _context9.abrupt("return");
 
                   case 5:
                     this.deleteLoading = true;
@@ -4871,27 +4949,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }).subscribe(function (d) {
                       console.log("product deleted : ", d);
 
-                      _this6.close();
+                      _this7.close();
                     }, function (err) {
-                      return _this6.deleteLoading = false;
+                      return _this7.deleteLoading = false;
                     });
 
                   case 7:
                   case "end":
-                    return _context8.stop();
+                    return _context9.stop();
                 }
               }
-            }, _callee8, this);
+            }, _callee9, this);
           }));
         }
       }, {
         key: "close",
         value: function close() {
-          var _this7 = this;
+          var _this8 = this;
 
           this.showingClass = false;
           setTimeout(function () {
-            return _this7.closeEvent.emit();
+            return _this8.closeEvent.emit();
           }, 350);
         }
       }]);
@@ -5049,14 +5127,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(ProductsService, [{
         key: "listProducts",
         value: function listProducts(variables, fetchPolicy) {
+          var _this9 = this;
+
           var listProducts = ["query ListProducts(\n        $filter: ModelProductFilterInput\n        $limit: Int\n        $nextToken: String\n      ) {\n        listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {\n          items {\n            id\n            name\n            supplierName\n            description\n            imageUrl\n            _version\n            _deleted\n            _lastChangedAt\n          }\n          nextToken\n          startedAt\n        }\n      }"];
           this.listProductsQuery = listProducts;
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(_app_sync_init_client__WEBPACK_IMPORTED_MODULE_2__["default"].watchQuery({
             query: graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(listProducts),
             variables: variables,
             fetchPolicy: fetchPolicy
-          })).pipe( // filter((r: any) => this.checkError(r, 'Search in products')),
-          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (r) {
+          })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (r) {
+            return _this9.checkError(r, 'Search in products');
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (r) {
             return r.data.listProducts;
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (d) {
             return {
@@ -5077,7 +5158,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "checkError",
         value: function checkError(r, title) {
-          console.log(r);
           var log = console;
 
           if (r.errors) {
@@ -5133,7 +5213,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "createProduct",
         value: function createProduct(variables, fetchPolicy) {
-          var _this8 = this;
+          var _this10 = this;
 
           var createProduct = ["mutation CreateProduct(\n        $input: CreateProductInput!\n        $condition: ModelProductConditionInput\n      ) {\n        createProduct(input: $input, condition: $condition) {\n          id\n          name\n          supplierName\n          description\n          imageUrl\n          " + // ! Category give an error
 
@@ -5158,9 +5238,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 _lastChangedAt: new Date()
               }, variables.input)
             },
-            update: function update(cache, _ref2) {
-              var createProduct = _ref2.data.createProduct;
-              var query = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_this8.listProductsQuery); // Read query from cache
+            update: function update(cache, _ref4) {
+              var createProduct = _ref4.data.createProduct;
+              var query = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(_this10.listProductsQuery); // Read query from cache
 
               var data = cache.readQuery({
                 query: query,
@@ -5333,13 +5413,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getQuery",
         value: function getQuery() {
-          var _this9 = this;
+          var _this11 = this;
 
           this.prodSvc.listProducts({
             limit: 1000
           }, 'cache-and-network').subscribe(function (d) {
             console.log('products filtered from cache : ', d.items.filter(function (p) {
-              return p.name.includes(_this9.searchProduct);
+              return p.name.includes(_this11.searchProduct);
             }));
           });
         }
