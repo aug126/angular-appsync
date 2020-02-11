@@ -1,6 +1,6 @@
 <div class="content" role="main">
   <div
-    [class.mobile-hidden]="showNewProduct || (updatingProduct$ | async)"
+    [class.mobile-hidden]="showNewProduct || updatingProduct"
     class="displayed-content"
   >
     <div class="Rectangle">
@@ -33,6 +33,9 @@
           <h3 class="Product-Name">{{ product.name }}</h3>
           <span class="Supplier-Name">{{ product.supplierName }}</span>
           <p class="Description">{{ product.description }}</p>
+          <p *ngIf="product._deleted" class="Description" style="color: red">
+            DELETED !
+          </p>
         </div>
       </div>
     </div>

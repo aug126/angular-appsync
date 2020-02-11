@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
   styleUrls: ["../new-product/new-product.component.scss"] // template from another component
 })
 export class UpdateProductComponent implements OnInit {
-  constructor(private productsSvc: ProductsService) {}
+  constructor(private prodSvc: ProductsService) {}
   @Output() closeEvent = new EventEmitter();
   activeField = "";
   @Input() formTitle = "";
@@ -41,19 +41,27 @@ export class UpdateProductComponent implements OnInit {
       return;
     }
     this.actionLoading = true;
-    // prevent empty string for optional parameters
-    // this.form.imageUrl = this.form.imageUrl || null;
-    // this.form.description = this.form.description || null;
     try {
-      // this.productsSvc.updateProduct(this.form).subscribe();
-      this.close();
+      const input: UpdateProductInput = {
+        id: this.form.id,
+        _version: this.form._version,
+        description: this.form.description,
+        imageUrl: this.form.imageUrl,
+        name: this.form.name,
+        productCategoryId: this.form.productCategoryId, // doesn't exist at the moment
+        supplierName: this.form.supplierName
+      };
+      this.prodSvc.updateProduct({ input }).subscribe(product => {
+        console.log("product updated : ", product);
+        this.close();
+      });
     } catch (err) {
       this.actionLoading = false;
       setTimeout(() => alert(err.errors[0].message), 1);
     }
   }
 
-  async deleteProduct(id) {
+  async deleteProduct({ id, _version }) {
     if (this.deleteConfirm === false) {
       this.deleteConfirm = true;
       return;
@@ -63,11 +71,14 @@ export class UpdateProductComponent implements OnInit {
     }
     this.deleteLoading = true;
     try {
-      // this.productsSvc.deleteProduct({
-      //   id: this.form.id
-      //   // _version: this.form._version
-      // });
-      this.close();
+      this.prodSvc
+        .deleteProduct({
+          input: { id, _version }
+        })
+        .subscribe(d => {
+          console.log("product deleted : ", d);
+          this.close();
+        });
     } catch (err) {
       this.deleteLoading = false;
     }

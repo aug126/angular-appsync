@@ -63,11 +63,7 @@
           <button (click)="close()" type="text">
             Cancel
           </button>
-          <button
-            *ngIf="form.id"
-            (click)="deleteProduct(form.id)"
-            class="danger"
-          >
+          <button *ngIf="form.id" (click)="deleteProduct(form)" class="danger">
             <div *ngIf="deleteLoading" class="loader">
               <div></div>
               <div></div>

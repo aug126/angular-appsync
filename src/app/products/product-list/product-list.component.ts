@@ -42,9 +42,10 @@ export class ProductListComponent implements OnInit {
   }
 
   updateProduct(product) {
-    this.prodSvc
-      .getProduct({ id: product.id })
-      .subscribe(product => (this.updatingProduct = product));
+    this.prodSvc.getProduct({ id: product.id }).subscribe(product => {
+      console.log("the product to update : ", product);
+      this.updatingProduct = product;
+    });
   }
 
   closeModalUpdateProduct() {
