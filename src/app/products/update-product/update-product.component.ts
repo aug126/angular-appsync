@@ -47,13 +47,13 @@ export class UpdateProductComponent implements OnInit {
     this.prodSvc.updateProduct({ input }).subscribe(
       product => {
         console.log("product updated : ", product);
-        this.close();
       },
       err => {
         this.actionLoading = false;
         setTimeout(() => alert(err.errors[0].message), 1);
       }
     );
+    this.close();
   }
 
   async deleteProduct({ id, _version }) {

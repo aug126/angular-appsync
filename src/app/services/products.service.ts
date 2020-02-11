@@ -251,17 +251,17 @@ export class ProductsService {
             ...variables.input
           }
         },
-        update: (cache, { data: { updateProduct } }) => {
-          const query = gql(this.listProductsQuery);
+        // update: (cache, { data: { updateProduct } }) => {
+        //   const query = gql(this.listProductsQuery);
 
-          // Read query from cache
-          const data: { listProducts: ListProductsQuery } = cache.readQuery({
-            query,
-            variables: { limit: 1000 }
-          });
-          //Overwrite the cache with the new results
-          cache.writeQuery({ query, data, variables: { limit: 1000 } });
-        }
+        //   // Read query from cache
+        //   const data: { listProducts: ListProductsQuery } = cache.readQuery({
+        //     query,
+        //     variables: { limit: 1000 }
+        //   });
+        //   //Overwrite the cache with the new results
+        //   cache.writeQuery({ query, data, variables: { limit: 1000 } });
+        // }
       })
     ).pipe(map(r => r.data.updateProduct));
   }
@@ -303,7 +303,15 @@ export class ProductsService {
       client.mutate<{ deleteProduct: DeleteProductMutation }>({
         mutation: gql(deleteProduct),
         variables,
-        fetchPolicy
+        fetchPolicy,
+        optimisticResponse: {
+          deleteProduct: {
+            __typename: 'Product', // ! There is missing fields ... do we have to use the models for instantiate a correct entity
+            _lastChangedAt: new Date(),
+            _deleted: true,
+            ...variables.input
+          }
+        }
       })
     ).pipe(map(d => d.data.deleteProduct));
   }
