@@ -2108,7 +2108,7 @@ module.exports = Array.isArray || function (arr) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- Toolbar -->\n<div class=\"Rectangle toolbar\" role=\"banner\">\n  <span routerLink=\"/product-list\" style=\"cursor: pointer;\" class=\"ShowSourcing\">ShowSourcing</span>\n  <button *ngIf=\"authService.isLoggedIn\" (click)=\"logout()\" class=\"btn-logout\">\n    Logout\n  </button> \n  <button routerLink=\"/tests\" style=\"margin-bottom: 0\">TESTS</button>\n</div>\n\n<router-outlet></router-outlet>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- Toolbar -->\n<div class=\"Rectangle toolbar\" role=\"banner\">\n  <span routerLink=\"/product-list\" style=\"cursor: pointer;\" class=\"ShowSourcing\">ShowSourcing</span>\n  <div class=\"ml-auto\">\n    <button *ngIf=\"authService.isLoggedIn\" (click)=\"logout()\" class=\"btn-logout\">\n      Logout\n    </button> \n    <button routerLink=\"/tests\" style=\"margin-bottom: 0\">TESTS</button>\n  </div>\n</div>\n\n<router-outlet></router-outlet>\n");
 
 /***/ }),
 
@@ -2134,7 +2134,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"new-product-component\">\n  <div [class.show]=\"showingClass\" class=\"modal\">\n    <div class=\"modal-content\">\n      <form action=\"\">\n        <h3 class=\"title\">{{ formTitle }}</h3>\n        <label [class.active]=\"activeField == 'name'\" for=\"name\">Name</label>\n        <input\n          [(ngModel)]=\"form.name\"\n          [class.active]=\"activeField == 'name'\"\n          (focus)=\"setActive('name')\"\n          (blur)=\"setInactive()\"\n          id=\"name\"\n          name=\"name\"\n          type=\"text\"\n        />\n        <label\n          [class.active]=\"activeField == 'supplier-name'\"\n          for=\"supplier-name\"\n          >Supplier Name</label\n        >\n        <input\n          [(ngModel)]=\"form.supplierName\"\n          [class.active]=\"activeField == 'supplier-name'\"\n          (focus)=\"setActive('supplier-name')\"\n          (blur)=\"setInactive()\"\n          id=\"supplier-name\"\n          name=\"supplier-name\"\n          type=\"text\"\n        />\n        <label [class.active]=\"activeField == 'img-url'\" for=\"img-url\"\n          >Image Url</label\n        >\n        <input\n          [(ngModel)]=\"form.imageUrl\"\n          [class.active]=\"activeField == 'img-url'\"\n          (focus)=\"setActive('img-url')\"\n          (blur)=\"setInactive()\"\n          id=\"img-url\"\n          name=\"img-url\"\n          type=\"text\"\n        />\n        <label [class.active]=\"activeField == 'description'\" for=\"description\"\n          >Description</label\n        >\n        <textarea\n          [class.active]=\"activeField == 'description'\"\n          (focus)=\"setActive('description')\"\n          (blur)=\"setInactive()\"\n          name=\"description\"\n          id=\"description\"\n          cols=\"30\"\n          rows=\"10\"\n          [(ngModel)]=\"form.description\"\n        ></textarea>\n        <div>\n          <button (click)=\"formAction($event)\" type=\"text\">\n            <div *ngIf=\"actionLoading\" class=\"loader\">\n              <div></div>\n              <div></div>\n            </div>\n            <span>{{ formBtn }}</span>\n          </button>\n          <button (click)=\"close()\" type=\"text\">\n            Cancel\n          </button>\n          <button\n            *ngIf=\"form.id\"\n            (click)=\"deleteProduct(form.id)\"\n            class=\"danger\"\n          >\n            <div *ngIf=\"deleteLoading\" class=\"loader\">\n              <div></div>\n              <div></div>\n            </div>\n            <span *ngIf=\"!deleteConfirm\">Delete</span>\n            <span *ngIf=\"deleteConfirm\">Confirm</span>\n          </button>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"new-product-component\">\n  <div [class.show]=\"showingClass\" class=\"modal\">\n    <div class=\"modal-content\">\n      <form action=\"\">\n        <h3 class=\"title\">{{ formTitle }}</h3>\n        <label [class.active]=\"activeField == 'name'\" for=\"name\">Name</label>\n        <input\n          [(ngModel)]=\"form.name\"\n          [class.active]=\"activeField == 'name'\"\n          (focus)=\"setActive('name')\"\n          (blur)=\"setInactive()\"\n          id=\"name\"\n          name=\"name\"\n          type=\"text\"\n        />\n        <label\n          [class.active]=\"activeField == 'supplier-name'\"\n          for=\"supplier-name\"\n          >Supplier Name</label\n        >\n        <input\n          [(ngModel)]=\"form.supplierName\"\n          [class.active]=\"activeField == 'supplier-name'\"\n          (focus)=\"setActive('supplier-name')\"\n          (blur)=\"setInactive()\"\n          id=\"supplier-name\"\n          name=\"supplier-name\"\n          type=\"text\"\n        />\n        <label [class.active]=\"activeField == 'img-url'\" for=\"img-url\"\n          >Image Url</label\n        >\n        <input\n          [(ngModel)]=\"form.imageUrl\"\n          [class.active]=\"activeField == 'img-url'\"\n          (focus)=\"setActive('img-url')\"\n          (blur)=\"setInactive()\"\n          id=\"img-url\"\n          name=\"img-url\"\n          type=\"text\"\n        />\n        <label [class.active]=\"activeField == 'description'\" for=\"description\"\n          >Description</label\n        >\n        <textarea\n          [class.active]=\"activeField == 'description'\"\n          (focus)=\"setActive('description')\"\n          (blur)=\"setInactive()\"\n          name=\"description\"\n          id=\"description\"\n          cols=\"30\"\n          rows=\"10\"\n          [(ngModel)]=\"form.description\"\n        ></textarea>\n        <div>\n          <button (click)=\"formAction($event)\" type=\"text\">\n            <div *ngIf=\"actionLoading\" class=\"loader\">\n              <div></div>\n              <div></div>\n            </div>\n            <span>{{ formBtn }}</span>\n          </button>\n          <button (click)=\"close()\" type=\"text\">\n            Cancel\n          </button>\n          <button *ngIf=\"form.id\" (click)=\"deleteProduct(form)\" class=\"danger\">\n            <div *ngIf=\"deleteLoading\" class=\"loader\">\n              <div></div>\n              <div></div>\n            </div>\n            <span *ngIf=\"!deleteConfirm\">Delete</span>\n            <span *ngIf=\"deleteConfirm\">Confirm</span>\n          </button>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -2147,7 +2147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"content\" role=\"main\">\n  <div\n    [class.mobile-hidden]=\"showNewProduct || updatingProduct\"\n    class=\"displayed-content\"\n  >\n    <div class=\"Rectangle\">\n      <h1 class=\"My-Products\">\n        My Products\n      </h1>\n      <div class=\"new-wrapper\">\n        <button class=\"new-product-btn\" (click)=\"newProduct()\">New Category</button>\n        <button class=\"new-product-btn\" (click)=\"newProduct()\">New Product</button>\n      </div>\n    </div>\n    <div class=\"product-list\">\n      <div\n        (click)=\"updateProduct(product)\"\n        *ngFor=\"let product of products$ | async\"\n        class=\"Background product-single\"\n      >\n        <div\n          class=\"product-img\"\n          [style.backgroundImage]=\"\n            'url(' +\n            (product.imageUrl ||\n              'https://informaticapubblica.com/wp-content/uploads/2016/12/default.jpg') +\n            ')'\n          \"\n        ></div>\n        <div class=\"product-detail\">\n          <h3 class=\"Product-Name\">{{ product.name }}</h3>\n          <span class=\"Supplier-Name\">{{ product.supplierName }}</span>\n          <p class=\"Description\">{{ product.description }}</p>\n        </div>\n      </div>\n    </div>\n    <div class=\"loader-container\">\n      <div *ngIf=\"infiniteScroll.loading === true\" class=\"loader\">\n        <div></div>\n        <div></div>\n      </div>\n      <!-- <button\n        *ngIf=\"\n          infiniteScroll.loading === false && infiniteScroll.maxDone === false\">\n        Load More\n      </button> -->\n    </div>\n  </div>\n  <app-new-product\n    (closeEvent)=\"closeModalNewProduct()\"\n    *ngIf=\"showNewProduct\"\n    formTitle=\"Create Product\"\n    formBtn=\"Create\"\n  ></app-new-product>\n  <app-update-product\n    (closeEvent)=\"closeModalUpdateProduct()\"\n    *ngIf=\"updatingProduct\"\n    formTitle=\"Update Product\"\n    formBtn=\"Update\"\n    [form]=\"updatingProduct\"\n  ></app-update-product>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"content\" role=\"main\">\n  <div\n    [class.mobile-hidden]=\"showNewProduct || updatingProduct\"\n    class=\"displayed-content\"\n  >\n    <div class=\"Rectangle\">\n      <h1 class=\"My-Products\">\n        My Products\n      </h1>\n      <div class=\"new-wrapper\">\n        <!-- <button class=\"new-product-btn\" (click)=\"newProduct()\">New Category</button> -->\n        <button class=\"new-product-btn\" (click)=\"newProduct()\">\n          New Product\n        </button>\n      </div>\n    </div>\n    <div class=\"product-list\">\n      <div\n        (click)=\"updateProduct(product)\"\n        *ngFor=\"let product of products$ | async; trackBy: trackByFn\"\n        class=\"Background product-single\"\n      >\n        <div\n          class=\"product-img\"\n          [style.backgroundImage]=\"\n            'url(' +\n            (product.imageUrl ||\n              'https://informaticapubblica.com/wp-content/uploads/2016/12/default.jpg') +\n            ')'\n          \"\n        ></div>\n        <div class=\"product-detail\">\n          <h3 class=\"Product-Name\">{{ product.name }}</h3>\n          <span class=\"Supplier-Name\">{{ product.supplierName }}</span>\n          <p class=\"Description\">{{ product.description }}</p>\n          <p *ngIf=\"product._deleted\" class=\"Description\" style=\"color: red\">\n            DELETED !\n          </p>\n        </div>\n      </div>\n    </div>\n    <div class=\"loader-container\">\n      <div *ngIf=\"infiniteScroll.loading === true\" class=\"loader\">\n        <div></div>\n        <div></div>\n      </div>\n      <!-- <button\n        *ngIf=\"\n          infiniteScroll.loading === false && infiniteScroll.maxDone === false\">\n        Load More\n      </button> -->\n    </div>\n  </div>\n  <app-new-product\n    (closeEvent)=\"closeModalNewProduct()\"\n    *ngIf=\"showNewProduct\"\n    formTitle=\"Create Product\"\n    formBtn=\"Create\"\n  ></app-new-product>\n  <app-update-product\n    (closeEvent)=\"closeModalUpdateProduct()\"\n    *ngIf=\"updatingProduct\"\n    formTitle=\"Update Product\"\n    formBtn=\"Update\"\n    [form]=\"updatingProduct\"\n  ></app-update-product>\n</div>\n");
 
 /***/ }),
 
@@ -2160,7 +2160,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- CEDRIC -->\n<div class=\"container\">\n\n  <!-- Updates-->\n  <p>\n    QueryList of products + QueryOne product, update the one product, is the product in the list updated as well. Click on Product to modify\n  </p>\n\n  <ul>\n    <li *ngFor=\"let product of products$ | async\" (click)=\"testUpdate(product)\">{{ product.name }}</li>\n  </ul>\n\n  <button (click)=\"testCreateSimpleProduct()\"> create</button>\n\n  <div class=\"conclusion\">\n    <ul>\n        <li>works when we specify version</li>\n        <li>Works offline but is refreshed in the view when we refresh only</li>\n        <li>Non optimistic by default</li>\n    </ul>\n</div>\n\n<!-- AUGUSTIn -->\n<div class=\"container\">\n\n    <!-- Simple List Product -->\n  <p>\n    Liste 10 produits avec une query graphql importée de amplify. utilise\n    L'authentification \"AMAZON_COGNITO_USER_POOLS\"\n  </p>\n  <div class=\"conclusion\">\n      <ul>\n          <li>Les produits récupérés sont stockés dans le loalStorage (key = reduxPersist::appsync) (et en mémoire pour la prochaine requete)</li>\n          <li>Les call sont beaucoup plus rapides une fois mis en cache ou en mémoire \n              <ul>\n                  <li>first time: 580ms</li>\n                  <li>from cache: 30ms</li>\n                  <li>from memory: 1ms</li>\n              </ul>\n      </ul>\n      <li>Crée une erreur à la prmière requete hors connexion.</li>\n  </div>\n  <button (click)=\"testSimpleListProductQuery()\">Simple List Product</button>\n\n\n  <!-- Simple List Product With Params -->\n  <p>Query 10 éléments avec un filtre sur le name</p>\n  <button (click)=\"testParamListProductQuery('Test')\">Query List Product</button>\n  \n\n  <p>\n      Creation d'un produit \"Test Product Mutation\"\n  </p>\n  <button (click)=\"testCreateSimpleProduct()\">Create Product</button>\n\n  \n  <!-- CREATE CATEGORY -->\n  <p>Création d'une categorie puis d'un produit qui contient cette catégorie</p>\n  <button (click)=\"createCategory()\">Create</button>\n\n\n  <p>test sync app</p>\n  <button (click)=\"testSyncAppsync()\">sync</button>\n</div>\n\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- CEDRIC -->\n<div class=\"container\">\n\n  <!-- Updates-->\n  <!-- <p>\n    QueryList of products + QueryOne product, update the one product, is the product in the list updated as well. Click on Product to modify\n  </p> -->\n\n  <!-- <ul>\n    <li *ngFor=\"let product of products$ | async\" (click)=\"testUpdate(product)\">{{ product.name }}</li>\n  </ul> -->\n\n  <!-- <button (click)=\"testCreateSimpleProduct()\"> create</button>\n  <div class=\"conclusion\">\n    <ul>\n        <li>works when we specify version</li>\n        <li>Works offline but is refreshed in the view when we refresh only</li>\n        <li>Non optimistic by default</li>\n    </ul>\n</div>\n</div> -->\n\n<!-- AUGUSTIn -->\n<div class=\"container\">\n\n    <!-- Simple List Product -->\n  <!-- <p>\n    Liste 10 produits avec une query graphql importée de amplify. utilise\n    L'authentification \"AMAZON_COGNITO_USER_POOLS\"\n  </p>\n  <div class=\"conclusion\">\n      <ul>\n          <li>Les produits récupérés sont stockés dans le loalStorage (key = reduxPersist::appsync) (et en mémoire pour la prochaine requete)</li>\n          <li>Les call sont beaucoup plus rapides une fois mis en cache ou en mémoire \n              <ul>\n                  <li>first time: 580ms</li>\n                  <li>from cache: 30ms</li>\n                  <li>from memory: 1ms</li>\n              </ul>\n      </ul>\n      <li>Crée une erreur à la prmière requete hors connexion.</li>\n  </div>\n  <button (click)=\"testSimpleListProductQuery()\">Simple List Product</button> -->\n\n\n  <!-- Simple List Product With Params -->\n  <!-- <p>Query 10 éléments avec un filtre sur le name</p>\n  <button (click)=\"testParamListProductQuery('Test')\">Query List Product</button>\n  \n\n  <p>\n      Creation d'un produit \"Test Product Mutation\"\n  </p>\n  <button (click)=\"testCreateSimpleProduct()\">Create Product</button>\n -->\n  \n  <!-- CREATE CATEGORY -->\n  <!-- <p>Création d'une categorie puis d'un produit qui contient cette catégorie</p>\n  <button (click)=\"createCategory()\">Create</button>\n\n\n  <p>test sync app</p>\n  <button (click)=\"testSyncAppsync()\">sync</button>\n -->\n\n\n  <p>Get query 1000 products from cache and search by name (logged in console)</p>\n  <input type=\"text\" [(ngModel)]=\"searchProduct\">\n  <button (click)=\"getQuery()\">search</button>\n</div>\n\n");
 
 /***/ }),
 
@@ -3181,10 +3181,10 @@ AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/app-sync/src/aws-exports.js":
-/*!*********************************************!*\
-  !*** ./src/app/app-sync/src/aws-exports.js ***!
-  \*********************************************/
+/***/ "./src/app/app-sync/aws-exports.js":
+/*!*****************************************!*\
+  !*** ./src/app/app-sync/aws-exports.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3194,290 +3194,48 @@ __webpack_require__.r(__webpack_exports__);
 // WARNING: DO NOT EDIT. This file is automatically generated by AWS Amplify. It will be overwritten.
 
 const awsmobile = {
-    "aws_project_region": "us-east-1",
-    "aws_cognito_identity_pool_id": "us-east-1:62bf3613-7a2c-4633-a189-879f16552c69",
-    "aws_cognito_region": "us-east-1",
-    "aws_user_pools_id": "us-east-1_l5x5uwHRa",
-    "aws_user_pools_web_client_id": "mmsg4bdggq6nhrsqa781gpknh",
-    "oauth": {},
-    "aws_appsync_graphqlEndpoint": "https://55nxlui2xzg4jg5xcw4oy77z2e.appsync-api.us-east-1.amazonaws.com/graphql",
-    "aws_appsync_region": "us-east-1",
-    "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS"
+    aws_project_region: "us-east-1",
+    aws_cognito_identity_pool_id: "us-east-1:62bf3613-7a2c-4633-a189-879f16552c69",
+    aws_cognito_region: "us-east-1",
+    aws_user_pools_id: "us-east-1_l5x5uwHRa",
+    aws_user_pools_web_client_id: "mmsg4bdggq6nhrsqa781gpknh",
+    oauth: {},
+    aws_appsync_graphqlEndpoint: "https://55nxlui2xzg4jg5xcw4oy77z2e.appsync-api.us-east-1.amazonaws.com/graphql",
+    aws_appsync_region: "us-east-1",
+    aws_appsync_authenticationType: "AMAZON_COGNITO_USER_POOLS"
 };
 /* harmony default export */ __webpack_exports__["default"] = (awsmobile);
 //# sourceMappingURL=aws-exports.js.map
 
 /***/ }),
 
-/***/ "./src/app/app-sync/src/graphql/mutations.ts":
-/*!***************************************************!*\
-  !*** ./src/app/app-sync/src/graphql/mutations.ts ***!
-  \***************************************************/
-/*! exports provided: CreateProduct, UpdateProduct, DeleteProduct, CreateCategory, UpdateCategory, DeleteCategory */
+/***/ "./src/app/app-sync/init-client.ts":
+/*!*****************************************!*\
+  !*** ./src/app/app-sync/init-client.ts ***!
+  \*****************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateProduct", function() { return CreateProduct; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateProduct", function() { return UpdateProduct; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeleteProduct", function() { return DeleteProduct; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateCategory", function() { return CreateCategory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateCategory", function() { return UpdateCategory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeleteCategory", function() { return DeleteCategory; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-// tslint:disable
-
-const CreateProduct = `mutation CreateProduct(
-  $input: CreateProductInput!
-  $condition: ModelProductConditionInput
-) {
-  createProduct(input: $input, condition: $condition) {
-    id
-    name
-    supplierName
-    description
-    imageUrl
-    category {
-      id
-      name
-      _version
-      _deleted
-      _lastChangedAt
-      
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    
-  }
-}`;
-const UpdateProduct = `mutation UpdateProduct(
-  $input: UpdateProductInput!
-  $condition: ModelProductConditionInput
-) {
-  updateProduct(input: $input, condition: $condition) {
-    id
-    name
-    supplierName
-    description
-    imageUrl
-    category {
-      id
-      name
-      _version
-      _deleted
-      _lastChangedAt
-      
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    
-  }
-}`;
-const DeleteProduct = `mutation DeleteProduct(
-  $input: DeleteProductInput!
-  $condition: ModelProductConditionInput
-) {
-  deleteProduct(input: $input, condition: $condition) {
-    id
-    name
-    supplierName
-    description
-    imageUrl
-    category {
-      id
-      name
-      _version
-      _deleted
-      _lastChangedAt
-      
-    }
-    _version
-    _deleted
-    _lastChangedAt
-    
-  }
-}`;
-const CreateCategory = `mutation CreateCategory(
-  $input: CreateCategoryInput!
-  $condition: ModelCategoryConditionInput
-) {
-  createCategory(input: $input, condition: $condition) {
-    id
-    name
-    _version
-    _deleted
-    _lastChangedAt
-    
-  }
-}`;
-const UpdateCategory = `mutation UpdateCategory(
-  $input: UpdateCategoryInput!
-  $condition: ModelCategoryConditionInput
-) {
-  updateCategory(input: $input, condition: $condition) {
-    id
-    name
-    _version
-    _deleted
-    _lastChangedAt
-    
-  }
-}`;
-const DeleteCategory = `mutation DeleteCategory(
-  $input: DeleteCategoryInput!
-  $condition: ModelCategoryConditionInput
-) {
-  deleteCategory(input: $input, condition: $condition) {
-    id
-    name
-    _version
-    _deleted
-    _lastChangedAt
-    
-  }
-}`;
+/* harmony import */ var aws_appsync__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aws-appsync */ "./node_modules/aws-appsync/lib/index.js");
+/* harmony import */ var aws_appsync__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(aws_appsync__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _aws_exports__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./aws-exports */ "./src/app/app-sync/aws-exports.js");
+/* harmony import */ var aws_amplify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! aws-amplify */ "./node_modules/aws-amplify/lib-esm/index.js");
 
 
-/***/ }),
 
-/***/ "./src/app/app-sync/src/graphql/queries.ts":
-/*!*************************************************!*\
-  !*** ./src/app/app-sync/src/graphql/queries.ts ***!
-  \*************************************************/
-/*! exports provided: SyncProducts, GetProduct, ListProducts, SyncCategories, GetCategory, ListCategorys */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SyncProducts", function() { return SyncProducts; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetProduct", function() { return GetProduct; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListProducts", function() { return ListProducts; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SyncCategories", function() { return SyncCategories; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetCategory", function() { return GetCategory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListCategorys", function() { return ListCategorys; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-// tslint:disable
-
-const SyncProducts = `query SyncProducts(
-  $filter: ModelProductFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncProducts(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      name
-      supplierName
-      description
-      imageUrl
-      _version
-      _deleted
-      _lastChangedAt
+const client = new aws_appsync__WEBPACK_IMPORTED_MODULE_1___default.a({
+    url: _aws_exports__WEBPACK_IMPORTED_MODULE_2__["default"].aws_appsync_graphqlEndpoint,
+    region: _aws_exports__WEBPACK_IMPORTED_MODULE_2__["default"].aws_appsync_region,
+    auth: {
+        type: aws_appsync__WEBPACK_IMPORTED_MODULE_1__["AUTH_TYPE"][_aws_exports__WEBPACK_IMPORTED_MODULE_2__["default"].aws_appsync_authenticationType],
+        jwtToken: () => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () { return (yield aws_amplify__WEBPACK_IMPORTED_MODULE_3__["Auth"].currentSession()).getIdToken().getJwtToken(); })
     }
-    nextToken
-    startedAt
-  }
-}`;
-const GetProduct = `query GetProduct($id: ID!) {
-  getProduct(id: $id) {
-    id
-    name
-    supplierName
-    description
-    imageUrl
-    category {
-      id
-      name
-      _version
-      _deleted
-      _lastChangedAt
-      
-    }
-    _version
-    _deleted
-    _lastChangedAt
-  }
-}`;
-const ListProducts = `query ListProducts(
-  $filter: ModelProductFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      supplierName
-      description
-      imageUrl
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
-  }
-}`;
-const SyncCategories = `query SyncCategories(
-  $filter: ModelCategoryFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncCategories(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      name
-      _version
-      _deleted
-      _lastChangedAt
-      
-    }
-    nextToken
-    startedAt
-  }
-}`;
-const GetCategory = `query GetCategory($id: ID!) {
-  getCategory(id: $id) {
-    id
-    name
-    _version
-    _deleted
-    _lastChangedAt
-    
-  }
-}`;
-const ListCategorys = `query ListCategorys(
-  $filter: ModelCategoryFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listCategorys(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      _version
-      _deleted
-      _lastChangedAt
-      
-    }
-    nextToken
-    startedAt
-  }
-}`;
+});
+/* harmony default export */ __webpack_exports__["default"] = (client);
 
 
 /***/ }),
@@ -3491,7 +3249,7 @@ const ListCategorys = `query ListCategorys(
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".toolbar {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  color: white;\n  padding: 0 24px;\n}\n.toolbar .btn-logout {\n  margin-bottom: 0;\n}\n.ShowSourcing {\n  width: 112px;\n  height: 23px;\n  font-family: SourceSansPro;\n  font-size: 18px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #ffffff;\n}\n.Rectangle {\n  height: 48px;\n  background-color: #4595ff;\n}\n.btn-logout {\n  background-color: #4595ff;\n  margin-left: auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsIi4uL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usb0JBQUE7RUFBQSxhQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0FDQ0Y7QURBRTtFQUNFLGdCQUFBO0FDRUo7QURFQTtFQUNFLFlBQUE7RUFDQSxZQUFBO0VBQ0EsMEJBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxvQkFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGNBQUE7QUNDRjtBREVBO0VBQ0UsWUFBQTtFQUNBLHlCQUFBO0FDQ0Y7QURFQTtFQUNFLHlCQUFBO0VBQ0EsaUJBQUE7QUNDRiIsImZpbGUiOiIuLi9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50b29sYmFyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgY29sb3I6IHdoaXRlO1xuICBwYWRkaW5nOiAwIDI0cHg7XG4gIC5idG4tbG9nb3V0IHtcbiAgICBtYXJnaW4tYm90dG9tOiAwO1xuICB9XG59XG5cbi5TaG93U291cmNpbmcge1xuICB3aWR0aDogMTEycHg7XG4gIGhlaWdodDogMjNweDtcbiAgZm9udC1mYW1pbHk6IFNvdXJjZVNhbnNQcm87XG4gIGZvbnQtc2l6ZTogMThweDtcbiAgZm9udC13ZWlnaHQ6IDYwMDtcbiAgZm9udC1zdHJldGNoOiBub3JtYWw7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgbGluZS1oZWlnaHQ6IG5vcm1hbDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgY29sb3I6ICNmZmZmZmY7XG59XG5cbi5SZWN0YW5nbGUge1xuICBoZWlnaHQ6IDQ4cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICM0NTk1ZmY7XG59XG5cbi5idG4tbG9nb3V0IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzQ1OTVmZjtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG59XG4iLCIudG9vbGJhciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgcGFkZGluZzogMCAyNHB4O1xufVxuLnRvb2xiYXIgLmJ0bi1sb2dvdXQge1xuICBtYXJnaW4tYm90dG9tOiAwO1xufVxuXG4uU2hvd1NvdXJjaW5nIHtcbiAgd2lkdGg6IDExMnB4O1xuICBoZWlnaHQ6IDIzcHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE4cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjZmZmZmZmO1xufVxuXG4uUmVjdGFuZ2xlIHtcbiAgaGVpZ2h0OiA0OHB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDU5NWZmO1xufVxuXG4uYnRuLWxvZ291dCB7XG4gIGJhY2tncm91bmQtY29sb3I6ICM0NTk1ZmY7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".toolbar {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  color: white;\n  padding: 0 24px;\n}\n.toolbar .btn-logout {\n  margin-bottom: 0;\n}\n.ShowSourcing {\n  width: 112px;\n  height: 23px;\n  font-family: SourceSansPro;\n  font-size: 18px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #ffffff;\n}\n.Rectangle {\n  height: 48px;\n  background-color: #4595ff;\n}\n.btn-logout {\n  background-color: #4595ff;\n  margin-left: auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usb0JBQUE7RUFBQSxhQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0FDQ0Y7QURBRTtFQUNFLGdCQUFBO0FDRUo7QURFQTtFQUNFLFlBQUE7RUFDQSxZQUFBO0VBQ0EsMEJBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxvQkFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGNBQUE7QUNDRjtBREVBO0VBQ0UsWUFBQTtFQUNBLHlCQUFBO0FDQ0Y7QURFQTtFQUNFLHlCQUFBO0VBQ0EsaUJBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50b29sYmFyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgY29sb3I6IHdoaXRlO1xuICBwYWRkaW5nOiAwIDI0cHg7XG4gIC5idG4tbG9nb3V0IHtcbiAgICBtYXJnaW4tYm90dG9tOiAwO1xuICB9XG59XG5cbi5TaG93U291cmNpbmcge1xuICB3aWR0aDogMTEycHg7XG4gIGhlaWdodDogMjNweDtcbiAgZm9udC1mYW1pbHk6IFNvdXJjZVNhbnNQcm87XG4gIGZvbnQtc2l6ZTogMThweDtcbiAgZm9udC13ZWlnaHQ6IDYwMDtcbiAgZm9udC1zdHJldGNoOiBub3JtYWw7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgbGluZS1oZWlnaHQ6IG5vcm1hbDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgY29sb3I6ICNmZmZmZmY7XG59XG5cbi5SZWN0YW5nbGUge1xuICBoZWlnaHQ6IDQ4cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICM0NTk1ZmY7XG59XG5cbi5idG4tbG9nb3V0IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzQ1OTVmZjtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG59XG4iLCIudG9vbGJhciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgcGFkZGluZzogMCAyNHB4O1xufVxuLnRvb2xiYXIgLmJ0bi1sb2dvdXQge1xuICBtYXJnaW4tYm90dG9tOiAwO1xufVxuXG4uU2hvd1NvdXJjaW5nIHtcbiAgd2lkdGg6IDExMnB4O1xuICBoZWlnaHQ6IDIzcHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE4cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjZmZmZmZmO1xufVxuXG4uUmVjdGFuZ2xlIHtcbiAgaGVpZ2h0OiA0OHB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNDU5NWZmO1xufVxuXG4uYnRuLWxvZ291dCB7XG4gIGJhY2tncm91bmQtY29sb3I6ICM0NTk1ZmY7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -3723,37 +3481,6 @@ AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/init-client.js":
-/*!********************************!*\
-  !*** ./src/app/init-client.js ***!
-  \********************************/
-/*! exports provided: client */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "client", function() { return client; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var aws_appsync__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aws-appsync */ "./node_modules/aws-appsync/lib/index.js");
-/* harmony import */ var aws_appsync__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(aws_appsync__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _app_sync_src_aws_exports__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app-sync/src/aws-exports */ "./src/app/app-sync/src/aws-exports.js");
-/* harmony import */ var aws_amplify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! aws-amplify */ "./node_modules/aws-amplify/lib-esm/index.js");
-
-
-
-
-const client = new aws_appsync__WEBPACK_IMPORTED_MODULE_1___default.a({
-    url: _app_sync_src_aws_exports__WEBPACK_IMPORTED_MODULE_2__["default"].aws_appsync_graphqlEndpoint,
-    region: _app_sync_src_aws_exports__WEBPACK_IMPORTED_MODULE_2__["default"].aws_appsync_region,
-    auth: {
-        type: aws_appsync__WEBPACK_IMPORTED_MODULE_1__["AUTH_TYPE"].AMAZON_COGNITO_USER_POOLS,
-        jwtToken: () => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](undefined, void 0, void 0, function* () { return (yield aws_amplify__WEBPACK_IMPORTED_MODULE_3__["Auth"].currentSession()).getIdToken().getJwtToken(); })
-    }
-});
-//# sourceMappingURL=init-client.js.map
-
-/***/ }),
-
 /***/ "./src/app/login/login.component.scss":
 /*!********************************************!*\
   !*** ./src/app/login/login.component.scss ***!
@@ -3763,7 +3490,7 @@ const client = new aws_appsync__WEBPACK_IMPORTED_MODULE_1___default.a({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".login-page {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n          justify-content: center;\n  height: calc(100vh - 48px);\n}\n@media screen and (max-width: 640px) {\n  .login-page {\n    -webkit-box-align: start;\n            align-items: flex-start;\n  }\n}\n.login-form {\n  margin: 24px;\n  width: 376px;\n}\n.login-form .title {\n  margin-bottom: 48px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIiwiLi4vc3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0VBQ0EsMEJBQUE7QUNDRjtBREFFO0VBTEY7SUFNSSx3QkFBQTtZQUFBLHVCQUFBO0VDR0Y7QUFDRjtBRERBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7QUNJRjtBREhFO0VBQ0UsbUJBQUE7QUNLSiIsImZpbGUiOiIuLi9zcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmxvZ2luLXBhZ2Uge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgaGVpZ2h0OiBjYWxjKDEwMHZoIC0gNDhweCk7XG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDY0MHB4KSB7XG4gICAgYWxpZ24taXRlbXM6IGZsZXgtc3RhcnQ7XG4gIH1cbn1cbi5sb2dpbi1mb3JtIHtcbiAgbWFyZ2luOiAyNHB4O1xuICB3aWR0aDogMzc2cHg7XG4gIC50aXRsZSB7XG4gICAgbWFyZ2luLWJvdHRvbTogNDhweDtcbiAgfVxufVxuIiwiLmxvZ2luLXBhZ2Uge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgaGVpZ2h0OiBjYWxjKDEwMHZoIC0gNDhweCk7XG59XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2NDBweCkge1xuICAubG9naW4tcGFnZSB7XG4gICAgYWxpZ24taXRlbXM6IGZsZXgtc3RhcnQ7XG4gIH1cbn1cblxuLmxvZ2luLWZvcm0ge1xuICBtYXJnaW46IDI0cHg7XG4gIHdpZHRoOiAzNzZweDtcbn1cbi5sb2dpbi1mb3JtIC50aXRsZSB7XG4gIG1hcmdpbi1ib3R0b206IDQ4cHg7XG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".login-page {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n          justify-content: center;\n  height: calc(100vh - 48px);\n}\n@media screen and (max-width: 640px) {\n  .login-page {\n    -webkit-box-align: start;\n            align-items: flex-start;\n  }\n}\n.login-form {\n  margin: 24px;\n  width: 376px;\n}\n.login-form .title {\n  margin-bottom: 48px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0VBQ0EsMEJBQUE7QUNDRjtBREFFO0VBTEY7SUFNSSx3QkFBQTtZQUFBLHVCQUFBO0VDR0Y7QUFDRjtBRERBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7QUNJRjtBREhFO0VBQ0UsbUJBQUE7QUNLSiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmxvZ2luLXBhZ2Uge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgaGVpZ2h0OiBjYWxjKDEwMHZoIC0gNDhweCk7XG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDY0MHB4KSB7XG4gICAgYWxpZ24taXRlbXM6IGZsZXgtc3RhcnQ7XG4gIH1cbn1cbi5sb2dpbi1mb3JtIHtcbiAgbWFyZ2luOiAyNHB4O1xuICB3aWR0aDogMzc2cHg7XG4gIC50aXRsZSB7XG4gICAgbWFyZ2luLWJvdHRvbTogNDhweDtcbiAgfVxufVxuIiwiLmxvZ2luLXBhZ2Uge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgaGVpZ2h0OiBjYWxjKDEwMHZoIC0gNDhweCk7XG59XG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2NDBweCkge1xuICAubG9naW4tcGFnZSB7XG4gICAgYWxpZ24taXRlbXM6IGZsZXgtc3RhcnQ7XG4gIH1cbn1cblxuLmxvZ2luLWZvcm0ge1xuICBtYXJnaW46IDI0cHg7XG4gIHdpZHRoOiAzNzZweDtcbn1cbi5sb2dpbi1mb3JtIC50aXRsZSB7XG4gIG1hcmdpbi1ib3R0b206IDQ4cHg7XG59Il19 */");
 
 /***/ }),
 
@@ -3837,7 +3564,7 @@ LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9zcmMvYXBwL3Byb2R1Y3RzL25ldy1wcm9kdWN0L25ldy1wcm9kdWN0LmNvbXBvbmVudC5zY3NzIn0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2R1Y3RzL25ldy1wcm9kdWN0L25ldy1wcm9kdWN0LmNvbXBvbmVudC5zY3NzIn0= */");
 
 /***/ }),
 
@@ -3854,17 +3581,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_services_products_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/products.service */ "./src/app/services/products.service.ts");
-/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js");
-/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var src_app_init_client__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/init-client */ "./src/app/init-client.js");
-
-
 
 
 
 let NewProductComponent = class NewProductComponent {
-    constructor(productsSvc) {
-        this.productsSvc = productsSvc;
+    constructor(prodSvc) {
+        this.prodSvc = prodSvc;
         this.closeEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.formTitle = "";
         this.formBtn = "";
@@ -3896,22 +3618,17 @@ let NewProductComponent = class NewProductComponent {
                 return;
             }
             this.actionLoading = true;
-            // prevent empty string for optional values.
+            // prevent empty string for optional values. // ! the empty strings are not accepted
             this.form.imageUrl = this.form.imageUrl || null;
             this.form.description = this.form.description || null;
-            try {
-                this.form.id = uuid_v4__WEBPACK_IMPORTED_MODULE_3__();
-                let test = this.productsSvc.createProduct(this.form)
-                    .subscribe(() => {
-                    src_app_init_client__WEBPACK_IMPORTED_MODULE_4__["client"].reFetchObservableQueries();
-                    test.unsubscribe();
-                });
+            // this.form.id = uuid();
+            this.prodSvc.createProduct({ input: Object.assign({}, this.form) }).subscribe(d => {
+                console.log("création du produit : ", d);
                 this.close();
-            }
-            catch (err) {
+            }, err => {
                 this.actionLoading = false;
                 console.log(err);
-            }
+            });
         });
     }
     close() {
@@ -3952,7 +3669,7 @@ NewProductComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".content {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n}\n\n.Rectangle {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  width: 100%;\n  padding: 0 24px;\n  height: 80px;\n  box-shadow: 0 2px 4px 0 rgba(93, 109, 139, 0.2);\n  background-color: #ffffff;\n}\n\n.My-Products {\n  width: 127px;\n  height: 31px;\n  font-family: SourceSansPro;\n  font-size: 24px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n}\n\n.Background {\n  width: 296px;\n  margin: 12px;\n  border-radius: 4px;\n  background-color: #ffffff;\n  -webkit-transition: all ease 0.3s;\n  transition: all ease 0.3s;\n}\n\n.Background:hover {\n  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);\n}\n\n.Background:hover .Product-Name {\n  color: #50c2ff;\n}\n\n.Product-Name {\n  width: 184px;\n  height: 24px;\n  font-family: SourceSansPro;\n  font-size: 18px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n  margin-bottom: 4px;\n  -webkit-transition: all ease 0.3s;\n  transition: all ease 0.3s;\n}\n\n.Supplier-Name {\n  width: 184px;\n  height: 18px;\n  font-family: SourceSansPro;\n  font-size: 14px;\n  font-weight: normal;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n  margin-bottom: 8px;\n  display: block;\n}\n\n.Description {\n  font-family: SourceSansPro;\n  font-size: 14px;\n  font-weight: normal;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #4a4a4a;\n}\n\n.product-list {\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap;\n  margin: 12px;\n}\n\n.product-single {\n  display: -webkit-box;\n  display: flex;\n  padding: 8px 12px 12px 8px;\n  cursor: pointer;\n}\n\n.product-img {\n  height: 80px;\n  width: 80px;\n  border-radius: 4px;\n  background-size: cover;\n  background-position: center;\n  margin-right: 12px;\n}\n\n.product-detail {\n  width: 182px;\n}\n\n.new-wrapper {\n  margin-left: auto;\n}\n\n.new-wrapper .new-product-btn {\n  margin-bottom: 0;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL3Byb2R1Y3RzL3Byb2R1Y3QtbGlzdC9wcm9kdWN0LWxpc3QuY29tcG9uZW50LnNjc3MiLCIuLi9zcmMvYXBwL3Byb2R1Y3RzL3Byb2R1Y3QtbGlzdC9wcm9kdWN0LWxpc3QuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSw0QkFBQTtFQUFBLDZCQUFBO1VBQUEsc0JBQUE7QUNDRjs7QURFQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7RUFDQSxXQUFBO0VBQ0EsZUFBQTtFQUNBLFlBQUE7RUFDQSwrQ0FBQTtFQUNBLHlCQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsWUFBQTtFQUNBLDBCQUFBO0VBQ0EsZUFBQTtFQUNBLGdCQUFBO0VBQ0Esb0JBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0VBQ0Esc0JBQUE7RUFDQSxjQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsWUFBQTtFQUNBLGtCQUFBO0VBQ0EseUJBQUE7RUFDQSxpQ0FBQTtFQUFBLHlCQUFBO0FDQ0Y7O0FEQUU7RUFDRSwwQ0FBQTtBQ0VKOztBRERJO0VBQ0UsY0FBQTtBQ0dOOztBREVBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsaUNBQUE7RUFBQSx5QkFBQTtBQ0NGOztBRENBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7RUFDQSxtQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtBQ0VGOztBREFBO0VBQ0UsMEJBQUE7RUFDQSxlQUFBO0VBQ0EsbUJBQUE7RUFDQSxvQkFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGNBQUE7QUNHRjs7QURBQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLGVBQUE7RUFDQSxZQUFBO0FDR0Y7O0FEQUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7QUNHRjs7QURBQTtFQUNFLFlBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxzQkFBQTtFQUNBLDJCQUFBO0VBQ0Esa0JBQUE7QUNHRjs7QURBQTtFQUNFLFlBQUE7QUNHRjs7QURBQTtFQUNFLGlCQUFBO0FDR0Y7O0FERkU7RUFDRSxnQkFBQTtFQUNBLG1CQUFBO0FDSUoiLCJmaWxlIjoiLi4vc3JjL2FwcC9wcm9kdWN0cy9wcm9kdWN0LWxpc3QvcHJvZHVjdC1saXN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRlbnQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG4uUmVjdGFuZ2xlIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDAgMjRweDtcbiAgaGVpZ2h0OiA4MHB4O1xuICBib3gtc2hhZG93OiAwIDJweCA0cHggMCByZ2JhKDkzLCAxMDksIDEzOSwgMC4yKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbn1cblxuLk15LVByb2R1Y3RzIHtcbiAgd2lkdGg6IDEyN3B4O1xuICBoZWlnaHQ6IDMxcHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDI0cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xufVxuXG4uQmFja2dyb3VuZCB7XG4gIHdpZHRoOiAyOTZweDtcbiAgbWFyZ2luOiAxMnB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG4gICY6aG92ZXIge1xuICAgIGJveC1zaGFkb3c6IDAgMCA4cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAuUHJvZHVjdC1OYW1lIHtcbiAgICAgIGNvbG9yOiAjNTBjMmZmO1xuICAgIH1cbiAgfVxufVxuXG4uUHJvZHVjdC1OYW1lIHtcbiAgd2lkdGg6IDE4NHB4O1xuICBoZWlnaHQ6IDI0cHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE4cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xuICBtYXJnaW4tYm90dG9tOiA0cHg7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG59XG4uU3VwcGxpZXItTmFtZSB7XG4gIHdpZHRoOiAxODRweDtcbiAgaGVpZ2h0OiAxOHB4O1xuICBmb250LWZhbWlseTogU291cmNlU2Fuc1BybztcbiAgZm9udC1zaXplOiAxNHB4O1xuICBmb250LXdlaWdodDogbm9ybWFsO1xuICBmb250LXN0cmV0Y2g6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xuICBsZXR0ZXItc3BhY2luZzogbm9ybWFsO1xuICBjb2xvcjogIzAwMDAwMDtcbiAgbWFyZ2luLWJvdHRvbTogOHB4O1xuICBkaXNwbGF5OiBibG9jaztcbn1cbi5EZXNjcmlwdGlvbiB7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE0cHg7XG4gIGZvbnQtd2VpZ2h0OiBub3JtYWw7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjNGE0YTRhO1xufVxuXG4ucHJvZHVjdC1saXN0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC13cmFwOiB3cmFwO1xuICBtYXJnaW46IDEycHg7XG59XG5cbi5wcm9kdWN0LXNpbmdsZSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHBhZGRpbmc6IDhweCAxMnB4IDEycHggOHB4O1xuICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5wcm9kdWN0LWltZyB7XG4gIGhlaWdodDogODBweDtcbiAgd2lkdGg6IDgwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgYmFja2dyb3VuZC1wb3NpdGlvbjogY2VudGVyO1xuICBtYXJnaW4tcmlnaHQ6IDEycHg7XG59XG5cbi5wcm9kdWN0LWRldGFpbCB7XG4gIHdpZHRoOiAxODJweDsgLy8gMjk2IC04IC0xMiAtIDgwIC0xMlxufVxuXG4ubmV3LXdyYXBwZXIge1xuICBtYXJnaW4tbGVmdDogYXV0bztcbiAgLm5ldy1wcm9kdWN0LWJ0biB7XG4gICAgbWFyZ2luLWJvdHRvbTogMDtcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICB9XG59XG4iLCIuY29udGVudCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG59XG5cbi5SZWN0YW5nbGUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB3aWR0aDogMTAwJTtcbiAgcGFkZGluZzogMCAyNHB4O1xuICBoZWlnaHQ6IDgwcHg7XG4gIGJveC1zaGFkb3c6IDAgMnB4IDRweCAwIHJnYmEoOTMsIDEwOSwgMTM5LCAwLjIpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO1xufVxuXG4uTXktUHJvZHVjdHMge1xuICB3aWR0aDogMTI3cHg7XG4gIGhlaWdodDogMzFweDtcbiAgZm9udC1mYW1pbHk6IFNvdXJjZVNhbnNQcm87XG4gIGZvbnQtc2l6ZTogMjRweDtcbiAgZm9udC13ZWlnaHQ6IDYwMDtcbiAgZm9udC1zdHJldGNoOiBub3JtYWw7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgbGluZS1oZWlnaHQ6IG5vcm1hbDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgY29sb3I6ICMwMDAwMDA7XG59XG5cbi5CYWNrZ3JvdW5kIHtcbiAgd2lkdGg6IDI5NnB4O1xuICBtYXJnaW46IDEycHg7XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbiAgdHJhbnNpdGlvbjogYWxsIGVhc2UgMC4zcztcbn1cbi5CYWNrZ3JvdW5kOmhvdmVyIHtcbiAgYm94LXNoYWRvdzogMCAwIDhweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xufVxuLkJhY2tncm91bmQ6aG92ZXIgLlByb2R1Y3QtTmFtZSB7XG4gIGNvbG9yOiAjNTBjMmZmO1xufVxuXG4uUHJvZHVjdC1OYW1lIHtcbiAgd2lkdGg6IDE4NHB4O1xuICBoZWlnaHQ6IDI0cHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE4cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xuICBtYXJnaW4tYm90dG9tOiA0cHg7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG59XG5cbi5TdXBwbGllci1OYW1lIHtcbiAgd2lkdGg6IDE4NHB4O1xuICBoZWlnaHQ6IDE4cHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE0cHg7XG4gIGZvbnQtd2VpZ2h0OiBub3JtYWw7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xuICBtYXJnaW4tYm90dG9tOiA4cHg7XG4gIGRpc3BsYXk6IGJsb2NrO1xufVxuXG4uRGVzY3JpcHRpb24ge1xuICBmb250LWZhbWlseTogU291cmNlU2Fuc1BybztcbiAgZm9udC1zaXplOiAxNHB4O1xuICBmb250LXdlaWdodDogbm9ybWFsO1xuICBmb250LXN0cmV0Y2g6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xuICBsZXR0ZXItc3BhY2luZzogbm9ybWFsO1xuICBjb2xvcjogIzRhNGE0YTtcbn1cblxuLnByb2R1Y3QtbGlzdCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAgbWFyZ2luOiAxMnB4O1xufVxuXG4ucHJvZHVjdC1zaW5nbGUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBwYWRkaW5nOiA4cHggMTJweCAxMnB4IDhweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4ucHJvZHVjdC1pbWcge1xuICBoZWlnaHQ6IDgwcHg7XG4gIHdpZHRoOiA4MHB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjtcbiAgbWFyZ2luLXJpZ2h0OiAxMnB4O1xufVxuXG4ucHJvZHVjdC1kZXRhaWwge1xuICB3aWR0aDogMTgycHg7XG59XG5cbi5uZXctd3JhcHBlciB7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufVxuLm5ldy13cmFwcGVyIC5uZXctcHJvZHVjdC1idG4ge1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".content {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n}\n\n.Rectangle {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n  width: 100%;\n  padding: 0 24px;\n  height: 80px;\n  box-shadow: 0 2px 4px 0 rgba(93, 109, 139, 0.2);\n  background-color: #ffffff;\n}\n\n.My-Products {\n  width: 127px;\n  height: 31px;\n  font-family: SourceSansPro;\n  font-size: 24px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n}\n\n.Background {\n  width: 296px;\n  margin: 12px;\n  border-radius: 4px;\n  background-color: #ffffff;\n  -webkit-transition: all ease 0.3s;\n  transition: all ease 0.3s;\n}\n\n.Background:hover {\n  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);\n}\n\n.Background:hover .Product-Name {\n  color: #50c2ff;\n}\n\n.Product-Name {\n  width: 184px;\n  height: 24px;\n  font-family: SourceSansPro;\n  font-size: 18px;\n  font-weight: 600;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n  margin-bottom: 4px;\n  -webkit-transition: all ease 0.3s;\n  transition: all ease 0.3s;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n}\n\n.Supplier-Name {\n  width: 184px;\n  height: 18px;\n  font-family: SourceSansPro;\n  font-size: 14px;\n  font-weight: normal;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #000000;\n  margin-bottom: 8px;\n  display: block;\n}\n\n.Description {\n  font-family: SourceSansPro;\n  font-size: 14px;\n  font-weight: normal;\n  font-stretch: normal;\n  font-style: normal;\n  line-height: normal;\n  letter-spacing: normal;\n  color: #4a4a4a;\n}\n\n.product-list {\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap;\n  margin: 12px;\n}\n\n.product-single {\n  display: -webkit-box;\n  display: flex;\n  padding: 8px 12px 12px 8px;\n  cursor: pointer;\n}\n\n.product-img {\n  height: 80px;\n  width: 80px;\n  border-radius: 4px;\n  background-size: cover;\n  background-position: center;\n  margin-right: 12px;\n}\n\n.product-detail {\n  width: 182px;\n}\n\n.new-wrapper {\n  margin-left: auto;\n}\n\n.new-wrapper .new-product-btn {\n  margin-bottom: 0;\n  white-space: nowrap;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL3Byb2R1Y3RzL3Byb2R1Y3QtbGlzdC9wcm9kdWN0LWxpc3QuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3Byb2R1Y3RzL3Byb2R1Y3QtbGlzdC9wcm9kdWN0LWxpc3QuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSw0QkFBQTtFQUFBLDZCQUFBO1VBQUEsc0JBQUE7QUNDRjs7QURFQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7RUFDQSxXQUFBO0VBQ0EsZUFBQTtFQUNBLFlBQUE7RUFDQSwrQ0FBQTtFQUNBLHlCQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsWUFBQTtFQUNBLDBCQUFBO0VBQ0EsZUFBQTtFQUNBLGdCQUFBO0VBQ0Esb0JBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0VBQ0Esc0JBQUE7RUFDQSxjQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsWUFBQTtFQUNBLGtCQUFBO0VBQ0EseUJBQUE7RUFDQSxpQ0FBQTtFQUFBLHlCQUFBO0FDQ0Y7O0FEQUU7RUFDRSwwQ0FBQTtBQ0VKOztBRERJO0VBQ0UsY0FBQTtBQ0dOOztBREVBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsaUNBQUE7RUFBQSx5QkFBQTtFQUNBLG1CQUFBO0VBQ0EsdUJBQUE7RUFDQSxnQkFBQTtBQ0NGOztBRENBO0VBQ0UsWUFBQTtFQUNBLFlBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7RUFDQSxtQkFBQTtFQUNBLG9CQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtBQ0VGOztBREFBO0VBQ0UsMEJBQUE7RUFDQSxlQUFBO0VBQ0EsbUJBQUE7RUFDQSxvQkFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGNBQUE7QUNHRjs7QURBQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLGVBQUE7RUFDQSxZQUFBO0FDR0Y7O0FEQUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7QUNHRjs7QURBQTtFQUNFLFlBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxzQkFBQTtFQUNBLDJCQUFBO0VBQ0Esa0JBQUE7QUNHRjs7QURBQTtFQUNFLFlBQUE7QUNHRjs7QURBQTtFQUNFLGlCQUFBO0FDR0Y7O0FERkU7RUFDRSxnQkFBQTtFQUNBLG1CQUFBO0FDSUoiLCJmaWxlIjoic3JjL2FwcC9wcm9kdWN0cy9wcm9kdWN0LWxpc3QvcHJvZHVjdC1saXN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRlbnQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG4uUmVjdGFuZ2xlIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDAgMjRweDtcbiAgaGVpZ2h0OiA4MHB4O1xuICBib3gtc2hhZG93OiAwIDJweCA0cHggMCByZ2JhKDkzLCAxMDksIDEzOSwgMC4yKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbn1cblxuLk15LVByb2R1Y3RzIHtcbiAgd2lkdGg6IDEyN3B4O1xuICBoZWlnaHQ6IDMxcHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDI0cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xufVxuXG4uQmFja2dyb3VuZCB7XG4gIHdpZHRoOiAyOTZweDtcbiAgbWFyZ2luOiAxMnB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG4gICY6aG92ZXIge1xuICAgIGJveC1zaGFkb3c6IDAgMCA4cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAuUHJvZHVjdC1OYW1lIHtcbiAgICAgIGNvbG9yOiAjNTBjMmZmO1xuICAgIH1cbiAgfVxufVxuXG4uUHJvZHVjdC1OYW1lIHtcbiAgd2lkdGg6IDE4NHB4O1xuICBoZWlnaHQ6IDI0cHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE4cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xuICBtYXJnaW4tYm90dG9tOiA0cHg7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuLlN1cHBsaWVyLU5hbWUge1xuICB3aWR0aDogMTg0cHg7XG4gIGhlaWdodDogMThweDtcbiAgZm9udC1mYW1pbHk6IFNvdXJjZVNhbnNQcm87XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcbiAgZm9udC1zdHJldGNoOiBub3JtYWw7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgbGluZS1oZWlnaHQ6IG5vcm1hbDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgY29sb3I6ICMwMDAwMDA7XG4gIG1hcmdpbi1ib3R0b206IDhweDtcbiAgZGlzcGxheTogYmxvY2s7XG59XG4uRGVzY3JpcHRpb24ge1xuICBmb250LWZhbWlseTogU291cmNlU2Fuc1BybztcbiAgZm9udC1zaXplOiAxNHB4O1xuICBmb250LXdlaWdodDogbm9ybWFsO1xuICBmb250LXN0cmV0Y2g6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xuICBsZXR0ZXItc3BhY2luZzogbm9ybWFsO1xuICBjb2xvcjogIzRhNGE0YTtcbn1cblxuLnByb2R1Y3QtbGlzdCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAgbWFyZ2luOiAxMnB4O1xufVxuXG4ucHJvZHVjdC1zaW5nbGUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBwYWRkaW5nOiA4cHggMTJweCAxMnB4IDhweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4ucHJvZHVjdC1pbWcge1xuICBoZWlnaHQ6IDgwcHg7XG4gIHdpZHRoOiA4MHB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjtcbiAgbWFyZ2luLXJpZ2h0OiAxMnB4O1xufVxuXG4ucHJvZHVjdC1kZXRhaWwge1xuICB3aWR0aDogMTgycHg7IC8vIDI5NiAtOCAtMTIgLSA4MCAtMTJcbn1cblxuLm5ldy13cmFwcGVyIHtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gIC5uZXctcHJvZHVjdC1idG4ge1xuICAgIG1hcmdpbi1ib3R0b206IDA7XG4gICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgfVxufVxuIiwiLmNvbnRlbnQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG4uUmVjdGFuZ2xlIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDAgMjRweDtcbiAgaGVpZ2h0OiA4MHB4O1xuICBib3gtc2hhZG93OiAwIDJweCA0cHggMCByZ2JhKDkzLCAxMDksIDEzOSwgMC4yKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtcbn1cblxuLk15LVByb2R1Y3RzIHtcbiAgd2lkdGg6IDEyN3B4O1xuICBoZWlnaHQ6IDMxcHg7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDI0cHg7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjMDAwMDAwO1xufVxuXG4uQmFja2dyb3VuZCB7XG4gIHdpZHRoOiAyOTZweDtcbiAgbWFyZ2luOiAxMnB4O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlIDAuM3M7XG59XG4uQmFja2dyb3VuZDpob3ZlciB7XG4gIGJveC1zaGFkb3c6IDAgMCA4cHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbn1cbi5CYWNrZ3JvdW5kOmhvdmVyIC5Qcm9kdWN0LU5hbWUge1xuICBjb2xvcjogIzUwYzJmZjtcbn1cblxuLlByb2R1Y3QtTmFtZSB7XG4gIHdpZHRoOiAxODRweDtcbiAgaGVpZ2h0OiAyNHB4O1xuICBmb250LWZhbWlseTogU291cmNlU2Fuc1BybztcbiAgZm9udC1zaXplOiAxOHB4O1xuICBmb250LXdlaWdodDogNjAwO1xuICBmb250LXN0cmV0Y2g6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xuICBsZXR0ZXItc3BhY2luZzogbm9ybWFsO1xuICBjb2xvcjogIzAwMDAwMDtcbiAgbWFyZ2luLWJvdHRvbTogNHB4O1xuICB0cmFuc2l0aW9uOiBhbGwgZWFzZSAwLjNzO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuLlN1cHBsaWVyLU5hbWUge1xuICB3aWR0aDogMTg0cHg7XG4gIGhlaWdodDogMThweDtcbiAgZm9udC1mYW1pbHk6IFNvdXJjZVNhbnNQcm87XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcbiAgZm9udC1zdHJldGNoOiBub3JtYWw7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbiAgbGluZS1oZWlnaHQ6IG5vcm1hbDtcbiAgbGV0dGVyLXNwYWNpbmc6IG5vcm1hbDtcbiAgY29sb3I6ICMwMDAwMDA7XG4gIG1hcmdpbi1ib3R0b206IDhweDtcbiAgZGlzcGxheTogYmxvY2s7XG59XG5cbi5EZXNjcmlwdGlvbiB7XG4gIGZvbnQtZmFtaWx5OiBTb3VyY2VTYW5zUHJvO1xuICBmb250LXNpemU6IDE0cHg7XG4gIGZvbnQtd2VpZ2h0OiBub3JtYWw7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGxpbmUtaGVpZ2h0OiBub3JtYWw7XG4gIGxldHRlci1zcGFjaW5nOiBub3JtYWw7XG4gIGNvbG9yOiAjNGE0YTRhO1xufVxuXG4ucHJvZHVjdC1saXN0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC13cmFwOiB3cmFwO1xuICBtYXJnaW46IDEycHg7XG59XG5cbi5wcm9kdWN0LXNpbmdsZSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHBhZGRpbmc6IDhweCAxMnB4IDEycHggOHB4O1xuICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5wcm9kdWN0LWltZyB7XG4gIGhlaWdodDogODBweDtcbiAgd2lkdGg6IDgwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgYmFja2dyb3VuZC1wb3NpdGlvbjogY2VudGVyO1xuICBtYXJnaW4tcmlnaHQ6IDEycHg7XG59XG5cbi5wcm9kdWN0LWRldGFpbCB7XG4gIHdpZHRoOiAxODJweDtcbn1cblxuLm5ldy13cmFwcGVyIHtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG59XG4ubmV3LXdyYXBwZXIgLm5ldy1wcm9kdWN0LWJ0biB7XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG59Il19 */");
 
 /***/ }),
 
@@ -3969,19 +3686,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_services_products_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/products.service */ "./src/app/services/products.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+
 
 
 
 let ProductListComponent = class ProductListComponent {
-    constructor(productsSvc) {
-        this.productsSvc = productsSvc;
+    constructor(prodSvc) {
+        this.prodSvc = prodSvc;
         this.showNewProduct = false;
-        this.updatingProduct = null;
-        this.infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: '' };
-        // observer pour refetch
-        this.products$ = this.productsSvc.getAllProducts();
+        this.infiniteScroll = { loading: false, maxDone: false, limit: 0, nextToken: "" };
     }
     ngOnInit() {
+        this.products$ = this.prodSvc
+            .listProducts({ limit: 1000 })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(r => r.items));
+        this.products$.subscribe(products => console.log("liste des produits affichés : ", products));
+    }
+    trackByFn(index, product) {
+        return product.id;
     }
     newProduct() {
         this.showNewProduct = true;
@@ -3990,27 +3713,16 @@ let ProductListComponent = class ProductListComponent {
         this.showNewProduct = false;
     }
     updateProduct(product) {
-        const productCopy = Object.assign({}, product);
-        delete productCopy.__typename;
-        delete productCopy._deleted;
-        delete productCopy._lastChangedAt;
-        this.updatingProduct = productCopy;
+        // this.prodSvc.getProduct({ id: product.id }).subscribe(product => {
+        //   console.log("the product to update : ", product);
+        //   this.updatingProduct = product;
+        // }); // * getProduct is a bad way for offline (and speed)
+        this.updatingProduct = Object.assign({}, product);
     }
     closeModalUpdateProduct() {
         this.updatingProduct = null;
     }
     loadMore() {
-        // ({
-        //         variables: {
-        //           offset: data.feed.length
-        //         },
-        //         updateQuery: (prev, { fetchMoreResult }) => {
-        //           if (!fetchMoreResult) return prev;
-        //           return Object.assign({}, prev, {
-        //             feed: [...prev.feed, ...fetchMoreResult.feed]
-        //           });
-        //         }
-        //       })
     }
 };
 ProductListComponent.ctorParameters = () => [
@@ -4018,7 +3730,7 @@ ProductListComponent.ctorParameters = () => [
 ];
 ProductListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-product-list',
+        selector: "app-product-list",
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./product-list.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/products/product-list/product-list.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./product-list.component.scss */ "./src/app/products/product-list/product-list.component.scss")).default]
     })
@@ -4045,19 +3757,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UpdateProductComponent = class UpdateProductComponent {
-    constructor(productsSvc) {
-        this.productsSvc = productsSvc;
+    constructor(prodSvc) {
+        this.prodSvc = prodSvc;
         this.closeEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
-        this.activeField = '';
-        this.formTitle = '';
-        this.formBtn = '';
-        this.form = {
-            id: '',
-            name: '',
-            supplierName: '',
-            imageUrl: '',
-            description: '',
-        };
+        this.activeField = "";
+        this.formTitle = "";
+        this.formBtn = "";
         this.actionLoading = false;
         this.deleteLoading = false;
         this.deleteConfirm = false;
@@ -4070,7 +3775,7 @@ let UpdateProductComponent = class UpdateProductComponent {
         this.activeField = field;
     }
     setInactive() {
-        this.activeField = '';
+        this.activeField = "";
     }
     // Update the product.
     formAction($event) {
@@ -4080,22 +3785,20 @@ let UpdateProductComponent = class UpdateProductComponent {
                 return;
             }
             this.actionLoading = true;
-            // prevent empty string for optional parameters
-            this.form.imageUrl = this.form.imageUrl || null;
-            this.form.description = this.form.description || null;
-            try {
-                // ! updateProduct ne peut pas recevoir de _deleted
-                // delete this.form._deleted;
-                this.productsSvc.updateProduct(this.form).subscribe();
-                this.close();
-            }
-            catch (err) {
+            const input = Object.assign({}, this.form);
+            delete input._deleted; // ! these fields have to be deleted to don't have an error but the optimistic response give us warnings for theses missing fields
+            delete input._lastChangedAt;
+            delete input.__typename;
+            this.prodSvc.updateProduct({ input }).subscribe(product => {
+                console.log("product updated : ", product);
+            }, err => {
                 this.actionLoading = false;
                 setTimeout(() => alert(err.errors[0].message), 1);
-            }
+            });
+            this.close();
         });
     }
-    deleteProduct(id) {
+    deleteProduct({ id, _version }) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             if (this.deleteConfirm === false) {
                 this.deleteConfirm = true;
@@ -4105,16 +3808,14 @@ let UpdateProductComponent = class UpdateProductComponent {
                 return;
             }
             this.deleteLoading = true;
-            try {
-                this.productsSvc.deleteProduct({
-                    id: this.form.id,
-                    _version: this.form._version
-                });
+            this.prodSvc
+                .deleteProduct({
+                input: { id, _version }
+            })
+                .subscribe(d => {
+                console.log("product deleted : ", d);
                 this.close();
-            }
-            catch (err) {
-                this.deleteLoading = false;
-            }
+            }, err => (this.deleteLoading = false));
         });
     }
     close() {
@@ -4139,7 +3840,7 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 ], UpdateProductComponent.prototype, "form", void 0);
 UpdateProductComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-update-product',
+        selector: "app-update-product",
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!../new-product/new-product.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/products/new-product/new-product.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ../new-product/new-product.component.scss */ "./src/app/products/new-product/new-product.component.scss")).default]
     })
@@ -4161,33 +3862,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoriesService", function() { return CategoriesService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _init_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../init-client */ "./src/app/init-client.js");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _app_sync_src_graphql_mutations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app-sync/src/graphql/mutations */ "./src/app/app-sync/src/graphql/mutations.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-
-
-
-
 
 
 let CategoriesService = class CategoriesService {
-    constructor() {
-        this._client = _init_client__WEBPACK_IMPORTED_MODULE_2__["client"];
-    }
-    createCategory(category) {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["from"])(this._client.mutate({
-            mutation: graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()([_app_sync_src_graphql_mutations__WEBPACK_IMPORTED_MODULE_4__["CreateCategory"]]),
-            variables: {
-                input: category
-            }
-        }));
-    }
+    constructor() { }
 };
 CategoriesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
+        providedIn: "root"
     })
 ], CategoriesService);
 
@@ -4207,14 +3889,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductsService", function() { return ProductsService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _app_sync_src_graphql_mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app-sync/src/graphql/mutations */ "./src/app/app-sync/src/graphql/mutations.ts");
-/* harmony import */ var _app_sync_src_graphql_queries__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app-sync/src/graphql/queries */ "./src/app/app-sync/src/graphql/queries.ts");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _init_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../init-client */ "./src/app/init-client.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-
+/* harmony import */ var _app_sync_init_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app-sync/init-client */ "./src/app/app-sync/init-client.ts");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -4223,43 +3904,250 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ProductsService = class ProductsService {
-    constructor() {
-        this._client = _init_client__WEBPACK_IMPORTED_MODULE_5__["client"];
-    }
-    getAllProducts() {
-        this.productQuery = this._client.watchQuery({
-            query: graphql_tag__WEBPACK_IMPORTED_MODULE_4___default()([_app_sync_src_graphql_queries__WEBPACK_IMPORTED_MODULE_3__["ListProducts"]]),
-            variables: {
-                limit: 100
-            }
-        });
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["from"])(this.productQuery).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])((d) => d.data.listProducts.items));
-    }
-    createProduct(product) {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["from"])(this._client.mutate({
-            mutation: graphql_tag__WEBPACK_IMPORTED_MODULE_4___default()([_app_sync_src_graphql_mutations__WEBPACK_IMPORTED_MODULE_2__["CreateProduct"]]),
-            variables: {
-                input: product
-            }
+    constructor() { }
+    /** ===== QUERIES ===== */
+    listProducts(variables, fetchPolicy) {
+        const listProducts = [
+            `query ListProducts(
+        $filter: ModelProductFilterInput
+        $limit: Int
+        $nextToken: String
+      ) {
+        listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          items {
+            id
+            name
+            supplierName
+            description
+            imageUrl
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`
+        ];
+        this.listProductsQuery = listProducts;
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(_app_sync_init_client__WEBPACK_IMPORTED_MODULE_2__["default"].watchQuery({
+            query: graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(listProducts),
+            variables,
+            fetchPolicy
+        })).pipe(
+        // filter((r: any) => this.checkError(r, 'Search in products')),
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(r => r.data.listProducts), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(d => ({
+            items: d.items.filter(p => !p._deleted),
+            __typename: d.__typename,
+            nextToken: d.nextToken,
+            startedAt: d.startedAt
+        })), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(err => {
+            console.log(err);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(err);
         }));
-        // .pipe(tap(() => this.productQuery.refetch()));
     }
-    updateProduct(product) {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["from"])(this._client.mutate({
-            mutation: graphql_tag__WEBPACK_IMPORTED_MODULE_4___default()([_app_sync_src_graphql_mutations__WEBPACK_IMPORTED_MODULE_2__["UpdateProduct"]]),
-            variables: {
-                input: product
-            }
-        }));
+    /** check if a graphql call has given any error */
+    checkError(r, title) {
+        console.log(r);
+        const log = console;
+        if (r.errors) {
+            r.errors.forEach(e => log.error(e));
+            return false;
+        }
+        else if (r.loading) {
+            return false;
+        }
+        else if (!r.data) {
+            log.error(`No data, there must be something wrong with the query "${title}", here is the response`);
+            log.debug(r);
+            return false;
+        }
+        return true;
     }
-    deleteProduct(productId) {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["from"])(this._client.mutate({
-            mutation: graphql_tag__WEBPACK_IMPORTED_MODULE_4___default()([_app_sync_src_graphql_mutations__WEBPACK_IMPORTED_MODULE_2__["DeleteProduct"]]),
-            variables: {
-                input: productId
+    searchProducts(variables, fetchPolicy) {
+        const searchProducts = [
+            `query SearchProducts(
+        $filter: SearchableProductFilterInput
+        $sort: SearchableProductSortInput
+        $limit: Int
+        $nextToken: String
+      ) {
+        searchProducts(
+          filter: $filter
+          sort: $sort
+          limit: $limit
+          nextToken: $nextToken
+        ) {
+          items {
+            id
+            name
+            supplierName
+            description
+            imageUrl
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          total
+        }
+      }
+      `
+        ];
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(_app_sync_init_client__WEBPACK_IMPORTED_MODULE_2__["default"].query({
+            query: graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(searchProducts),
+            variables,
+            fetchPolicy
+        })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(r => r.data.searchProducts));
+    }
+    getProduct(variables, fetchPolicy) {
+        const getProduct = [
+            `query GetProduct($id: ID!) {
+        getProduct(id: $id) {
+          id
+          name
+          supplierName
+          description
+          imageUrl
+          ` + // ! category give an erreur ...
+                /* category {
+                    id
+                    name
+                    _version
+                    _deleted
+                    _lastChangedAt
+                  } */
+                `_version
+          _deleted
+          _lastChangedAt
+        }
+      }`
+        ];
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(_app_sync_init_client__WEBPACK_IMPORTED_MODULE_2__["default"].query({
+            query: graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(getProduct),
+            variables,
+            fetchPolicy
+        })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(d => d.data.getProduct));
+    }
+    /** ===== MUTATIONS ===== */
+    createProduct(variables, fetchPolicy) {
+        const createProduct = [
+            `mutation CreateProduct(
+        $input: CreateProductInput!
+        $condition: ModelProductConditionInput
+      ) {
+        createProduct(input: $input, condition: $condition) {
+          id
+          name
+          supplierName
+          description
+          imageUrl
+          ` + // ! Category give an error
+                /* category {
+                    id
+                    name
+                    _version
+                    _deleted
+                    _lastChangedAt
+                  } */
+                `_version
+          _deleted
+          _lastChangedAt
+        }
+      }`
+        ];
+        variables.input.id = uuid__WEBPACK_IMPORTED_MODULE_6___default()();
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(_app_sync_init_client__WEBPACK_IMPORTED_MODULE_2__["default"].mutate({
+            mutation: graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(createProduct),
+            variables,
+            fetchPolicy,
+            optimisticResponse: {
+                createProduct: Object.assign({ __typename: 'Product', _deleted: false, _version: 1, _lastChangedAt: new Date() }, variables.input)
+            },
+            update: (cache, { data: { createProduct } }) => {
+                const query = graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(this.listProductsQuery);
+                // Read query from cache
+                const data = cache.readQuery({
+                    query,
+                    variables: { limit: 1000 }
+                });
+                if (!data.listProducts.items.find(p => p.id === createProduct.id)) {
+                    data.listProducts.items = [createProduct, ...data.listProducts.items];
+                }
+                //Overwrite the cache with the new results
+                cache.writeQuery({ query, data, variables: { limit: 1000 } });
             }
-        })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["tap"])(() => this.productQuery.refetch()));
-        ;
+        })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(r => r.data.createProduct));
+    }
+    updateProduct(variables, fetchPolicy) {
+        const updateProduct = [
+            `mutation UpdateProduct(
+        $input: UpdateProductInput!
+        $condition: ModelProductConditionInput
+      ) {
+        updateProduct(input: $input, condition: $condition) {
+          id
+          name
+          supplierName
+          description
+          imageUrl
+          ` +
+                /* category { // ! the category give an error
+                    id
+                    name
+                    _version
+                    _deleted
+                    _lastChangedAt
+                  } */
+                `_version
+          _deleted
+          _lastChangedAt
+        }
+      }`
+        ];
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(_app_sync_init_client__WEBPACK_IMPORTED_MODULE_2__["default"].mutate({
+            mutation: graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(updateProduct),
+            variables,
+            fetchPolicy,
+            optimisticResponse: {
+                updateProduct: Object.assign({ __typename: "Product", _deleted: false, _lastChangedAt: new Date() }, variables.input)
+            },
+        })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(r => r.data.updateProduct));
+    }
+    deleteProduct(variables, fetchPolicy) {
+        const deleteProduct = [
+            `mutation DeleteProduct(
+        $input: DeleteProductInput!
+        $condition: ModelProductConditionInput
+      ) {
+        deleteProduct(input: $input, condition: $condition) {
+          id
+          name
+          supplierName
+          description
+          imageUrl
+          ` +
+                /* category { // ! The category give an error
+                    id
+                    name
+                    _version
+                    _deleted
+                    _lastChangedAt
+                  } */
+                `_version
+          _deleted
+          _lastChangedAt
+        }
+      }`
+        ];
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(_app_sync_init_client__WEBPACK_IMPORTED_MODULE_2__["default"].mutate({
+            mutation: graphql_tag__WEBPACK_IMPORTED_MODULE_3___default()(deleteProduct),
+            variables,
+            fetchPolicy,
+            optimisticResponse: {
+                deleteProduct: Object.assign({ __typename: 'Product', _lastChangedAt: new Date(), _deleted: true }, variables.input)
+            }
+        })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(d => d.data.deleteProduct));
     }
 };
 ProductsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -4281,7 +4169,7 @@ ProductsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".container {\n  width: 80%;\n  margin: 2rem;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.conclusion {\n  color: gray;\n  border-left: 3px solid grey;\n  margin: 1rem;\n  margin-top: 2rem;\n  padding: 1rem;\n  position: relative;\n}\n\n.conclusion::before {\n  top: -1rem;\n  content: \"Conclusion\";\n  position: absolute;\n  font-style: italic;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL3Rlc3QvdGVzdC5jb21wb25lbnQuc2NzcyIsIi4uL3NyYy9hcHAvdGVzdC90ZXN0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksVUFBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FDQ0o7O0FERUE7RUFDSSxXQUFBO0VBQ0EsMkJBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7RUFDQSxhQUFBO0VBQ0Esa0JBQUE7QUNDSjs7QURDSTtFQUNJLFVBQUE7RUFDQSxxQkFBQTtFQUNBLGtCQUFBO0VBQ0Esa0JBQUE7QUNDUiIsImZpbGUiOiIuLi9zcmMvYXBwL3Rlc3QvdGVzdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xuICAgIHdpZHRoOiA4MCU7XG4gICAgbWFyZ2luOiAycmVtO1xuICAgIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICAgIG1hcmdpbi1yaWdodDogYXV0bztcbn1cblxuLmNvbmNsdXNpb24ge1xuICAgIGNvbG9yOiBncmF5O1xuICAgIGJvcmRlci1sZWZ0OiAzcHggc29saWQgZ3JleTtcbiAgICBtYXJnaW46IDFyZW07XG4gICAgbWFyZ2luLXRvcDogMnJlbTtcbiAgICBwYWRkaW5nOiAxcmVtO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBcbiAgICAmOjpiZWZvcmUge1xuICAgICAgICB0b3A6IC0xcmVtO1xuICAgICAgICBjb250ZW50OiAnQ29uY2x1c2lvbic7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgZm9udC1zdHlsZTogaXRhbGljO1xuICAgIH1cbn0iLCIuY29udGFpbmVyIHtcbiAgd2lkdGg6IDgwJTtcbiAgbWFyZ2luOiAycmVtO1xuICBtYXJnaW4tbGVmdDogYXV0bztcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xufVxuXG4uY29uY2x1c2lvbiB7XG4gIGNvbG9yOiBncmF5O1xuICBib3JkZXItbGVmdDogM3B4IHNvbGlkIGdyZXk7XG4gIG1hcmdpbjogMXJlbTtcbiAgbWFyZ2luLXRvcDogMnJlbTtcbiAgcGFkZGluZzogMXJlbTtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuLmNvbmNsdXNpb246OmJlZm9yZSB7XG4gIHRvcDogLTFyZW07XG4gIGNvbnRlbnQ6IFwiQ29uY2x1c2lvblwiO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGZvbnQtc3R5bGU6IGl0YWxpYztcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".container {\n  width: 80%;\n  margin: 2rem;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.conclusion {\n  color: gray;\n  border-left: 3px solid grey;\n  margin: 1rem;\n  margin-top: 2rem;\n  padding: 1rem;\n  position: relative;\n}\n\n.conclusion::before {\n  top: -1rem;\n  content: \"Conclusion\";\n  position: absolute;\n  font-style: italic;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2F1Z3VzdGluL3d3dy9zaG93LXNvdXJjaW5nL2FuZ3VsYXItYXBwc3luYy9zcmMvYXBwL3Rlc3QvdGVzdC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvdGVzdC90ZXN0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksVUFBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FDQ0o7O0FERUE7RUFDSSxXQUFBO0VBQ0EsMkJBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7RUFDQSxhQUFBO0VBQ0Esa0JBQUE7QUNDSjs7QURDSTtFQUNJLFVBQUE7RUFDQSxxQkFBQTtFQUNBLGtCQUFBO0VBQ0Esa0JBQUE7QUNDUiIsImZpbGUiOiJzcmMvYXBwL3Rlc3QvdGVzdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xuICAgIHdpZHRoOiA4MCU7XG4gICAgbWFyZ2luOiAycmVtO1xuICAgIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICAgIG1hcmdpbi1yaWdodDogYXV0bztcbn1cblxuLmNvbmNsdXNpb24ge1xuICAgIGNvbG9yOiBncmF5O1xuICAgIGJvcmRlci1sZWZ0OiAzcHggc29saWQgZ3JleTtcbiAgICBtYXJnaW46IDFyZW07XG4gICAgbWFyZ2luLXRvcDogMnJlbTtcbiAgICBwYWRkaW5nOiAxcmVtO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBcbiAgICAmOjpiZWZvcmUge1xuICAgICAgICB0b3A6IC0xcmVtO1xuICAgICAgICBjb250ZW50OiAnQ29uY2x1c2lvbic7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgZm9udC1zdHlsZTogaXRhbGljO1xuICAgIH1cbn0iLCIuY29udGFpbmVyIHtcbiAgd2lkdGg6IDgwJTtcbiAgbWFyZ2luOiAycmVtO1xuICBtYXJnaW4tbGVmdDogYXV0bztcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xufVxuXG4uY29uY2x1c2lvbiB7XG4gIGNvbG9yOiBncmF5O1xuICBib3JkZXItbGVmdDogM3B4IHNvbGlkIGdyZXk7XG4gIG1hcmdpbjogMXJlbTtcbiAgbWFyZ2luLXRvcDogMnJlbTtcbiAgcGFkZGluZzogMXJlbTtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuLmNvbmNsdXNpb246OmJlZm9yZSB7XG4gIHRvcDogLTFyZW07XG4gIGNvbnRlbnQ6IFwiQ29uY2x1c2lvblwiO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGZvbnQtc3R5bGU6IGl0YWxpYztcbn0iXX0= */");
 
 /***/ }),
 
@@ -4297,21 +4185,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestComponent", function() { return TestComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _app_sync_src_graphql_queries__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app-sync/src/graphql/queries */ "./src/app/app-sync/src/graphql/queries.ts");
-/* harmony import */ var _app_sync_src_graphql_mutations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app-sync/src/graphql/mutations */ "./src/app/app-sync/src/graphql/mutations.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-/* harmony import */ var _init_client__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../init-client */ "./src/app/init-client.js");
-/* harmony import */ var _services_categories_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/categories.service */ "./src/app/services/categories.service.ts");
-/* harmony import */ var _services_products_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/products.service */ "./src/app/services/products.service.ts");
-
-
-
-
-
-
+/* harmony import */ var _services_categories_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/categories.service */ "./src/app/services/categories.service.ts");
+/* harmony import */ var _services_products_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/products.service */ "./src/app/services/products.service.ts");
 
 
 
@@ -4320,76 +4195,21 @@ let TestComponent = class TestComponent {
     constructor(catSvc, prodSvc) {
         this.catSvc = catSvc;
         this.prodSvc = prodSvc;
-        this.products$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["from"])(_init_client__WEBPACK_IMPORTED_MODULE_7__["client"].watchQuery({
-            query: graphql_tag__WEBPACK_IMPORTED_MODULE_2___default()([_app_sync_src_graphql_queries__WEBPACK_IMPORTED_MODULE_3__["ListProducts"]]),
-        }))
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])((res) => res.data.listProducts.items));
     }
-    ngOnInit() {
-        // this.testParamListProductQuery("Test");
-    }
-    // CEDRIC
-    // AUGUSTIN
-    testSimpleListProductQuery() {
-        console.time("testSimpleListProductQuery");
-        _init_client__WEBPACK_IMPORTED_MODULE_7__["client"]
-            .query({
-            query: graphql_tag__WEBPACK_IMPORTED_MODULE_2___default()([_app_sync_src_graphql_queries__WEBPACK_IMPORTED_MODULE_3__["ListProducts"]])
-        })
-            .then(data => {
-            console.timeEnd("testSimpleListProductQuery");
-            console.log(data);
-        });
-    }
-    testParamListProductQuery(nameContains) {
-        console.time("testParamListProduct");
-        _init_client__WEBPACK_IMPORTED_MODULE_7__["client"]
-            .query({
-            query: graphql_tag__WEBPACK_IMPORTED_MODULE_2___default()([_app_sync_src_graphql_queries__WEBPACK_IMPORTED_MODULE_3__["ListProducts"]]),
-            variables: {
-                filter: {
-                    name: { contains: nameContains }
-                }
-            }
-        })
-            .then(r => console.log(r));
-        console.timeEnd("testParamListProduct");
-    }
-    testCreateSimpleProduct() {
-        console.time('testListProductQuery');
-        _init_client__WEBPACK_IMPORTED_MODULE_7__["client"]
-            .mutate({
-            mutation: graphql_tag__WEBPACK_IMPORTED_MODULE_2___default()([_app_sync_src_graphql_mutations__WEBPACK_IMPORTED_MODULE_4__["CreateProduct"]]),
-            variables: {
-                input: {
-                    name: 'Test Product Mutation',
-                    supplierName: 'supplier',
-                }
-            },
-        })
-            .then(data => {
-            console.timeEnd('testListProductQuery');
-            console.log(data);
-        });
-    }
-    createCategory() {
-        this.catSvc.createCategory({ name: "Catégorie for Product" }).subscribe((data) => {
-            const product = {
-                name: "Produit with categoy",
-                supplierName: "supplier",
-                productCategoryId: data.data.createCategory.id
-            };
-            this.prodSvc.createProduct(product).subscribe(p => console.log(p));
+    ngOnInit() { }
+    getQuery() {
+        this.prodSvc.listProducts({ limit: 1000 }, 'cache-and-network').subscribe(d => {
+            console.log('products filtered from cache : ', d.items.filter(p => p.name.includes(this.searchProduct)));
         });
     }
 };
 TestComponent.ctorParameters = () => [
-    { type: _services_categories_service__WEBPACK_IMPORTED_MODULE_8__["CategoriesService"] },
-    { type: _services_products_service__WEBPACK_IMPORTED_MODULE_9__["ProductsService"] }
+    { type: _services_categories_service__WEBPACK_IMPORTED_MODULE_2__["CategoriesService"] },
+    { type: _services_products_service__WEBPACK_IMPORTED_MODULE_3__["ProductsService"] }
 ];
 TestComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-test',
+        selector: "app-test",
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./test.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/test/test.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./test.component.scss */ "./src/app/test/test.component.scss")).default]
     })
@@ -4444,7 +4264,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/app.module */ "./src/app/app.module.ts");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var aws_amplify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! aws-amplify */ "./node_modules/aws-amplify/lib-esm/index.js");
-/* harmony import */ var _app_app_sync_src_aws_exports__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app/app-sync/src/aws-exports */ "./src/app/app-sync/src/aws-exports.js");
+/* harmony import */ var _app_app_sync_aws_exports__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app/app-sync/aws-exports */ "./src/app/app-sync/aws-exports.js");
 
 
 
@@ -4453,7 +4273,7 @@ __webpack_require__.r(__webpack_exports__);
 /** Amplify */
 
 
-aws_amplify__WEBPACK_IMPORTED_MODULE_5__["default"].configure(_app_app_sync_src_aws_exports__WEBPACK_IMPORTED_MODULE_6__["default"]);
+aws_amplify__WEBPACK_IMPORTED_MODULE_5__["default"].configure(_app_app_sync_aws_exports__WEBPACK_IMPORTED_MODULE_6__["default"]);
 /** End Amplify */
 if (_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].production) {
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["enableProdMode"])();

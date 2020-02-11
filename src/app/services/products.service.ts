@@ -20,7 +20,6 @@ import { from, Observable, ObjectUnsubscribedError, of } from "rxjs";
 import { map, filter, catchError } from "rxjs/operators";
 import { FetchPolicy } from "apollo-client";
 import uuid from "uuid"
-import { title } from 'process';
 
 @Injectable({
   providedIn: "root"
@@ -68,7 +67,7 @@ export class ProductsService {
         fetchPolicy
       })
     ).pipe(
-      // filter((r: any) => this.checkError(r, 'Search in products')),
+      filter((r: any) => this.checkError(r, 'Search in products')),
       map(r => r.data.listProducts),
       map(d => ({
         items: d.items.filter(p => !p._deleted), // hide the deleted products : should be on the backend
